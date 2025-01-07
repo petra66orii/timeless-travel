@@ -1,0 +1,50 @@
+body {
+    background-color: whitesmoke;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #C2EBE6;
+}
+
+.nav-link, i {
+    font-family: 'Work Sans', 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: #333839;
+}
+
+/* Main */
+main {
+    font-family: 'Work Sans', 'Times New Roman', Times, serif;
+}
+
+/* Login and Register Page */
+
+#signup_form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+#sign-in, #sign-up {
+    background-color: #C2EBE6;
+    color: #333839;
+    border: 1px solid #333839;
+    border-radius: 10px;
+    width: 80px;
+    align-self: center;
+}
+
+.helptext {
+    text-decoration: none;
+}
+
+/* Footer */
+.dark-bg {
+    background-color: #C2EBE6;
+}
+
+.footer {
+    font-family: 'Work Sans', 'Times New Roman', Times, serif;
+    font-weight: 700;
+}
