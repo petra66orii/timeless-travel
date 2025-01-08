@@ -1,13 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time[less] Travel</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% block content %}
+
+<section class="container-fluid jumbotron h-100 d-flex" id="hero-section">
+    <div class="justify-content-center">
+        <img src="{% static 'images/hero-image.webp' %}" alt="Roys Peak in South Island, New Zealand" class="mw-100">
+        <div class="card-img-overlay">
+            <h1 class="intro-title mt-5">Time[less] Travel
+                <hr class="invisible mt-2 mt-md-5">
+                Timeless Memories, Effortless Plans</h1>
+            <p class="mx-auto w-50 text-black">
+                Welcome to Time[less] Travel, where we transform the way you plan and experience your dream holidays.
+                Our
+                mission is to make travel planning effortless and enjoyable, providing you with the tools to organize
+                your
+                trips seamlessly and share your adventures with a vibrant community. Let's make your travel dreams a
+                reality!
+            </p>
+            <button class="mx-auto justify-content-center">Get Started</button>
+        </div>
+    </div>
+</section>
+<hr>
+<section class="container-fluid">
+    <div>
+        <h2>Reviews</h2>
+    </div>
+    <div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</section>
+{% endblock %}
