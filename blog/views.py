@@ -5,4 +5,4 @@ from .models import BlogPost, Comments
 # Create your views here.
 class BlogPostList(generic.ListView):
     queryset = BlogPost.objects.all()
-    template_name = "blog/index.html"
+    template_name = "blog/blog_posts.html"
