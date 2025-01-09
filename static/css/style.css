@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: whitesmoke;
 }
@@ -19,15 +25,42 @@ main {
 }
 
 /* Homepage */
-.intro-title {
+.intro-title, .tagline {
     font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color: whitesmoke;
+    width: 50%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.intro-text {
+    color: whitesmoke;
+    font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
+    line-height: 38px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 75%;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 #hero-section {
-    background: rgba(0, 0, 0, 0.5) no-repeat center;
-    background-color: whitesmoke;
+    background: url(../images/hero-image.webp) #C2EBE6 no-repeat center;
     background-size: cover;
-    position: relative;
+    height: 60%;
+}
+
+.btn {
+    background-color: #C2EBE6;
+    color: #1c565f;
+    border: 1px solid #333839;
+    border-radius: 10px;
+    margin-top: 50px;
+    width: 120px;
+    align-self: center;
 }
 
 #hero-section img {
