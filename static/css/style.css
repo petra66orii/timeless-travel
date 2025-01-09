@@ -106,3 +106,12 @@ main {
     font-family: 'Work Sans', 'Times New Roman', Times, serif;
     font-weight: 700;
 }
+
+/* Media queries */
+@media screen and (min-width: 840px) {
+    .intro-title, .tagline {
+        font-size: 2rem;
+    }
+
+
+}
