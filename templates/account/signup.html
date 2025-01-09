@@ -20,7 +20,27 @@
 
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
+        <div>
+          <label for="id_username">Username</label>
+          {{ form.username }}
+          <small class="help-text">Choose a unique username</small>
+        </div>
+        <div>
+          <label for="id_email">Email</label>
+          {{ form.email }}
+          <small class="help-text">Enter your email address</small>
+        </div>
+        <div>
+          <label for="id_password1">Password</label>
+          {{ form.password1 }}
+          <small class="help-text">Choose a strong password</small>
+        </div>
+        <div>
+          <label for="id_password2">Confirm Password</label>
+          {{ form.password2 }}
+          <small class="help-text">Confirm your password</small>
+        </div>
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
