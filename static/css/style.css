@@ -86,6 +86,7 @@ main {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    padding-bottom: 60px;
 }
 
 #sign-in, #sign-up {
@@ -94,6 +95,15 @@ main {
     border: 1px solid #333839;
     border-radius: 10px;
     width: 80px;
+    align-self: center;
+}
+
+.toggle-popover {
+    background-color: #A08DB9;
+    color: #333839;
+    border: 1px solid #333839;
+    border-radius: 8px;
+    width: 20px;
     align-self: center;
 }
 
