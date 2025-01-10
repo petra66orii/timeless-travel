@@ -17,7 +17,7 @@
         <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 
 
-      <form class="login d-flex flex-column method="POST" action="{% url 'account_login' %}">
+      <form class="login d-flex flex-column" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
