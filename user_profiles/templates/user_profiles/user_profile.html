@@ -2,5 +2,11 @@
 {% load static %}
 
 {% block content %}
-<h1>My Profile</h1>
+<div class="profile">
+    <h1>Welcome, {{ profile.user.username }}</h1>
+    {% if profile.profile_picture %}
+        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+    {% endif %}
+    <p>Bio: {{ profile.bio }}</p>
+</div>
 {% endblock %}
