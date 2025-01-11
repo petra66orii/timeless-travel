@@ -22,6 +22,14 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
         <div class="p-xs-2 mb-1 align-items-center">
+          <label for="id_first_name">First Name</label>
+          {{ form.first_name }}
+        </div>
+        <div class="p-xs-2 mb-1 align-items-center">
+          <label for="id_last_name">Last Name</label>
+          {{ form.last_name }}
+        </div>
+        <div class="p-xs-2 mb-1 align-items-center">
           <label for="id_username">Username</label>
           {{ form.username }}
           <small class="help-text">Choose a unique username</small>
