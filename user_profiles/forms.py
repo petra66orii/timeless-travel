@@ -3,11 +3,17 @@ from django import forms
 class CustomSignupForm(forms.Form):
     first_name = forms.CharField(
         max_length=30,
-        label="First Name"
+        label="First Name",
+        widget=forms.TextInput(attrs={
+            'placeholder': 'First Name'
+        })
     )
     last_name = forms.CharField(
         max_length=30,
-        label="Last Name"
+        label="Last Name",
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Last Name'
+        })
     )
     username = forms.CharField(
         max_length=30,
