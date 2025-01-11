@@ -90,7 +90,11 @@
     </nav>
 
     <main class="flex-shrink-0 text-center">
-
+            {% if user.is_authenticated %}
+            <p class="text-end m-0 p-2 login-status">Welcome, {{ user }}</p>
+            {% else %}
+            <p class="text-end m-0 p-2 login-status">Welcome, traveller! Please log in</p>
+            {% endif %}
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
@@ -99,7 +103,7 @@
 
     <!-- Footer -->
     <footer class="footer fixed-bottom mt-auto py-2 dark-bg">
-        <p class="m-0 text-center text-black">Find us on social media: 
+        <p class="m-0 text-center text-black">Find us on social media:
             <a href="https://github.com/petra66orii"><i class="fab fa-github-square ms-1 ms-sm-3"></i></a>
             <a href="https://www.twitter.com"><i class="fab fa-twitter-square ms-1 ms-sm-3"></i></a>
             <a href="https://www.instagram.com"><i class="fab fa-instagram-square ms-1 ms-sm-3"></i></a>

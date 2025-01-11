@@ -24,6 +24,10 @@ main {
     font-family: 'Work Sans', 'Times New Roman', Times, serif;
 }
 
+.login-status {
+    background-color: #A08DB9;
+}
+
 /* Homepage */
 .intro-title, .tagline {
     font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
