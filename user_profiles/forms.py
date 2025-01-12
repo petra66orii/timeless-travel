@@ -1,4 +1,5 @@
 from django import forms
+from .models import Profile
 
 class CustomSignupForm(forms.Form):
     first_name = forms.CharField(
@@ -57,3 +58,8 @@ class CustomSignupForm(forms.Form):
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
         user.save()
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_picture', 'bio']
