@@ -17,7 +17,17 @@
   </div>
   <div class="row">
     <div class="col-md-6 mt-3 offset-md-3">
-
+      {% for field in form %}
+      <div class="mb-3">
+        {% if field.errors %}
+        <div class="text-danger">
+          {% for error in field.errors %}
+          <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
       <form class="signup d-inline-flex col-4" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -43,8 +53,8 @@
           <label for="id_password1">Password</label>
           {{ form.password1 }}
           <small class="help-text">Choose a strong password</small>
-          <button type="button" class="toggle-popover" data-bs-toggle="popover" title="Password Requirements" data-bs-trigger="hover"
-            data-bs-content="&#9900 Your password can't be too similar to your other personal information
+          <button type="button" class="toggle-popover" data-bs-toggle="popover" title="Password Requirements"
+            data-bs-trigger="hover" data-bs-content="&#9900 Your password can't be too similar to your other personal information
             &#9900 Your password must contain at least 8 characters
             &#9900 Your password can't be a commonly used password
             &#9900 Your password can't be entirely numeric">?</button>
