@@ -11,10 +11,52 @@
     <button><a class="{% if request.path == edit_profile_url %}" aria-current="page{% endif %}"
         href="{% url 'edit_profile' %}">Edit Profile</a></button>
 </div>
-<div class="checklist">
-    <h2>Travel Checklists</h2>
-</div>
-<div>
-    <h2>My Posts</h2>
+<div class="container">
+    <div class="row m-4 justify-content-center flex-md-nowrap">
+        <div class="col-12 col-md-6 m-3 p-2">
+            <div class="checklist">
+                <h2>Travel Checklists</h2>
+                <p>Quite commonly in web applications, you need to display a one-time notification message (also
+                    known
+                    as “flash
+                    message”) to the user after processing a form or some other types of user input.
+
+                    For this, Django provides full support for cookie- and session-based messaging, for both
+                    anonymous
+                    and
+                    authenticated users. The messages framework allows you to temporarily store messages in one
+                    request
+                    and
+                    retrieve
+                    them for display in a subsequent request (usually the next one). Every message is tagged
+                    with a
+                    specific
+                    level
+                    that determines its priority (e.g., info, warning, or error).</p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 m-3 p-2">
+            <div class="posts">
+                <h2>My Posts</h2>
+                <p>Quite commonly in web applications, you need to display a one-time notification message (also
+                    known
+                    as “flash
+                    message”) to the user after processing a form or some other types of user input.
+
+                    For this, Django provides full support for cookie- and session-based messaging, for both
+                    anonymous
+                    and
+                    authenticated users. The messages framework allows you to temporarily store messages in one
+                    request
+                    and
+                    retrieve
+                    them for display in a subsequent request (usually the next one). Every message is tagged
+                    with a
+                    specific
+                    level
+                    that determines its priority (e.g., info, warning, or error).</p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

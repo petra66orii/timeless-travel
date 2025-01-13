@@ -84,6 +84,26 @@ main {
     font-size: 120%;
 }
 
+/* Profile Page */
+
+.bio {
+    position: relative;
+    top: 30px;
+    height: auto;
+}
+
+.btn a {
+    text-decoration: none;
+    color: #1c565f;
+}
+
+.checklist, .posts {
+    height: 100%;
+    padding: 15px;
+    border: 2px #64C431 solid;
+    border-radius: 15px;
+}
+
 /* Login and Register Page */
 
 #signup_form {
@@ -126,6 +146,4 @@ main {
     .intro-title, .tagline {
         font-size: 2rem;
     }
-
-
 }
