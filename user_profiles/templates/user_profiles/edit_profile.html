@@ -3,11 +3,11 @@
 
 {% block content %}
 
-<h2>Edit Profile</h2>
-<form action="POST">
+<h2 class="my-3">Edit Profile</h2>
+<form method="post" enctype="multipart/form-data" action="{% url 'edit_profile' %}" class="m-3 p-3 justify-content-center">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+    <button class="btn" type="submit">Save Changes</button>
 </form>
 
 {% endblock %}
