@@ -11,6 +11,13 @@ def user_profile(request):
         request, 'user_profiles/user_profile.html',
         {'profile': profile})
 
+@login_required
+def profile_view(request):
+    profile = request.user.profile
+    profile_picture_url = profile.profile_picture.url if profile.profile_picture else '/static/images/placeholder.png'
+    return render(request, 'profile.html', {'profile': profile, 'profile_picture_url': profile_picture_url})
+
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
