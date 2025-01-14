@@ -63,3 +63,10 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_picture', 'bio']
+
+    def validate_profile_picture(self):
+        profile_picture = self.cleaned_data.get('profile_picture')
+        if profile_picture:
+            if not profile_picture.content_type.startswith('image/'):
+                raise forms.ValidationError('File type is not image')
+        return profile_picture
