@@ -63,7 +63,7 @@ main {
     border: 1px solid #333839;
     border-radius: 10px;
     margin-top: 50px;
-    width: 120px;
+    width: auto;
     align-self: center;
 }
 
