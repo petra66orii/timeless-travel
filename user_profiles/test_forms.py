@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
+from allauth.account.forms import LoginForm
 from .forms import CustomSignupForm
 
 # Create your tests here.
@@ -56,3 +58,25 @@ class TestSignupForm(TestCase):
         signup_form = CustomSignupForm(data=form_data)
         self.assertFalse(signup_form.is_valid())
         self.assertIn('email', signup_form.errors)
+
+class LoginFormTests(TestCase):
+    def setUp(self):
+        self.user_credentials = {
+            'username': 'testusername',
+            'password': 'testpassword123'
+        }
+        # Create a user in the test database
+        self.user = User.objects.create_user(
+            username=self.user_credentials['username'],
+            password=self.user_credentials['password']
+        )
+
+    def test_valid_form(self):
+        form_data = {'login': 'testusername', 'password': 'testpassword123'}
+        form = LoginForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_form(self):
+        form_data = {'login': 'testusername', 'password': ''}
+        form = LoginForm(data=form_data)
+        self.assertFalse(form.is_valid())
