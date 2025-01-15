@@ -13,7 +13,7 @@
             {{ checklist.description }}
             <form action="{% url 'checklist_delete' checklist.id %}" method="get">
                 {% csrf_token %}
-                <button type="submit">Delete</button>
+                <button class="btn" type="submit">Delete</button>
             </form>
         </li>
     {% endfor %}
