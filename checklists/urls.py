@@ -7,6 +7,9 @@ from .views import TaskViewSet, ChecklistViewSet, ChecklistListView, ChecklistCr
 #router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('checklist/', checklist_view, name='checklist'),
+ #   path('', include(router.urls)),
+    path('', ChecklistListView.as_view(), name='checklist'),
+    path('create/', ChecklistCreateView.as_view(), name='checklist_create'),
+    path('<int:pk>/edit/', ChecklistUpdateView.as_view(), name='checklist_update'),
+    path('<int:pk>/delete/', ChecklistDeleteView.as_view(), name='checklist_delete'),
 ]
