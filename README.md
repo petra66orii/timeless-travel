@@ -10,13 +10,15 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 4. **[Features](#features)**
     * [Existing Features](#existing-features)
         + [User Authentication](#user-authentication)
-        + [User Profile](#user-profile)
             * [Sign Up Page](#sign-up-page)
             * [Sign In Page](#sign-in-page)
             * [Reset Password Feature](#reset-password-feature)
-    * [Future Implementations]()
+        + [User Profile](#user-profile)
+    * [Future Implementations](#future-implementations)
 5. **[Technologies](#technologies)**
 6. **[Deployment and Local Development](#deployment-and-local-development)**
+    * [Deployment](#deployment)
+    * [Local Development](#local-development)
 7. **[Testing](#testing)**
 8. **[Credits](#credits)**
 9. **[Acknowledgements](#acknowledgements)**
@@ -56,6 +58,35 @@ The moment they are registered, the website automatically creates a profile for 
 
 # Technologies
 # Deployment and Local Development
+
+## Deployment
+
+1. Log in to **[Heroku](https://www.heroku.com/)** if you already have an account with them. If not, **[create an account](https://signup.heroku.com/)**.
+2. Once signed in, click on the "**Create New App**" button located above your dashboard. Give your app a unique name, choose the region you're in (United States/Europe) and click "**Create app**".
+3. Before deploying, you need to go to the **Settings** tab. Once there, scroll down and click on **Reveal Config Vars** to open this section.
+4. In this section, enter all of your environment variables that are present in your `env.py` file. Fields like `DATABASE_URL`, `SECRET_KEY`, `CLOUDINARY_URL` (*if using Cloudinary*), `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` if you are planning on sending emails to users (like having a *Reset Password* functionality).
+5. After that, make sure to go to the **Resources** tab and make sure Heroku didn't automatically set up a database for you. If that happens, simply remove the PostgreSQL database.
+6. Now, go to the **Deploy** tab. Once there, in the **Deployment Method** section, click `GitHub` and if needed, authorize `GitHub` to access your `Heroku` account. Click **Connect to GitHub**.
+7. Once connected, look up your GitHub repository by entering the name of it under **Search for a repository to connect to** and click **Search**. After you've found your repo, click **Connect**. 
+8. Now, you can click on **Enable Automatic Deploys** (optional, but I'd recommend it to save time and to detect any issues should they arise), and then select **Deploy Branch**. *If you enabled automatic deploys, every time you push changes to GitHub, the app will be automatically deployed every time, just like you would with a webpage deployed on GitHub Pages*.
+9. The app can take a couple of minutes until it's deployed. Once it's done, you'll see the message **Your app was successfully deployed** and a **View** button will come up where you can see your deployed app. 
+
+
+## Local Development
+
+### How to Clone
+1. Log into your account on GitHub
+2. Go to the repository of this project /petra66orii/timeless-travel/
+3. Click on the code button, and copy your preferred clone link
+4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory
+5. Type 'git clone' into the terminal, paste the link you copied in step 3 and press enter
+
+### How to Fork
+To fork the repository:
+1. Log in (or sign up) to Github.
+2. Go to the repository for this project, petra66orii/timeless-travel
+3. Click the Fork button in the top right corner
+
 # Testing
 # Credits
 # Acknowledgements
