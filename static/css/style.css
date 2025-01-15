@@ -104,6 +104,18 @@ main {
     border-radius: 15px;
 }
 
+.btn-green {
+    background-color: #64C431;
+}
+
+.btn-green a {
+    color: whitesmoke;
+}
+
+.btn-green:hover {
+    background-color: #468a21;
+}
+
 /* Login and Register Page */
 
 #signup_form {
