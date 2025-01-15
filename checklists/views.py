@@ -37,7 +37,7 @@ class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     model = Checklist
     fields = ['title', 'description']
     template_name = 'checklists/checklist_form.html'
-    success_url = reverse_lazy('checklist_update')
+    success_url = reverse_lazy('checklist')
 
 class ChecklistDeleteView(DeleteView, LoginRequiredMixin):
     model = Checklist
