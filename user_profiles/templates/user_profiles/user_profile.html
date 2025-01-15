@@ -30,7 +30,8 @@
     <div class="row m-4 justify-content-center flex-md-nowrap">
         <div class="col-12 col-md-6 m-3 p-2">
             <div class="checklist">
-                <h2>Travel Checklists</h2>
+                <h2><a class="{% if request.path == checklist_url %}" aria-current="page{% endif %}"
+                    href="{% url 'checklist' %}">Travel Checklists</a></h2>
                 <p>Quite commonly in web applications, you need to display a one-time notification message (also
                     known
                     as “flash
