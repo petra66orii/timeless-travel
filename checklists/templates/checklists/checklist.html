@@ -8,9 +8,10 @@
 <ul>
     {% for checklist in checklists %}
         <li>
-            <a href="{% url 'checklist_update' checklist.id %}">{{ checklist.title }}</a>
-            - {{ checklist.description }}
-            <form action="{% url 'checklist_delete' checklist.id %}" method="post" style="display: inline;">
+            <button class="btn"><a href="{% url 'checklist_update' checklist.id %}">Update</a></button>
+            {{ checklist.title }}
+            {{ checklist.description }}
+            <form action="{% url 'checklist_delete' checklist.id %}" method="get">
                 {% csrf_token %}
                 <button type="submit">Delete</button>
             </form>
