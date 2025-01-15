@@ -28,6 +28,11 @@ class ChecklistCreateView(CreateView, LoginRequiredMixin):
     template_name = 'checklists/checklist_form.html'
     success_url = reverse_lazy('checklist')
 
+    def form_valid(self, form):
+        # Set the user to the currently logged-in user
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     model = Checklist
     fields = ['title', 'description']
