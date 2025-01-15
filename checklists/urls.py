@@ -1,9 +1,10 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import TaskViewSet, checklist_view
+#from rest_framework.routers import DefaultRouter
+from .views import TaskViewSet, ChecklistViewSet, ChecklistListView, ChecklistCreateView, ChecklistUpdateView, ChecklistDeleteView
 
-router = DefaultRouter()
-router.register(r'tasks', TaskViewSet)
+#router = DefaultRouter()
+#router.register(r'checklists', ChecklistViewSet)
+#router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
