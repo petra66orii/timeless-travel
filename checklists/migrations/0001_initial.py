@@ -26,12 +26,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Tasks',
+            name='Task',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('task', models.CharField(max_length=255)),
                 ('completed', models.BooleanField(default=False)),
-                ('checklist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='checklists.checklist')),
+                ('checklist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tasks', to='checklists.checklist')),
             ],
         ),
     ]
