@@ -10,7 +10,7 @@ class Checklist(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
 class Task(models.Model):
-    checklist = models.ForeignKey(Checklist, on_delete=models.CASCADE, related_name='items')
+    checklist = models.ForeignKey(Checklist, on_delete=models.CASCADE, related_name='tasks')
     task = models.CharField(max_length=255)
     completed = models.BooleanField(default=False)
 
