@@ -12,7 +12,7 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
         + [User Authentication](#user-authentication)
             * [Sign Up Page](#sign-up-page)
             * [Sign In Page](#sign-in-page)
-            * [Reset Password Page](#reset-password-page)
+            * [Reset Password Feature](#reset-password-feature)
     * [Future Implementations]()
 5. **[Technologies](#technologies)**
 6. **[Deployment and Local Development](#deployment-and-local-development)**
@@ -43,7 +43,9 @@ For a returning user, there is a sign in page. In the eventuality they forget th
 
 ![Sign in page](static/images/README/sign-in-page.png)
 
-#### Reset Password Page
+#### Reset Password Feature
+
+Users can reset their password by inputting their email address. Shortly after they'll receive an email from the website with a link, prompting them to a new tab to reset their password.
 
 ## Future Implementations
 
