@@ -32,15 +32,24 @@
             <div class="checklist">
                 <h2>Travel Checklists</h2>
                 <div>
-                    {% for checklist in checklists %}
-                    <ul>
-                        <li>
-                            <a href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a>
+                    {% if not checklists %}
+                    <p>Ooops! No checklists here... click below to create one &#128515;</p>
+                    {% else %}
+                    <ul class="list-group">
+                        {% for checklist in checklists %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><a class="checklist-title" href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a></div>
+                                <p class="text-start">{{ checklist.description }}</p>
+                              </div>
+                              <span class="badge btn-green rounded-pill">14</span>
                         </li>
+                        {% endfor %}
                     </ul>
-                    {% endfor %}
-                    <button class="btn btn-green"><a class="{% if request.path == checklist_create_url %}" aria-current="page{% endif %}"
-                        href="{% url 'checklist_create' %}">Create Checklist</a></button>
+                    {% endif %}
+                    <button class="btn btn-green"><a class="{% if request.path == checklist_create_url %}"
+                            aria-current="page{% endif %}" href="{% url 'checklist_create' %}">Create
+                            Checklist</a></button>
                 </div>
             </div>
         </div>

@@ -116,6 +116,15 @@ main {
     background-color: #468a21;
 }
 
+.checklist-title {
+    text-decoration: none;
+    color: #333839;
+}
+
+.checklist-title:hover {
+    color:#A08DB9;
+}
+
 /* Login and Register Page */
 
 #signup_form {
