@@ -19,10 +19,20 @@ class ChecklistViewSet(viewsets.ModelViewSet):
     serializer_class = ChecklistSerializer
 
 # Checklist CRUD Views
-class ChecklistListView(ListView, LoginRequiredMixin):
+class ChecklistDetailView(DetailView):
     model = Checklist
-    template_name = 'checklists/checklist.html'
-    context_object_name = 'checklists'
+    template_name = 'checklists/checklist.html' 
+    context_object_name = 'checklist'  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add tasks related to this checklist
+        context['tasks'] = Task.objects.filter(checklist=self.object)
+        return context
+
+    def get_queryset(self):
+        # Restrict checklists to those owned by the logged-in user
+        return Checklist.objects.filter(user=self.request.user)
 
 class ChecklistCreateView(CreateView, LoginRequiredMixin):
     model = Checklist
