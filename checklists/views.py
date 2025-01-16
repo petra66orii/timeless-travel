@@ -36,15 +36,15 @@ class ChecklistDetailView(DetailView):
 
 class ChecklistCreateView(CreateView, LoginRequiredMixin):
     model = Checklist
-    form = CreateChecklist
-    fields = ['title', 'description']
+    form_class = CreateChecklist
     template_name = 'checklists/checklist_form.html'
-    success_url = reverse_lazy('checklist')
 
     def form_valid(self, form):
-        # Set the user to the currently logged-in user
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('checklist', kwargs={'pk': self.object.pk})
 
 class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     model = Checklist
