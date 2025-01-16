@@ -51,6 +51,13 @@ class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     fields = ['title', 'description']
     template_name = 'checklists/checklist_form.html'
     success_url = reverse_lazy('checklist')
+    
+    def get_success_url(self):
+        return reverse('checklist', kwargs={'pk': self.object.pk})
+
+    def get_queryset(self):
+        # Only allow the logged-in user to update their checklists
+        return Checklist.objects.filter(user=self.request.user)
 
 class ChecklistDeleteView(DeleteView, LoginRequiredMixin):
     model = Checklist
