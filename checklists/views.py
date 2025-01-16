@@ -60,3 +60,11 @@ class TaskCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('checklist', kwargs={'pk': self.kwargs['checklist_id']})
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = ['task', 'completed']
+    template_name = 'checklists/task_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
