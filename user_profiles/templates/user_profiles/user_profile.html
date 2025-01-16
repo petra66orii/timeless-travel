@@ -31,17 +31,17 @@
         <div class="col-12 col-md-6 m-3 p-2">
             <div class="checklist">
                 <h2>Travel Checklists</h2>
-                <p>Quite commonly in web applications, you need to display a one-time notification message (also
-                    known
-                    as “flash
-                    message”) to the user after processing a form or some other types of user input.
-
-                    For this, Django provides full support for cookie- and session-based messaging, for both
-                    anonymous
-                    and
-                    authenticated users.</p>
-                <button class="btn btn-green"><a class="{% if request.path == checklist_url %}" aria-current="page{% endif %}"
-                    href="{% url 'checklist' %}">Go To Checklists</a></button>
+                <div>
+                    {% for checklist in checklists %}
+                    <ul>
+                        <li>
+                            <a href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                    <button class="btn btn-green"><a class="{% if request.path == checklist_create_url %}" aria-current="page{% endif %}"
+                        href="{% url 'checklist_create' %}">Create Checklist</a></button>
+                </div>
             </div>
         </div>
         <div class="col-12 col-md-6 m-3 p-2">
