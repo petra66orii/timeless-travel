@@ -61,8 +61,11 @@ class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
 
 class ChecklistDeleteView(DeleteView, LoginRequiredMixin):
     model = Checklist
-    template_name = 'checklists/checklist_delete.html'
+    template_name = 'checklists/checklist_confirm_delete.html'
     success_url = reverse_lazy('checklist')
+
+    def get_success_url(self):
+        return reverse('profile')
 
 # Tasks CRUD Views
 class TaskCreateView(CreateView):
