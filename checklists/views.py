@@ -92,5 +92,11 @@ class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'checklists/task_confirm_delete.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.get_object()
+        context['checklist'] = task.checklist
+        return context
+
     def get_success_url(self):
         return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
