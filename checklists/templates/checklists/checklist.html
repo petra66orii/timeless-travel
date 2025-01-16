@@ -3,19 +3,38 @@
 
 
 {% block content %}
-<h1>Checklists</h1>
-<a href="{% url 'checklist_create' %}">Create New Checklist</a>
+<h1>{{ checklist.title }}</h1>
+<p>{{ checklist.description }}</p>
+
+<h2>Tasks</h2>
 <ul>
-    {% for checklist in checklists %}
-        <li>
-            <button class="btn"><a href="{% url 'checklist_update' checklist.id %}">Update</a></button>
-            {{ checklist.title }}
-            {{ checklist.description }}
-            <form action="{% url 'checklist_delete' checklist.id %}" method="get">
-                {% csrf_token %}
-                <button class="btn" type="submit">Delete</button>
-            </form>
-        </li>
+    {% for task in tasks %}
+    <li>
+        {{ task.task }} - {{ task.completed|yesno:"Completed,Pending" }}
+        <a href="{% url 'task_update' task.id %}">Edit</a>
+        <form action="{% url 'task_delete' task.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% empty %}
+    <p>No tasks available.</p>
     {% endfor %}
 </ul>
+
+{% for checklist in checklists %}
+<li>
+    {{ checklist.title }}
+    {% if checklist.id %}
+    <a href="{% url 'task_create' checklist.id %}">Add Task</a>
+    {% endif %}
+</li>
+{% endfor %}
+
+<button class="btn"><a href="{% url 'checklist_update' checklist.id %}">Update</a></button>
+<form action="{% url 'checklist_delete' checklist.id %}" method="get">
+    {% csrf_token %}
+    <button class="btn" type="submit">Delete</button>
+</form>
+<a href="{% url 'profile' %}">Back to Profile</a>
 {% endblock %}
