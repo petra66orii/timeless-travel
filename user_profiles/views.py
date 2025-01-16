@@ -2,14 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import EditProfileForm
+from checklists.models import Checklist
 
 # Create your views here.
 @login_required
 def user_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
+    checklists = Checklist.objects.filter(user=request.user)
     return render(
         request, 'user_profiles/user_profile.html',
-        {'profile': profile})
+        {'profile': profile, 'checklists': checklists})
 
 @login_required
 def profile_view(request):
