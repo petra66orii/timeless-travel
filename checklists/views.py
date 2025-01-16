@@ -8,6 +8,8 @@ from .serializers import TaskSerializer, ChecklistSerializer
 from .forms import CreateChecklist
 
 # Create your views here.
+
+# Model View Sets
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -16,6 +18,7 @@ class ChecklistViewSet(viewsets.ModelViewSet):
     queryset = Checklist.objects.all()
     serializer_class = ChecklistSerializer
 
+# Checklist CRUD Views
 class ChecklistListView(ListView, LoginRequiredMixin):
     model = Checklist
     template_name = 'checklists/checklist.html'
