@@ -2,13 +2,10 @@ from django.urls import path, include
 from .views import TaskViewSet, ChecklistViewSet, ChecklistCreateView, ChecklistUpdateView, ChecklistDeleteView
 from .views import TaskCreateView, TaskUpdateView, TaskDeleteView, ChecklistDetailView
 
-#router = DefaultRouter()
-#router.register(r'checklists', ChecklistViewSet)
-#router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
- #   path('', include(router.urls)),
-    path('', ChecklistListView.as_view(), name='checklist'),
+    path('checklists/<int:pk>/', ChecklistDetailView.as_view(), name='checklist'),
+    #path('checklists/<int:pk>/', ChecklistListView.as_view(), name='checklist'),
     path('create/', ChecklistCreateView.as_view(), name='checklist_create'),
     path('<int:pk>/edit/', ChecklistUpdateView.as_view(), name='checklist_update'),
     path('<int:pk>/delete/', ChecklistDeleteView.as_view(), name='checklist_delete'),
