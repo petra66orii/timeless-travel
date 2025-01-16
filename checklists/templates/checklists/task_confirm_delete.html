@@ -7,5 +7,5 @@
     {% csrf_token %}
     <button type="submit">Yes</button>
 </form>
-<a href="{% url 'checklist_detail' object.checklist.id %}">Cancel</a>
+<a href="{% url 'checklist' checklist.id %}">Cancel</a>
 {% endblock %}
