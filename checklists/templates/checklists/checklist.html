@@ -12,7 +12,7 @@
     <li>
         {{ task.task }} - {{ task.completed|yesno:"Completed,Pending" }}
         <a href="{% url 'task_update' task.id %}">Edit</a>
-        <form action="{% url 'task_delete' task.id %}" method="post" style="display:inline;">
+        <form action="{% url 'task_delete' task.id %}" method="get">
             {% csrf_token %}
             <button type="submit">Delete</button>
         </form>
@@ -22,14 +22,14 @@
     {% endfor %}
 </ul>
 
-{% for checklist in checklists %}
-<li>
-    {{ checklist.title }}
-    {% if checklist.id %}
-    <a href="{% url 'task_create' checklist.id %}">Add Task</a>
-    {% endif %}
-</li>
-{% endfor %}
+<ul>
+    <li>
+        {% if checklist.id %}
+        <a href="{% url 'task_create' checklist.id %}">Add Task</a>
+        {% endif %}
+    </li>
+</ul>
+
 
 <button class="btn"><a href="{% url 'checklist_update' checklist.id %}">Update</a></button>
 <form action="{% url 'checklist_delete' checklist.id %}" method="get">
