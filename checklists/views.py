@@ -44,13 +44,12 @@ class ChecklistCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('checklist', kwargs={'pk': self.object.pk})
+        return reverse('profile')
 
 class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     model = Checklist
     fields = ['title', 'description']
     template_name = 'checklists/checklist_form.html'
-    success_url = reverse_lazy('checklist')
     
     def get_success_url(self):
         return reverse('checklist', kwargs={'pk': self.object.pk})
