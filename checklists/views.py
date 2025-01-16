@@ -68,3 +68,10 @@ class TaskUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'checklists/task_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
