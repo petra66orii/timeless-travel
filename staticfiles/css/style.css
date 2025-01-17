@@ -28,6 +28,10 @@ main {
     background-color: #A08DB9;
 }
 
+.page-title {
+    font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
+}
+
 /* Homepage */
 .intro-title, .tagline {
     font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
@@ -67,6 +71,15 @@ main {
     align-self: center;
 }
 
+.btn:hover {
+    background-color: #1c565f;
+    color: whitesmoke;
+}
+
+.btn a:hover {
+    color: whitesmoke;
+}
+
 #review-section {
     margin-top: 20px;
     padding-bottom: 60px;
@@ -94,7 +107,7 @@ main {
 
 .btn a {
     text-decoration: none;
-    color: #1c565f;
+    color: #333839;
 }
 
 .checklist, .posts {
@@ -106,14 +119,32 @@ main {
 
 .btn-green {
     background-color: #64C431;
+    color: whitesmoke;
 }
 
-.btn-green a {
+.btn-green a, .btn-red, .btn-orange a {
     color: whitesmoke;
 }
 
 .btn-green:hover {
     background-color: #468a21;
+}
+
+.btn-red {
+    background-color: #cf065a;
+}
+
+.btn-red:hover {
+    background-color: #810539;
+    color: whitesmoke;
+}
+
+.btn-orange {
+    background-color: #eb8808;
+}
+
+.btn-orange:hover {
+    background-color: #ac6305;
 }
 
 .checklist-title {
@@ -123,6 +154,12 @@ main {
 
 .checklist-title:hover {
     color:#A08DB9;
+}
+
+/* Tasks Page */
+
+hr {
+    border: 2px solid #A08DB9;
 }
 
 /* Login and Register Page */
