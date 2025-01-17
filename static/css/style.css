@@ -28,6 +28,10 @@ main {
     background-color: #A08DB9;
 }
 
+.page-title {
+    font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
+}
+
 /* Homepage */
 .intro-title, .tagline {
     font-family: 'Playwrite AU SA', 'Times New Roman', Times, serif;
@@ -65,6 +69,14 @@ main {
     margin-top: 50px;
     width: auto;
     align-self: center;
+}
+
+.btn:hover {
+    background-color: #1c565f;
+}
+
+.btn a:hover {
+    color: whitesmoke;
 }
 
 #review-section {
@@ -108,12 +120,29 @@ main {
     background-color: #64C431;
 }
 
-.btn-green a {
+.btn-green a, .btn-red, .btn-orange a {
     color: whitesmoke;
 }
 
 .btn-green:hover {
     background-color: #468a21;
+}
+
+.btn-red {
+    background-color: #cf065a;
+}
+
+.btn-red:hover {
+    background-color: #810539;
+    color: whitesmoke;
+}
+
+.btn-orange {
+    background-color: #eb8808;
+}
+
+.btn-orange:hover {
+    background-color: #ac6305;
 }
 
 .checklist-title {
