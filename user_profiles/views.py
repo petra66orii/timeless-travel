@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import EditProfileForm
@@ -8,10 +9,16 @@ from checklists.models import Checklist
 @login_required
 def user_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
-    checklists = Checklist.objects.filter(user=request.user)
+    checklists = Checklist.objects.filter(user=request.user).annotate(
+        completed_tasks=Count('tasks', filter=Q(tasks__completed=True)),
+        pending_tasks=Count('tasks', filter=Q(tasks__completed=False))
+    )
+
     return render(
         request, 'user_profiles/user_profile.html',
-        {'profile': profile, 'checklists': checklists})
+        {'profile': profile, 
+         'checklists': checklists
+        })
 
 @login_required
 def profile_view(request):

@@ -39,10 +39,12 @@
                         {% for checklist in checklists %}
                         <li class="list-group-item d-flex justify-content-between align-items-start text-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold"><a class="checklist-title" href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a></div>
+                                <div class="fw-bold"><a class="checklist-title"
+                                        href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a></div>
                                 <p>{{ checklist.description }}</p>
-                              </div>
-                              <span class="badge btn-green rounded-pill">14</span>
+                            </div>
+                            <span class="badge btn-green rounded-pill">{{ checklist.completed_tasks }}</span>
+                            <span class="badge btn-red rounded-pill">{{ checklist.pending_tasks }}</span>
                         </li>
                         {% endfor %}
                     </ul>
