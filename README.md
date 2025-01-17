@@ -9,6 +9,7 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 3. **[Design](#design)**
 4. **[Features](#features)**
     * [Existing Features](#existing-features)
+        + [Checklists](#checklists)
         + [User Authentication](#user-authentication)
             * [Sign Up Page](#sign-up-page)
             * [Sign In Page](#sign-in-page)
@@ -29,6 +30,10 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 # Features
 
 ## Existing Features
+
+### Checklists
+
+As a registered user, one can create multiple checklists to separate their tasks. Checklists are intuitive to navigate, at the right of the checklist the user can check to see how many tasks are completed how many are still pending. Inside the checklist, users have a list of tasks that can easily edited and checked as complete. Both checklists and tasks have CRUD functionalities, giving the user freedom to create, edit and delete their checklists.
 
 ### User Authentication
 
