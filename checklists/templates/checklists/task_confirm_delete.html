@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete Task</h1>
-<p>Are you sure you want to delete "{{ object.task }}"?</p>
+<h1 class="page-title my-3 p-2">Delete Task</h1>
+<p class="fw-bold">Are you sure you want to delete your task "{{ object.task }}"?</p>
+<p class="text-danger fw-bold">Warning! This action is irreversible!</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Yes</button>
+    <button class="btn btn-red my-2" type="submit">Yes</button>
 </form>
-<a href="{% url 'checklist' checklist.id %}">Cancel</a>
+<button class="btn mt-1"><a href="{% url 'checklist' checklist.id %}">Cancel</a></button>
 {% endblock %}
