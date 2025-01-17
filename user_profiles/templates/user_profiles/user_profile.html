@@ -43,8 +43,8 @@
                                         href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a></div>
                                 <p>{{ checklist.description }}</p>
                             </div>
-                            <span class="badge btn-green rounded-pill">{{ checklist.completed_tasks }}</span>
-                            <span class="badge btn-red rounded-pill">{{ checklist.pending_tasks }}</span>
+                            <span class="badge btn-green rounded-pill" data-bs-toggle="tooltip" title="Completed">{{ checklist.completed_tasks }}</span>
+                            <span class="badge btn-red rounded-pill" data-bs-toggle="tooltip" title="Pending">{{ checklist.pending_tasks }}</span>
                         </li>
                         {% endfor %}
                     </ul>
@@ -63,4 +63,6 @@
         </div>
     </div>
 </div>
+
+<script src="{% static 'js/sign-up-popover.js' %}"></script>
 {% endblock %}
