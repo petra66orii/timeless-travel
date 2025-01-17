@@ -73,6 +73,7 @@ main {
 
 .btn:hover {
     background-color: #1c565f;
+    color: whitesmoke;
 }
 
 .btn a:hover {
@@ -118,6 +119,7 @@ main {
 
 .btn-green {
     background-color: #64C431;
+    color: whitesmoke;
 }
 
 .btn-green a, .btn-red, .btn-orange a {
