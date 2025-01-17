@@ -107,7 +107,7 @@ main {
 
 .btn a {
     text-decoration: none;
-    color: #1c565f;
+    color: #333839;
 }
 
 .checklist, .posts {
@@ -154,6 +154,12 @@ main {
 
 .checklist-title:hover {
     color:#A08DB9;
+}
+
+/* Tasks Page */
+
+hr {
+    border: 2px solid #A08DB9;
 }
 
 /* Login and Register Page */
