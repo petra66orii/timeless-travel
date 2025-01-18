@@ -9,7 +9,7 @@
     {{ form | crispy }}
     <div>
         <button class="btn btn-green mb-5 mt-0" type="submit">Save</button>
-        <button class="mb-5 mt-0 btn btn-orange"><a href="{% url 'profile' %}">Cancel</a></button>
+        <button class="mb-5 mt-0 btn btn-orange"><a href="{% url 'checklist' checklist.id %}">Cancel</a></button>
     </div>
 </form>
 {% endblock %}
