@@ -16,11 +16,11 @@
                 <div class="fw-bold">{{ task.task }}</div>
                 <p>{{ task.completed|yesno:"Completed,Pending" }}</p>
             </div>
-            <button class="btn btn-orange me-1"><a href="{% url 'task_update' task.id %}">Edit</a></button>
-            <form action="{% url 'task_delete' task.id %}" method="get">
-                {% csrf_token %}
-                <button class="btn btn-red" type="submit">Delete</button>
-            </form>
+            <button class="btn btn-sm {% if task.completed %}btn-red{% else %}btn-green{% endif %} toggle-task me-1"
+                data-task-id="{{ task.id }}" data-url="{% url 'toggle_task_completion' task.id %}">
+                {% if task.completed %}Undo{% else %}Complete{% endif %}
+            </button>
+            <button class="btn btn-sm btn-orange me-1"><a href="{% url 'task_update' task.id %}">Edit</a></button>
         </li>
         {% empty %}
         <p>No tasks available.</p>
