@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Define our variables
     const toggleButtons = document.querySelectorAll('.toggle-task');
     const progressBar = document.getElementById('progress-bar');
 
@@ -20,22 +21,26 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function (e) {
             e.preventDefault();
 
+            // Define the url and the CSRF token
             const url = this.getAttribute('data-url');
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+            // Use fetch() and AJAX to update task completion and progress bar dynamically
             fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': csrftoken
-                }
-            })
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrftoken
+                    }
+                })
+                // Add error handling
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     return response.json();
                 })
+                // Changes the button's color and text based on whether the task is completed or not
                 .then(data => {
                     if (data.completed) {
                         this.classList.add('btn-green');
