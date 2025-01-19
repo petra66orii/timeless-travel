@@ -162,6 +162,15 @@ hr {
     border: 2px solid #A08DB9;
 }
 
+.progress {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 1%;
+    background-color: #64C431;
+}
+
 /* Login and Register Page */
 
 #signup_form {
