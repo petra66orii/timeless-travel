@@ -9,7 +9,8 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 3. **[Design](#design)**
 4. **[Features](#features)**
     * [Existing Features](#existing-features)
-        + [Checklists](#checklists)
+        + [Checklists and Tasks](#checklists-and-tasks)
+            * [Progress Tracking](#progress-tracking)
         + [User Authentication](#user-authentication)
             * [Sign Up Page](#sign-up-page)
             * [Sign In Page](#sign-in-page)
@@ -31,9 +32,57 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 
 ## Existing Features
 
-### Checklists
+### Checklists and Tasks
 
 As a registered user, one can create multiple checklists to separate their tasks. Checklists are intuitive to navigate, at the right of the checklist the user can check to see how many tasks are completed how many are still pending. Inside the checklist, users have a list of tasks that can easily edited and checked as complete. Both checklists and tasks have CRUD functionalities, giving the user freedom to create, edit and delete their checklists.
+
+Checklists are located in the lower-left section of a user's profile. There are two different colored circles beside every checklist with a certain number in them. The green circle is giving the user the number of tasks completed within the checklist, whilst the red circle is showing the remaining tasks left to be completed.
+
+![Checklists section](static/images/README/checklists-section.png)
+
+User can easily access a checklist by clicking on the title:
+
+![Select checklist](static/images/README/select-checklist.png)
+
+Clicking on the `Create Checklist` button will prompt the user to a form:
+
+![Create checklist template](static/images/README/create-checklist-template.png)
+
+Once inside the checklist, the user can see a list of tasks. Every task has a title, a priority level (Options are: `Low`, `Medium`, `High`), a button to toggle task completion and an `Edit` button. 
+
+This template also has CRUD functionalities. The user can add tasks, edit or delete the checklist, and they go back to their profile page as well.
+
+![Checklist options](static/images/README/checklist-buttons.png)
+
+Like with checklists, the user can add a task:
+
+![Add task template](static/images/README/create-task-template.png)
+
+Edit the task: 
+
+![Edit task template](static/images/README/edit-task-template.png)
+
+If the user wants to delete a task (or checklist), they will asked to confirm before permanently deleting the task:
+
+![Confirm delete template](static/images/README/delete-task-template.png)
+
+#### Progress Tracking
+
+Below the list of tasks, there is a progress bar that updates dynamically as the user completes these tasks. When there are no tasks completed, the bar is empty:
+
+![Tasks pending](static/images/README/checklist-all-tasks-pending.png)
+
+When a user completes a task, the progress bar is updated:
+
+![25% percent of tasks completed](static/images/README/25-percent-task-completion.png)
+
+As the user progresses through their tasks, the bar updates, giving the user a positive feeling of 'getting things done'. The `Pending` button also changes its color from red to green, and the text will read `Completed`. In case it was wrongfully clicked, the user can always undo by clicking again on the `Completed` button to turn it back to `Pending`.
+
+![50% percent of tasks completed](static/images/README/50-percent-task-completion.png)
+
+![75% percent of tasks completed](static/images/README/75-percent-task-completion.png)
+
+![All tasks completed](static/images/README/all-tasks-completed.png)
 
 ### User Authentication
 
