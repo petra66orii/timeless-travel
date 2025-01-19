@@ -71,7 +71,7 @@ class ChecklistDeleteView(DeleteView, LoginRequiredMixin):
 # Tasks CRUD Views
 class TaskCreateView(CreateView):
     model = Task
-    fields = ['task', 'completed']
+    fields = ['task', 'priority']
     template_name = 'checklists/task_form.html'
 
     def form_valid(self, form):
@@ -84,7 +84,7 @@ class TaskCreateView(CreateView):
 
 class TaskUpdateView(UpdateView):
     model = Task
-    fields = ['task', 'completed']
+    fields = ['task', 'priority']
     template_name = 'checklists/task_form.html'
 
     def get_context_data(self, **kwargs):

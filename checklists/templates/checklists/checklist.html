@@ -14,7 +14,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-start text-start">
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{ task.task }}</div>
-                <p>{% if task.completed %}Completed{% else %}Pending{% endif %}</p>
+                <p class="priority">Priority: {{ task.get_priority_display }}</p>
             </div>
             <form method="post">
                 {% csrf_token %}
