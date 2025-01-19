@@ -7,6 +7,8 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 1. **[Project Goals](#project-goals)**
 2. **[Target Audience](#target-audience)**
 3. **[Design](#design)**
+    * [Typography](#typography)
+    * [Color Scheme](#color-scheme)
 4. **[Features](#features)**
     * [Existing Features](#existing-features)
         + [Checklists and Tasks](#checklists-and-tasks)
@@ -28,6 +30,25 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 # Project Goals
 # Target Audience
 # Design
+
+## Typography
+
+I used Google Fonts for typography. My choice of fonts was **Playwrite AU SA** for main headings and titles:
+
+![Playwrite AU SA font](static/images/README/playwrite-au-sa-font.png)
+
+For the rest of the webpage, I used **Work Sans** font:
+
+![Work Sans](static/images/README/work-sans-font.png)
+
+## Color Scheme
+
+I went with a pretty rich color scheme, specifically I used strong colors for the CRUD buttons, because they emphasize the effect these actions can have on a user's data.
+
+The pastel colors are used for the navbar and the direction buttons, since there are many colorful photos and the main focus should be on these photos rather than on the colors, hence the pastel colors complement the photos in an elegant way.
+
+![Color scheme](static/images/README/color-scheme.png)
+
 # Features
 
 ## Existing Features
