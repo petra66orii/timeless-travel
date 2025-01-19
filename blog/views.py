@@ -6,3 +6,4 @@ from .models import BlogPost, Comments
 class BlogPostList(generic.ListView):
     queryset = BlogPost.objects.all()
     template_name = "blog/blog_posts.html"
+    paginate_by = 5
