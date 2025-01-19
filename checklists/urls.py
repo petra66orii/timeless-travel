@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import TaskViewSet, ChecklistViewSet, ChecklistCreateView, ChecklistUpdateView, ChecklistDeleteView
 from .views import TaskCreateView, TaskUpdateView, TaskDeleteView, ChecklistDetailView
+from . import views
 
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     path('checklists/<int:checklist_id>/tasks/create/', TaskCreateView.as_view(), name='task_create'),
     path('tasks/<int:pk>/update/', TaskUpdateView.as_view(), name='task_update'),
     path('tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='task_delete'),
+    path('tasks/<int:task_id>/toggle/', views.toggle_task_completion, name='toggle_task_completion'),
 ]
