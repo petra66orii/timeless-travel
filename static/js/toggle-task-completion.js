@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
     const toggleButtons = document.querySelectorAll('.toggle-task');
+    const progressBar = document.getElementById('progress-bar');
+
+    function updateProgress() {
+        // Get total tasks and completed tasks
+        const totalTasks = document.querySelectorAll('.toggle-task').length;
+        const completedTasks = document.querySelectorAll('.toggle-task.btn-green').length;
+
+        // Calculate progress percentage
+        const progress = Math.round((completedTasks / totalTasks) * 100);
+
+        // Update progress bar
+        progressBar.style.width = `${progress}%`;
+        progressBar.textContent = `${progress}%`;
+
+    }
 
     toggleButtons.forEach(button => {
         button.addEventListener('click', function (e) {
@@ -31,10 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         this.classList.remove('btn-green');
                         this.textContent = 'Pending';
                     }
+                    updateProgress();
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         });
     });
+    updateProgress();
 });
