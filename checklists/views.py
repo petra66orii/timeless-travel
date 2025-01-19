@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
@@ -105,3 +107,13 @@ class TaskDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
+
+# Toggle tasks as complete
+@csrf_exempt
+def toggle_task_completion(request, task_id):
+    if request.method == 'POST':
+        task = get_object_or_404(Task, id=task_id, checklist__user=request.user)
+        task.completed = not task.completed
+        task.save()
+        return JsonResponse({'completed': task.completed})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
