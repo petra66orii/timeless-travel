@@ -30,7 +30,10 @@
         {% endfor %}
     </ul>
 </div>
-<div class="">
+<div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar"></div>
+  </div>
+<div>
     {% if checklist.id %}
     <button class="btn btn-green"><a href="{% url 'task_create' checklist.id %}">Add Task</a></button>
     {% endif %}
