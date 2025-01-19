@@ -79,6 +79,11 @@ class TaskCreateView(CreateView):
         form.instance.checklist = checklist
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['checklist'] = get_object_or_404(Checklist, id=self.kwargs['checklist_id'])
+        return context
+
     def get_success_url(self):
         return reverse_lazy('checklist', kwargs={'pk': self.kwargs['checklist_id']})
 

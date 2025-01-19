@@ -12,8 +12,10 @@
         <button class="mb-5 mt-0 btn btn-orange"><a href="{% url 'checklist' checklist.id %}">Cancel</a></button>
     </div>
 </form>
+{% if task %}
 <form action="{% url 'task_delete' task.id %}" method="get">
     {% csrf_token %}
     <button class="btn btn-red" type="submit">Delete</button>
 </form>
+{% endif %}
 {% endblock %}
