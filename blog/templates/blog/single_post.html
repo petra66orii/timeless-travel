@@ -9,7 +9,7 @@
 
 
 <article class="card-text">
-    {{ blogpost.content }}
+    {{ blogpost.content | safe }}
 </article>
 
 {% if user.is_authenticated %}
