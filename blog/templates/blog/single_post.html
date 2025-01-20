@@ -11,4 +11,16 @@
 <article class="card-text">
     {{ blogpost.content }}
 </article>
+
+{% if user.is_authenticated %}
+<div class="comment-section mb-5">
+    <p>Be the first to leave a comment!</p>
+    <button class="btn btn-sm btn-green mt-0 mb-5">Submit</button>
+    <textarea name="comments" id="comments"></textarea>
+</div>
+{% else %}
+<p>Log in to leave a comment</p>
+{% endif %}
+
+
 {% endblock %}
