@@ -7,7 +7,7 @@
     destinations! Or
     maybe you want to find out more about that place that you wanted to visit, but never got around to planning it! No
     matter what, here you'll find the information you need. You can participate as well! All you need to do is
-    to click <a href="#" class="post-link">here</a> to create your own post!</h2>
+    to click <a href="{% url 'create_post' %}?next={{ request.path }}" class="post-link">here</a> to create your own post!</h2>
 <div class="container-fluid">
     <div class="row">
         {% for blogpost in blogpost_list %}

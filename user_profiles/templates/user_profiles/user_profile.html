@@ -59,7 +59,7 @@
             <div class="posts">
                 <h2>My Posts</h2>
                 <div>
-                    <button class="btn btn-green">Create Post</button>
+                    <button class="btn btn-green"><a href="{% url 'create_post' %}?next={{ request.path }}">Create Post</a></button>
                 </div>
 
             </div>
