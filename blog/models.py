@@ -17,7 +17,7 @@ class BlogPost(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
     featured_image = CloudinaryField('image', default='placeholder')
-    visibility = models.CharField(max_length=15, choices=VISIBILITY, default='users only')
+    visibility = models.CharField(max_length=15, choices=VISIBILITY)
 
     def __str__(self):
         return f"{self.title} | Written by {self.author}"
