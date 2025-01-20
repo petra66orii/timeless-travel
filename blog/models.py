@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
+VISIBILITY = (('private', 'Private'), ('users only', 'Users Only'), ('public', 'Public'))
 # Create your models here.
 
 # Blog post model - borrowed and adapted from Codestar Blog project
@@ -16,6 +17,7 @@ class BlogPost(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
     featured_image = CloudinaryField('image', default='placeholder')
+    visibility = models.CharField(max_length=15, choices=VISIBILITY, default='users only')
 
     def __str__(self):
         return f"{self.title} | Written by {self.author}"

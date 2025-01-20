@@ -10,7 +10,8 @@
             "created_at": "2023-07-14T13:58:53.884Z",
             "status": 1,
             "excerpt": "From classic console.log statements to the nuances of browser dev tools, discover how to troubleshoot your JavaScript code without pulling your hair out.",
-            "updated_at": "2023-09-13T09:43:19.754Z"
+            "updated_at": "2023-09-13T09:43:19.754Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -24,7 +25,8 @@
             "created_at": "2023-07-14T14:00:47.759Z",
             "status": 1,
             "excerpt": "From ORM to the DRY principle, learn why Django might just be the trusty sidekick you've been searching for.",
-            "updated_at": "2023-09-13T09:41:53.636Z"
+            "updated_at": "2023-09-13T09:41:53.636Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -38,7 +40,8 @@
             "created_at": "2023-07-14T14:01:24.838Z",
             "status": 1,
             "excerpt": "Join me on my roller coaster ride through Python development, where each day is a balancing act between triumph and tragedy.",
-            "updated_at": "2023-09-29T12:55:25.717Z"
+            "updated_at": "2023-09-29T12:55:25.717Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -52,7 +55,8 @@
             "created_at": "2023-09-04T13:51:34.009Z",
             "status": 1,
             "excerpt": "Mastering your IDE and algorithms is important, but there's more to software development than just code. Discover the soft skills that are just as essential for success in the tech industry, from communication to problem-solving.",
-            "updated_at": "2023-09-13T09:31:59.441Z"
+            "updated_at": "2023-09-13T09:31:59.441Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -66,7 +70,8 @@
             "created_at": "2023-09-04T13:59:56.703Z",
             "status": 1,
             "excerpt": "Facing a technical interview can feel like a boss battle in a video game. Get equipped with the strategies and tips you need to defeat the coding challenges and behavioral questions that await you.",
-            "updated_at": "2023-09-13T09:29:48.494Z"
+            "updated_at": "2023-09-13T09:29:48.494Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -80,7 +85,8 @@
             "created_at": "2023-09-04T14:09:27.860Z",
             "status": 1,
             "excerpt": "Your portfolio is more than just a collection of code—it's your calling card in the tech industry. Learn how to create a compelling portfolio that showcases not just your coding chops, but also your individuality and passion for development",
-            "updated_at": "2023-09-29T12:54:00.941Z"
+            "updated_at": "2023-09-29T12:54:00.941Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -94,7 +100,8 @@
             "created_at": "2023-09-04T14:13:08.280Z",
             "status": 1,
             "excerpt": "Agile, Scrum, Waterfall, and more—navigating the world of project management methodologies can feel like walking through a maze. This guide offers insights into the most popular methodologies, helping you choose the right approach for your team and projects.",
-            "updated_at": "2023-09-13T09:23:11.313Z"
+            "updated_at": "2023-09-13T09:23:11.313Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -108,7 +115,8 @@
             "created_at": "2023-09-06T10:55:41.904Z",
             "status": 1,
             "excerpt": "In a world cluttered with jargon and acronyms, get the straight talk on project management methodologies like Agile, Scrum, Waterfall, and Kanban. No frills, just facts, and actionable insights.",
-            "updated_at": "2023-09-13T09:16:09.224Z"
+            "updated_at": "2023-09-13T09:16:09.224Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -122,7 +130,8 @@
             "created_at": "2023-09-06T11:01:28.582Z",
             "status": 1,
             "excerpt": "Jumbled logic and messy syntax have you tangled? Untangle the web with this field guide to code refactoring techniques. No more spaghetti—only clean, readable, and maintainable code from here on out.",
-            "updated_at": "2023-09-29T12:52:06.068Z"
+            "updated_at": "2023-09-29T12:52:06.068Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -136,7 +145,8 @@
             "created_at": "2023-09-06T11:06:34.893Z",
             "status": 1,
             "excerpt": "From punch cards to Python, the programming world has come a long way. Join us as we journey through the history and evolution of programming languages, and explore how far we've come—and where we're headed.",
-            "updated_at": "2023-09-29T12:48:14.784Z"
+            "updated_at": "2023-09-29T12:48:14.784Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -150,7 +160,8 @@
             "created_at": "2023-09-06T11:07:26.655Z",
             "status": 1,
             "excerpt": "Machine Learning is everywhere—from voice assistants to self-driving cars. But what's the real deal? This blog post aims to break down the hype and offer a straightforward guide to ML for developers.",
-            "updated_at": "2023-09-13T08:53:53.837Z"
+            "updated_at": "2023-09-13T08:53:53.837Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -164,7 +175,8 @@
             "created_at": "2023-09-06T11:08:40.404Z",
             "status": 1,
             "excerpt": "New to the world of coding? Picking your first programming language is a crucial step. Here's a guide to help you make an informed decision.",
-            "updated_at": "2023-09-13T08:52:36.557Z"
+            "updated_at": "2023-09-13T08:52:36.557Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -178,7 +190,8 @@
             "created_at": "2023-09-06T11:15:40.883Z",
             "status": 1,
             "excerpt": "Let's face it—Google is every developer's silent partner. But are you using this invaluable resource to its fullest? Sharpen your Google-Fu with our tips on how to search effectively and find exactly what you need.",
-            "updated_at": "2023-09-13T08:50:49.144Z"
+            "updated_at": "2023-09-13T08:50:49.144Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -192,7 +205,8 @@
             "created_at": "2023-09-06T11:18:40.495Z",
             "status": 0,
             "excerpt": "Being stuck on a coding problem is inevitable in the life of a developer. But how do you ask for help in a way that ensures you get a useful solution? Learn how to craft questions that make it easier for others to help you.",
-            "updated_at": "2023-09-13T08:45:35.403Z"
+            "updated_at": "2023-09-13T08:45:35.403Z",
+            "visibility": "Users Only"
         }
     },
     {
@@ -206,7 +220,8 @@
             "created_at": "2023-09-06T11:20:20.336Z",
             "status": 0,
             "excerpt": "Images can make or break a website's performance and user experience. But how do you optimize images for the web without sacrificing quality? Uncover the best practices and tools for image optimization to keep your site speedy and visually stunning.",
-            "updated_at": "2023-09-13T08:47:31.725Z"
+            "updated_at": "2023-09-13T08:47:31.725Z",
+            "visibility": "Users Only"
         }
     }
 ]
