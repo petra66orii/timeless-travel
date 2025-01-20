@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form method="post" class="mb-5 p-3 m-2">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <div>
+        <button class="btn btn-green mb-5 mt-0" type="submit">Post</button>
+        <button class="mb-5 mt-0 btn btn-orange"><a href="{{ request.GET.next }}">Cancel</a></button>
+    </div>
+</form>
+
+{% endblock %}
