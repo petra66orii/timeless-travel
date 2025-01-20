@@ -7,10 +7,13 @@
     destinations! Or
     maybe you want to find out more about that place that you wanted to visit, but never got around to planning it! No
     matter what, here you'll find the information you need. You can participate as well! All you need to do is
-    to click <a href="{% url 'create_post' %}?next={{ request.path }}" class="post-link">here</a> to create your own post!</h2>
+    to click <a href="{% url 'create_post' %}?next={{ request.path }}" class="post-link">here</a> to create your own
+    post!</h2>
 <div class="container-fluid">
     <div class="row">
+        {% if blogpost_list %}
         {% for blogpost in blogpost_list %}
+
         <div class="card-body m-2">
             <div class="mb-2 col-md-4 float-md-start my-md-4">
                 {% if "placeholder" in blogpost.featured_image.url %}
@@ -20,7 +23,7 @@
                 {% endif %}
             </div>
             <div class="col-md-8 float-md-end my-md-5 p-2">
-                <a href="{% url 'post' slug=blogpost.slug %}" class="post-link">
+                <a href="{% url 'post' blogpost.slug %}" class="post-link">
                     <h2 class="card-title">{{ blogpost.title }}</h2>
                 </a>
                 <p class="author">Author: {{ blogpost.author }}</p>
@@ -30,6 +33,9 @@
             </div>
         </div>
         {% endfor %}
+        {% else %}
+        <p>No blog posts available.</p>
+        {% endif %}
     </div>
 </div>
 <!-- This code snippet was borrowed from the Codestar Walkthrough Project -->
