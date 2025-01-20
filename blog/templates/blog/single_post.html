@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="my-4 p-1 page-title post-title">{{ blogpost.title }}</h1>
+
+<p class="my-2 p-1 page-heading post-subtitle">{{ blogpost.author }} | {{ blogpost.created_on }}</p>
+
+
+<article class="card-text">
+    {{ blogpost.content }}
+</article>
+{% endblock %}
