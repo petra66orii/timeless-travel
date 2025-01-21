@@ -7,11 +7,14 @@ from .forms import CreatePost
 from .models import BlogPost, Comments
 
 # Create your views here.
+
+# Blog posts list view
 class BlogPostList(generic.ListView):
     model = BlogPost
     template_name = "blog/blog_posts.html"
     paginate_by = 5
 
+    # Used Django's documentation to filter posts depending in visibility
     def get_queryset(self):
         user = self.request.user
         if user.is_authenticated:
@@ -23,6 +26,7 @@ class BlogPostList(generic.ListView):
         else:
            return BlogPost.objects.filter(visibility='Public').order_by('-created_at')
 
+# Single blog post view
 class PostDetailView(DetailView):
     model = BlogPost
     template_name = 'blog/single_post.html'
