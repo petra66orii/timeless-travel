@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
-VISIBILITY = (('private', 'Private'), ('users only', 'Users Only'), ('public', 'Public'))
+VISIBILITY = (('Private', 'Private'), ('Users Only', 'Users Only'), ('Public', 'Public'))
 # Create your models here.
 
 # Blog post model - borrowed and adapted from Codestar Blog project
