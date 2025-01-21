@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from .models import Profile
 from .forms import EditProfileForm
 from checklists.models import Checklist
+from blog.models import BlogPost
 
 # Create your views here.
 @login_required
@@ -13,11 +15,18 @@ def user_profile(request):
         completed_tasks=Count('tasks', filter=Q(tasks__completed=True)),
         pending_tasks=Count('tasks', filter=Q(tasks__completed=False))
     )
+    blog_posts = BlogPost.objects.filter(author=request.user)
+    
+    # Used Django's Paginator to paginate the posts section in user profile
+    paginator = Paginator(blog_posts, 4) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     return render(
         request, 'user_profiles/user_profile.html',
         {'profile': profile, 
-         'checklists': checklists
+         'checklists': checklists,
+         'page_obj': page_obj
         })
 
 @login_required
