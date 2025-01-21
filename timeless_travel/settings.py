@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'cloudinary_storage',
     'django_summernote',
+    'django_bleach',
     'cloudinary',
     'django.contrib.sites',
     'allauth',
@@ -66,6 +67,49 @@ LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode, default
+    'iframe': True,
+
+    # You can put custom Summernote settings
+    'summernote': {
+        # Change editor size
+        'width': '100%',
+        'height': '480',
+
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+    }
+}
+
+BLEACH_ALLOWED_TAGS = [
+    'a', 'b', 'blockquote', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul', 
+    'h1', 'h2', 'h3', 'pre', 'code', 'img', 'table', 'tr', 'td', 'th', 'tbody'
+]
+
+BLEACH_ALLOWED_ATTRIBUTES = {
+    '*': ['class', 'style', 'align'],
+    'a': ['href', 'rel', 'target'],
+    'img': ['src', 'alt', 'width', 'height'],
+}
+
+BLEACH_ALLOWED_STYLES = [
+    'color', 'font-weight', 'text-align', 'background-color', 'font-style'
+]
+
+BLEACH_STRIP_TAGS = True  # Strip disallowed tags instead of escaping them
+BLEACH_STRIP_COMMENTS = True  # Remove HTML comments
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
