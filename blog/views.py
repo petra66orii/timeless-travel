@@ -1,14 +1,26 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from .models import BlogPost, Comments
+from django.db.models import Q
 from django.views.generic import DetailView, CreateView
 from .forms import CreatePost
+from .models import BlogPost, Comments
 
 # Create your views here.
 class BlogPostList(generic.ListView):
-    queryset = BlogPost.objects.all()
+    model = BlogPost
     template_name = "blog/blog_posts.html"
     paginate_by = 5
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return BlogPost.objects.filter(
+                Q(visibility='Public') |
+                Q(visibility='Users Only') |
+                (Q(visibility='Private') & Q(author=user))
+        ).order_by('-created_at')
+        else:
+           return BlogPost.objects.filter(visibility='Public').order_by('-created_at')
 
 class PostDetailView(DetailView):
     model = BlogPost
