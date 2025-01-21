@@ -14,6 +14,7 @@
 {% url 'task_create' as task_create_url %}
 {% url 'task_update' as task_update_url %}
 {% url 'task_delete' as task_delete_url %}
+{% url 'create_post' as create_post_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -73,6 +74,10 @@
                 </ul>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == create_post_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'create_post' %}?next={{ request.path }}">Create Post</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == profile_url %}active{% endif %}" aria-current="page"
                             href="{% url 'profile' %}">My Profile</a>
