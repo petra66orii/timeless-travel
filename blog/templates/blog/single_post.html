@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<button class="btn btn-sm d-flex justify-content-center ms-1 mt-2"><a href="{% url 'blog' %}">&laquo; Go Back</a></button>
+<button class="btn btn-sm d-flex justify-content-center ms-1 mt-2"><a href="{{ request.GET.next }}">&laquo; Go Back</a></button>
 <h1 class="my-4 p-1 page-title post-title">{{ blogpost.title }}</h1>
 
 <p class="my-2 p-1 page-heading post-subtitle">{{ blogpost.author }} | {{ blogpost.created_at }}</p>
