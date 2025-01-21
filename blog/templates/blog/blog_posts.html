@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block content %}
+
 <h1 class="my-4 p-1 page-title">Blog Posts</h1>
+
+{% if blogpost_list %}
+
 <h2 class="my-2 p-1 page-heading">Welcome to the Blog section! Feel free to explore articles about your favorite
     destinations! Or
     maybe you want to find out more about that place that you wanted to visit, but never got around to planning it! No
@@ -11,47 +15,65 @@
     post!</h2>
 <div class="container-fluid">
     <div class="row">
-        {% if blogpost_list %}
+
         {% for blogpost in blogpost_list %}
 
         <div class="card-body m-2">
             <div class="mb-2 col-md-4 float-md-start my-md-4">
+
                 {% if "placeholder" in blogpost.featured_image.url %}
+
                 <img src="{% static 'images/placeholder.png' %}" alt="Placeholder image" class="img-fluid">
+
                 {% else %}
+
                 <img src=" {{ blogpost.featured_image.url }}" alt="{{ post.title }}" class="img-fluid">
+
                 {% endif %}
             </div>
             <div class="col-md-8 float-md-end my-md-5 p-2">
                 <a href="{% url 'post' blogpost.slug %}" class="post-link">
                     <h2 class="card-title">{{ blogpost.title }}</h2>
                 </a>
-                <p class="author">Author: {{ blogpost.author }}</p>
+                <p class="author fw-bold my-2">Author: {{ blogpost.author }}</p>
                 <p class="card-text">{{ blogpost.excerpt }}</p>
                 <p class="card-text h6">{{ blogpost.created_on }}
                 </p>
             </div>
         </div>
+
         {% endfor %}
         {% else %}
-        <p>No blog posts available.</p>
+
+        <p class="my-5">No blog posts available. <a href="{% url 'account_login' %}" class="post-link">Log in</a> or <a
+                href="{% url 'account_signup' %}" class="post-link">register</a> to see our posts!</p>
+
         {% endif %}
     </div>
 </div>
 <!-- This code snippet was borrowed from the Codestar Walkthrough Project -->
+
 {% if is_paginated %}
+
 <nav aria-label="Page navigation" class="mb-5">
     <ul class="pagination justify-content-center">
+
         {% if page_obj.has_previous %}
+
         <li>
             <a href="?page={{ page_obj.previous_page_number }}" class="page-link me-1">&laquo; Previous Page</a>
         </li>
+
         {% endif %}
         {% if page_obj.has_next %}
+
         <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next Page &raquo;</a></li>
+
         {% endif %}
+
     </ul>
 </nav>
+
 {% endif %}
 
 {% endblock %}
