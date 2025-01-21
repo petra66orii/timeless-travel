@@ -11,6 +11,7 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
     * [Color Scheme](#color-scheme)
 4. **[Features](#features)**
     * [Existing Features](#existing-features)
+        + [User Profile](#user-profile)
         + [Blog Posts](#blog-posts)
         + [Checklists and Tasks](#checklists-and-tasks)
             * [Progress Tracking](#progress-tracking)
@@ -18,7 +19,6 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
             * [Sign Up Page](#sign-up-page)
             * [Sign In Page](#sign-in-page)
             * [Reset Password Feature](#reset-password-feature)
-        + [User Profile](#user-profile)
     * [Future Implementations](#future-implementations)
 5. **[Technologies](#technologies)**
 6. **[Deployment and Local Development](#deployment-and-local-development)**
@@ -53,6 +53,12 @@ The pastel colors are used for the navbar and the direction buttons, since there
 # Features
 
 ## Existing Features
+
+### User Profile
+
+The moment they are registered, the website automatically creates a profile for them. They can easily access it in the upper-right side of the navbar. In their profile, they can upload their own profile picture, and update their bio with a few words about themselves. 
+
+At the bottom of the profile, there are two sections: on the left side, the *Checklists* section, which contains their own personal checklists (only the users themselves are able to see them) and on the right side, the *Posts* section, which contains all of their published posts.
 
 ### Blog Posts
 
@@ -144,10 +150,6 @@ For a returning user, there is a sign in page. In the eventuality they forget th
 #### Reset Password Feature
 
 Users can reset their password by inputting their email address. Shortly after they'll receive an email from the website with a link, prompting them to a new tab to reset their password.
-
-### User Profile
-
-The moment they are registered, the website automatically creates a profile for them. They can easily access it in the upper-right side of the navbar. In their profile, they can upload their own profile picture, and update their bio with a few words about themselves. At the bottom of the page, there are two sections: on the left side, the *Checklists* section, which contains their own personal checklists (only the users themselves are able to see them) and on the right side, the *Posts* section, which contains all of their posts.
 
 ## Future Implementations
 
