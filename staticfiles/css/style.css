@@ -157,6 +157,11 @@ main {
     color:#A08DB9;
 }
 
+.page-item.active .page-link {
+    background-color:#A08DB9;
+    border-color: #A08DB9;
+}
+
 /* Tasks Page */
 
 hr {
