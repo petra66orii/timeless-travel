@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.db.models import Q
 from django.views.generic import DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreatePost
 from .models import BlogPost, Comments
 
@@ -27,13 +28,14 @@ class PostDetailView(DetailView):
     template_name = 'blog/single_post.html'
     context_object_name = 'blogpost'
 
-class PostCreateView(CreateView):
+# Create post view
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = BlogPost
     form_class = CreatePost
     template_name = 'blog/create_post.html'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
