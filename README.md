@@ -11,6 +11,7 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
     * [Color Scheme](#color-scheme)
 4. **[Features](#features)**
     * [Existing Features](#existing-features)
+        + [Blog Posts](#blog-posts)
         + [Checklists and Tasks](#checklists-and-tasks)
             * [Progress Tracking](#progress-tracking)
         + [User Authentication](#user-authentication)
@@ -52,6 +53,25 @@ The pastel colors are used for the navbar and the direction buttons, since there
 # Features
 
 ## Existing Features
+
+### Blog Posts
+
+Every user that registers for an account can start writing blog posts to share their experiences and to give advice to those that are seeking to travel. The main blog page consists of a list of all blog posts, ordered from *Newest* to *Oldest*. In the main blog page, every post has a title, the author and an excerpt to offer a little preview into the story. The user can click on any post to read it and/or leave a comment. Users can create, edit or delete their own posts. 
+
+When creating a post, users need to add:
+
+* **Title** - Title of the blog post
+* **Content** - The content of the blog post
+* **Status** - User can save the post as a *Draft* or *Published*
+* **Excerpt** - A short introduction offering a preview of the post
+* **Featured Image** - An image from the said destination
+* **Visibility** - Who can see this post
+
+Users can set their posts to a few visibility options:
+
+* *Private* - Only the authors can see this post
+* *Users Only* - Only registered users can see this post
+* *Public* - Everyone can see this post
 
 ### Checklists and Tasks
 
