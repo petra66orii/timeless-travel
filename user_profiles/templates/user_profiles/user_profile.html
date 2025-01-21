@@ -43,8 +43,10 @@
                                         href="{% url 'checklist' checklist.id %}">{{ checklist.title }}</a></div>
                                 <p>{{ checklist.description }}</p>
                             </div>
-                            <span class="badge btn-green rounded-pill" data-bs-toggle="tooltip" title="Completed">{{ checklist.completed_tasks }}</span>
-                            <span class="badge btn-red rounded-pill" data-bs-toggle="tooltip" title="Pending">{{ checklist.pending_tasks }}</span>
+                            <span class="badge btn-green rounded-pill" data-bs-toggle="tooltip"
+                                title="Completed">{{ checklist.completed_tasks }}</span>
+                            <span class="badge btn-red rounded-pill" data-bs-toggle="tooltip"
+                                title="Pending">{{ checklist.pending_tasks }}</span>
                         </li>
                         {% endfor %}
                     </ul>
@@ -59,7 +61,25 @@
             <div class="posts">
                 <h2>My Posts</h2>
                 <div>
-                    <button class="btn btn-green"><a href="{% url 'create_post' %}?next={{ request.path }}">Create Post</a></button>
+                    {% if not page_obj %}
+                    <p>Ooops! No posts here... click below to create one &#128515;</p>
+                    {% else %}
+                    <ul class="list-group">
+                        {% for blog_post in page_obj %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start text-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><a class="post-title post-link"
+                                        href="{% url 'post' blog_post.slug %}?next={{ request.path }}">{{ blog_post.title }}</a></div>
+                                <p>{{ blog_post.excerpt }}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+ 
+                    <button class="btn btn-green"><a href="{% url 'create_post' %}?next={{ request.path }}">Create
+                            Post</a></button>
                 </div>
 
             </div>
