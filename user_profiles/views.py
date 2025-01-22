@@ -53,3 +53,12 @@ def user_drafts(request):
     request, 'blog/draft_posts.html',
     {'draft_posts': draft_posts}
 )
+
+@login_required
+def publish_post(request, post_id):
+    draft_post = get_object_or_404(BlogPost, id=post_id, author=request.user, status=0)
+
+    if request.method == "POST":
+        draft_post.status = 1
+        draft_post.save()
+        return redirect('user_drafts')
