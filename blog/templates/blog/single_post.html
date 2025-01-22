@@ -25,6 +25,13 @@
 
 </article>
 
+{% if user == blogpost.author %}
+    <button class="btn btn-sm btn-orange">
+        <a href="{% url 'edit_post' blogpost.slug %}?next={{ request.path }}">Edit Post</a>
+    </button>
+{% endif %}
+
+
 {% if user.is_authenticated %}
 
 <div class="comment-section mb-5">
