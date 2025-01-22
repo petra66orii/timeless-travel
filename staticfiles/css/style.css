@@ -166,6 +166,14 @@ main {
     border-color: #A08DB9;
 }
 
+/* Drafts Page */
+#hide-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 170px;
+}
+
 /* Tasks Page */
 
 hr {
@@ -238,10 +246,18 @@ hr {
     .intro-title, .tagline {
         font-size: 2rem;
     }
+
+    #hide-text {
+        width: max-content;
+    }
 }
 
 @media screen and (min-width: 576px) {
     .image-post {
         max-width: 45%;
+    }
+
+    #hide-text {
+        width: 200px;
     }
 }
