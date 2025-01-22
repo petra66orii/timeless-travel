@@ -18,7 +18,8 @@ class BlogPostList(generic.ListView):
     def get_queryset(self):
         user = self.request.user
         if user.is_authenticated:
-            return BlogPost.objects.filter(
+            return BlogPost.objects.filter( 
+                Q(status=1)).filter(
                 Q(visibility='Public') |
                 Q(visibility='Users Only') |
                 (Q(visibility='Private') & Q(author=user))
