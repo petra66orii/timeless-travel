@@ -64,7 +64,7 @@ main {
 
 .btn {
     background-color: #C2EBE6;
-    color: #1c565f;
+    color: #333839;
     border: 1px solid #333839;
     border-radius: 10px;
     margin-top: 50px;
@@ -73,12 +73,16 @@ main {
 }
 
 .btn:hover {
-    background-color: #1c565f;
+    background-color: #2c99aa;
     color: whitesmoke;
 }
 
 .btn a:hover {
     color: whitesmoke;
+}
+
+.hide-button {
+    display: none;
 }
 
 #review-section {
@@ -233,5 +237,11 @@ hr {
 @media screen and (min-width: 840px) {
     .intro-title, .tagline {
         font-size: 2rem;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .image-post {
+        max-width: 45%;
     }
 }
