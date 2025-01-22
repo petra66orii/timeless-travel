@@ -51,7 +51,7 @@ class ChecklistCreateView(CreateView, LoginRequiredMixin):
 class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     model = Checklist
     fields = ['title', 'description']
-    template_name = 'checklists/checklist_form.html'
+    template_name = 'checklists/edit_checklist_form.html'
     
     def get_success_url(self):
         return reverse('checklist', kwargs={'pk': self.object.pk})
@@ -90,7 +90,7 @@ class TaskCreateView(CreateView):
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ['task', 'priority']
-    template_name = 'checklists/task_form.html'
+    template_name = 'checklists/edit_task_form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
