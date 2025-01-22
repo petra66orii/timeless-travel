@@ -50,6 +50,10 @@ The pastel colors are used for the navbar and the direction buttons, since there
 
 ![Color scheme](static/images/README/color-scheme.png)
 
+## Imagery
+
+I used photos from [Pexels](https://pexels.com) for the blog posts, the hero image is a photo taken by me. These photos are all related to travelling and well-known destinations.
+
 # Features
 
 ## Existing Features
@@ -58,11 +62,13 @@ The pastel colors are used for the navbar and the direction buttons, since there
 
 The moment they are registered, the website automatically creates a profile for them. They can easily access it in the upper-right side of the navbar. In their profile, they can upload their own profile picture, and update their bio with a few words about themselves. 
 
+On their profile page, they can go and check their draft posts as well. More information on draft posts is found below in the [Blog Posts](#blog-posts).
+
 At the bottom of the profile, there are two sections: on the left side, the *Checklists* section, which contains their own personal checklists (only the users themselves are able to see them) and on the right side, the *Posts* section, which contains all of their published posts.
 
 ### Blog Posts
 
-Every user that registers for an account can start writing blog posts to share their experiences and to give advice to those that are seeking to travel. The main blog page consists of a list of all blog posts, ordered from *Newest* to *Oldest*. In the main blog page, every post has a title, the author and an excerpt to offer a little preview into the story. The user can click on any post to read it and/or leave a comment. Users can create, edit or delete their own posts. 
+Every user that registers for an account can start writing blog posts to share their experiences and to give advice to those that are seeking to travel. The main blog page consists of a list of all blog posts, ordered from *Newest* to *Oldest*. In the main blog page, every post has a title, the author and an excerpt to offer a little preview into the story. The user can click on any post to read it and/or leave a comment. Users can create, edit or delete their own posts.
 
 When creating a post, users need to add:
 
@@ -72,6 +78,8 @@ When creating a post, users need to add:
 * **Excerpt** - A short introduction offering a preview of the post
 * **Featured Image** - An image from the said destination
 * **Visibility** - Who can see this post
+
+Posts that are saved as drafts can be accessed on the user's profile page, where they can further edit (or even delete, if they change their mind) their posts and choose to publish them.
 
 Users can set their posts to a few visibility options:
 
