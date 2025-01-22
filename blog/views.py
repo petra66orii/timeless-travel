@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.db.models import Q
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CreatePost
+from .forms import CreatePost, EditPost
 from .models import BlogPost, Comments
 
 # Create your views here.
@@ -46,3 +46,15 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('post', kwargs={'slug': self.object.slug})
 
+
+class PostUpdateView(UpdateView, LoginRequiredMixin):
+    model = BlogPost
+    form_class = EditPost
+    template_name = 'blog/edit_post.html'
+    
+    def get_success_url(self):
+        return reverse('post', kwargs={'slug': self.object.slug})
+
+    def get_queryset(self):
+        # Only allow the logged-in user to update their checklists
+        return BlogPost.objects.filter(author=self.request.user)
