@@ -20,8 +20,9 @@
         <div class="col-12 col-md-6 m-3 p-2">
             <div class="bio">
                 <p>Bio: {{ profile.bio }}</p>
-                <button class="btn"><a class="{% if request.path == edit_profile_url %}" aria-current="page{% endif %}"
-                        href="{% url 'edit_profile' %}">Edit Profile</a></button>
+                <button class="btn"><a href="{% url 'edit_profile' %}">Edit Profile</a></button>
+
+                <button class="btn"><a href="{% url 'user_drafts' %}">Your Drafts</a></button>
             </div>
         </div>
     </div>
