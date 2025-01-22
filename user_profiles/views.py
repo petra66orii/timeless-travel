@@ -45,3 +45,11 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user.profile)
     return render(request, 'user_profiles/edit_profile.html', {'form': form})
+
+@login_required
+def user_drafts(request):
+    draft_posts = BlogPost.objects.filter(author=request.user, status=0)
+    return render(
+    request, 'blog/draft_posts.html',
+    {'draft_posts': draft_posts}
+)
