@@ -19,15 +19,15 @@
 
                     <li class="list-group-item d-flex justify-content-between align-items-start text-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{ draft.title }}</div>
-                            <p>{{ draft.excerpt }}</p>
+                            <div class="fw-bold" id="hide-text">{{ draft.title }}</div>
                         </div>
                         <form method="post" action="{% url 'publish_post' draft.id %}">
 
                             {% csrf_token %}
 
-                            <button class="btn btn-green" type="submit">Publish</button>
+                            <button class="btn btn-sm btn-green" type="submit">Publish</button>
                         </form>
+                        <button class="btn btn-sm btn-orange"><a href="{% url 'edit_post' draft.slug %}?next={{ request.path }}">Edit</a></button>
                     </li>
 
                 {% endfor %}
