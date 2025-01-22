@@ -10,3 +10,11 @@ class CreatePost(forms.ModelForm):
         widgets = {
             'content': SummernoteWidget(),
         }
+
+class EditPost(forms.ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = ['title', 'content', 'status', 'excerpt', 'featured_image', 'visibility']
+        widgets = {
+            'content': SummernoteWidget(),
+        }
