@@ -6,7 +6,17 @@
 <h1 class="my-4 p-1 page-title post-title">{{ blogpost.title }}</h1>
 
 <p class="my-2 p-1 page-heading post-subtitle">{{ blogpost.author }} | {{ blogpost.created_at }}</p>
+<hr>
 
+{% if blogpost.featured_image.url %}
+
+<img src=" {{ blogpost.featured_image.url }}" alt="{{ blogpost.title }}" class="img-fluid image-post">
+
+{% else %}
+
+<br>
+
+{% endif %}
 
 <article class="card-text">
     {{ blogpost.content | safe }}
