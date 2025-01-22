@@ -15,7 +15,7 @@ def user_profile(request):
         completed_tasks=Count('tasks', filter=Q(tasks__completed=True)),
         pending_tasks=Count('tasks', filter=Q(tasks__completed=False))
     )
-    blog_posts = BlogPost.objects.filter(author=request.user, status=1)
+    blog_posts = BlogPost.objects.filter(author=request.user, status=1).order_by('-created_at')
     
     # Used Django's Paginator to paginate the posts section in user profile
     paginator = Paginator(blog_posts, 4) 
