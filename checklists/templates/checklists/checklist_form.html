@@ -2,17 +2,17 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1 class="page-title my-3 p-2">{% if view.title %}
-    {{ view.title }}
-    {% else %}
-    Create Checklist
-    {% endif %}</h1>
+
+<h1 class="page-title my-3 p-2">Create Checklist</h1>
 <form class="m-3 p-2 fw-bold" method="post">
+
     {% csrf_token %}
     {{ form | crispy }}
+
     <div>
         <button class="btn btn-green mb-5 mt-0" type="submit">Save</button>
         <button class="mb-5 mt-0 btn btn-orange"><a href="{% url 'profile' %}">Cancel</a></button>
     </div>
 </form>
+
 {% endblock %}
