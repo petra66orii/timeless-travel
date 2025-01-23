@@ -18,3 +18,7 @@ class EditPost(forms.ModelForm):
         widgets = {
             'content': SummernoteWidget(),
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        fields = ['content']
