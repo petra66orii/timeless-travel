@@ -99,7 +99,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center flex-column">
-
+                {% if not suppress_messages %}
                 {% for message in messages %}
 
                 <div class="alert {{ message.tags }} alert-dismissible fade show mb-0" id="msg" role="alert">
@@ -110,13 +110,13 @@
                 </div>
 
                 {% endfor %}
-
+                {% endif %}
             </div>
         </div>
     </div>
 
     <main class="flex-shrink-0 text-center">
-        
+
         <!-- Display login status -->
         {% if user.is_authenticated %}
 

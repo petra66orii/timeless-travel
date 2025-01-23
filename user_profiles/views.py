@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib import messages
 from .models import Profile
 from .forms import EditProfileForm
 from checklists.models import Checklist
@@ -51,7 +52,7 @@ def user_drafts(request):
     draft_posts = BlogPost.objects.filter(author=request.user, status=0)
     return render(
     request, 'blog/draft_posts.html',
-    {'draft_posts': draft_posts}
+    {'draft_posts': draft_posts, 'suppress_messages': True}
 )
 
 @login_required
@@ -61,4 +62,5 @@ def publish_post(request, post_id):
     if request.method == "POST":
         draft_post.status = 1
         draft_post.save()
+        messages.success(request, 'Post successfully published!')
         return redirect('user_drafts')
