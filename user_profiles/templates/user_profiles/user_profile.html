@@ -10,7 +10,7 @@
 
                 {% if user.profile.profile_picture %}
                 <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}'s profile picture"
-                    class="img-fluid rounded-circle">
+                    class="img-fluid image-post">
                 {% else %}
                 <img src="{% static 'images/placeholder.png' %}" alt="Default profile picture"
                     class="img-fluid rounded-circle">
@@ -20,8 +20,9 @@
         <div class="col-12 col-md-6 m-3 p-2">
             <div class="bio">
                 <p>Bio: {{ profile.bio }}</p>
+            </div>
+            <div>
                 <button class="btn"><a href="{% url 'edit_profile' %}">Edit Profile</a></button>
-
                 <button class="btn"><a href="{% url 'user_drafts' %}">Your Drafts</a></button>
             </div>
         </div>
