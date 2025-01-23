@@ -3,6 +3,17 @@
 
 {% block content %}
 
+{% if user == blogpost.author %}
+
+<form action="{% url 'delete_post' blogpost.slug %}" method="get">
+
+    {% csrf_token %}
+
+    <button class="btn btn-sm btn-red mt-3 me-3 float-end" type="submit">Delete</button>
+</form>
+
+{% endif %}
+
 <button class="btn btn-sm d-flex justify-content-center ms-3 mt-3"><a href="{{ request.GET.next }}">&laquo; Go Back</a></button>
 <h1 class="my-4 p-1 page-title post-title">{{ blogpost.title }}</h1>
 
@@ -26,9 +37,11 @@
 </article>
 
 {% if user == blogpost.author %}
+
     <button class="btn btn-sm btn-orange">
         <a href="{% url 'edit_post' blogpost.slug %}?next={{ request.path }}">Edit Post</a>
     </button>
+    
 {% endif %}
 
 
