@@ -6,37 +6,48 @@
 <div class="drafts">
     <h1 class="text-center my-3 page-title">My Drafts</h1>
     <hr class="mt-4">
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <div class="mb-4">
         {% if not draft_posts %}
 
-            <p>No drafts available. Create a new post to get started!</p>
+        <p>No drafts available. Create a new post to get started!</p>
 
         {% else %}
 
-            <ul class="list-group mt-5">
+        <ul class="list-group mt-5">
 
-                {% for draft in draft_posts %}
+            {% for draft in draft_posts %}
 
-                    <li class="list-group-item d-flex justify-content-between align-items-start text-start">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold hide-text"><a class="draft-title"
-                                href="{% url 'post' draft.slug %}">{{ draft.title }}</a></div>
-                        </div>
-                        <form method="post" action="{% url 'publish_post' draft.id %}">
+            <li class="list-group-item d-flex justify-content-between align-items-start text-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold hide-text"><a class="draft-title"
+                            href="{% url 'post' draft.slug %}">{{ draft.title }}</a></div>
+                </div>
+                <form class="me-1" method="post" action="{% url 'publish_post' draft.id %}">
 
-                            {% csrf_token %}
+                    {% csrf_token %}
 
-                            <button class="btn btn-sm btn-green" type="submit">Publish</button>
-                        </form>
-                        <button class="btn btn-sm btn-orange"><a href="{% url 'edit_post' draft.slug %}?next={{ request.path }}">Edit</a></button>
-                    </li>
+                    <button class="btn btn-sm btn-green" type="submit">Publish</button>
+                </form>
+                <button class="btn btn-sm btn-orange"><a
+                        href="{% url 'edit_post' draft.slug %}?next={{ request.path }}">Edit</a></button>
+            </li>
 
-                {% endfor %}
+            {% endfor %}
 
-            </ul>
+        </ul>
 
         {% endif %}
-        
+
     </div>
 </div>
 
