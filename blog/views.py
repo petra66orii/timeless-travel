@@ -58,3 +58,16 @@ class PostUpdateView(UpdateView, LoginRequiredMixin):
     def get_queryset(self):
         # Only allow the logged-in user to update their checklists
         return BlogPost.objects.filter(author=self.request.user)
+
+class PostDeleteView(DeleteView):
+    model = BlogPost
+    template_name = 'blog/blogpost_confirm_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.get_object()
+        context['blogpost'] = self.object
+        return context
+
+    def get_success_url(self):
+        return reverse('blog')
