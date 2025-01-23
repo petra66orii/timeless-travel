@@ -231,6 +231,12 @@ hr {
     align-self: center;
 }
 
+.errorlist li {
+    list-style-type: none;
+    color: red;
+    margin-bottom: 10px;
+}
+
 /* Footer */
 .dark-bg {
     background-color: #C2EBE6;
