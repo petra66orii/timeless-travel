@@ -5,6 +5,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CreatePost, EditPost
 from .models import BlogPost, Comments
+from user_profiles.views import user_drafts
 
 # Create your views here.
 
@@ -70,4 +71,7 @@ class PostDeleteView(DeleteView):
         return context
 
     def get_success_url(self):
-        return reverse('blog')
+        if self.object.status == 1:
+            return reverse('blog')
+        elif self.object.status == 0:
+            return reverse('user_drafts')
