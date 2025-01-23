@@ -167,11 +167,11 @@ main {
 }
 
 /* Drafts Page */
-#hide-text {
+.hide-text {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 170px;
+    width: 160px;
 }
 
 /* Tasks Page */
@@ -248,22 +248,22 @@ hr {
 }
 
 /* Media queries */
-@media screen and (min-width: 840px) {
-    .intro-title, .tagline {
-        font-size: 2rem;
-    }
-
-    #hide-text {
-        width: max-content;
-    }
-}
-
 @media screen and (min-width: 576px) {
     .image-post {
         max-width: 45%;
     }
 
-    #hide-text {
-        width: 200px;
+    .hide-text {
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 840px) {
+    .intro-title, .tagline {
+        font-size: 2rem;
+    }
+
+    .hide-text {
+        width: 700px;
     }
 }

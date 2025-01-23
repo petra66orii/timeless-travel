@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.completed) {
                         this.classList.add('btn-green');
                         this.classList.remove('btn-red');
-                        this.textContent = 'Completed';
+                        this.textContent = 'Undo';
                     } else {
                         this.classList.add('btn-red');
                         this.classList.remove('btn-green');
-                        this.textContent = 'Pending';
+                        this.textContent = 'Complete';
                     }
                     updateProgress();
                 })
