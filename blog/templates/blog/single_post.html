@@ -38,12 +38,11 @@
 
 {% if user == blogpost.author %}
 
-    <button class="btn btn-sm btn-orange">
+    <button class="btn btn-sm btn-orange mt-0 mb-5">
         <a href="{% url 'edit_post' blogpost.slug %}?next={{ request.path }}">Edit Post</a>
     </button>
     
 {% endif %}
-
 
 {% if user.is_authenticated %}
 

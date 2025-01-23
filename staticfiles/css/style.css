@@ -152,12 +152,12 @@ main {
     background-color: #ac6305;
 }
 
-.checklist-title {
+.checklist-title, .draft-title {
     text-decoration: none;
     color: #333839;
 }
 
-.checklist-title:hover {
+.checklist-title:hover, .draft-title:hover {
     color:#A08DB9;
 }
 
