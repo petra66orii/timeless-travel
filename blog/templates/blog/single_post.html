@@ -61,6 +61,12 @@
                 <strong>{{ comment.user }}</strong>
                 <p>{{ comment.content }}</p>
                 <small>{{ comment.created_at|date:"d M Y, H:i" }}</small>
+                <div class="row justify-content-center align-items-start">
+                    {% if user.is_authenticated and comment.user == user %}
+                    <button class="btn btn-sm btn-red mt-1 me-1">Delete</button>
+                    <button class="btn btn-sm btn-orange mt-1">Edit</button>
+                </div>
+                {% endif %}
             </div>
 
             {% endfor %}
