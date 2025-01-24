@@ -3,7 +3,8 @@ from django.views import generic
 from django.db.models import Q
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CreatePost, EditPost
+from django.http import HttpResponseRedirect
+from .forms import CreatePost, EditPost, CommentForm
 from .models import BlogPost, Comments
 from user_profiles.views import user_drafts
 
@@ -33,6 +34,28 @@ class PostDetailView(DetailView):
     model = BlogPost
     template_name = 'blog/single_post.html'
     context_object_name = 'blogpost'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add the comment form and the comments for the current post
+        context['form'] = CommentForm()
+        context['comments'] = self.object.comments.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # Handle the comment submission
+        self.object = self.get_object()  # Get the current blog post
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = self.object
+            comment.user = request.user
+            comment.save()
+            return HttpResponseRedirect(reverse('post', args=[self.object.slug]))
+
+        # If the form is invalid, re-render the page with the form errors
+        context = self.get_context_data(form=form)
+        return self.render_to_response(context)
 
 # Create post view
 class PostCreateView(LoginRequiredMixin, CreateView):
