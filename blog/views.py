@@ -53,9 +53,21 @@ class PostDetailView(DetailView):
             comment.save()
             return HttpResponseRedirect(reverse('post', args=[self.object.slug]))
 
+        # Handle editing a comment
+        if comment and comment.user == request.user:
+            form = CommentForm(request.POST, instance=comment)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Comment updated successfully!")
+                return redirect('post', slug=slug)
+
         # If the form is invalid, re-render the page with the form errors
-        context = self.get_context_data(form=form)
-        return self.render_to_response(context)
+        comments = blogpost.comments.all()
+        return self.render_to_response({
+            'blogpost': blogpost,
+            'comments': comments,
+            'form': form,
+        })
 
 # Create post view
 class PostCreateView(LoginRequiredMixin, CreateView):
