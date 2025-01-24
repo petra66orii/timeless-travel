@@ -70,7 +70,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('post', kwargs={'slug': self.object.slug})
 
-
+# Update post view
 class PostUpdateView(UpdateView, LoginRequiredMixin):
     model = BlogPost
     form_class = EditPost
@@ -83,6 +83,7 @@ class PostUpdateView(UpdateView, LoginRequiredMixin):
         # Only allow the logged-in user to update their checklists
         return BlogPost.objects.filter(author=self.request.user)
 
+# Delete post view
 class PostDeleteView(DeleteView):
     model = BlogPost
     template_name = 'blog/blogpost_confirm_delete.html'
