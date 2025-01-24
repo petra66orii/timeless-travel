@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .forms import CreatePost, EditPost, CommentForm
 from .models import BlogPost, Comments
 from user_profiles.views import user_drafts
@@ -51,6 +52,7 @@ class PostDetailView(DetailView):
             comment.post = self.object
             comment.user = request.user
             comment.save()
+            messages.success(request, "Comment added successfully!")
             return HttpResponseRedirect(reverse('post', args=[self.object.slug]))
 
         # Handle editing a comment
