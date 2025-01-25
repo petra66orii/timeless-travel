@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="text-center container">
+        <h1 class="my-4 p-1 page-title">404 - Page Not Found</h1>
+        <p>Ooops! Seems like you've travelled to a non-existent page.</p>
+        <button class="btn"><a href="{% url 'home' %}">Back to Home</a></button>
+    </div>
+{% endblock %}
