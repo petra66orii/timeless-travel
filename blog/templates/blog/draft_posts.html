@@ -5,41 +5,32 @@
 
 <button class="btn btn-sm d-flex justify-content-center ms-3 mt-3"><a href="{% url 'profile' %}">&laquo; Go
     Back</a></button>
+
+<!-- Draft posts list -->
 <div class="drafts">
     <h1 class="text-center my-3 page-title">My Drafts</h1>
     <hr class="mt-4">
     <div class="mb-4">
         {% if not draft_posts %}
-
         <p>No drafts available. Create a new post to get started!</p>
-
         {% else %}
-
         <ul class="list-group mt-5">
-
             {% for draft in draft_posts %}
-
             <li class="list-group-item d-flex justify-content-between align-items-start text-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold hide-text"><a class="draft-title"
                             href="{% url 'post' draft.slug %}?next={{ request.path }}">{{ draft.title }}</a></div>
                 </div>
                 <form class="me-1" method="post" action="{% url 'publish_post' draft.id %}">
-
                     {% csrf_token %}
-
                     <button class="btn btn-sm btn-green" type="submit">Publish</button>
                 </form>
                 <button class="btn btn-sm btn-orange"><a
                         href="{% url 'edit_post' draft.slug %}">Edit</a></button>
             </li>
-
             {% endfor %}
-
         </ul>
-
         {% endif %}
-
     </div>
 </div>
 

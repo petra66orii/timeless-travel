@@ -12,6 +12,8 @@
 {% endif %}
 <button class="btn btn-sm d-flex justify-content-center ms-3 mt-3"><a href="{{ request.GET.next }}">&laquo; Go
         Back</a></button>
+
+<!-- Blog Post Section -->
 <h1 class="my-4 p-1 page-title post-title">{{ blogpost.title }}</h1>
 <p class="my-2 p-1 page-heading post-subtitle">{{ blogpost.author }} | {{ blogpost.created_at }}</p>
 <hr>
@@ -23,11 +25,14 @@
 <article class="card-text m-2 p-2 m-lg-5 p-lg-5 text-start">
     {{ blogpost.content | safe }}
 </article>
+
 {% if user == blogpost.author %}
 <button class="btn btn-sm btn-orange mt-0 mb-5">
     <a href="{% url 'edit_post' blogpost.slug %}?next={{ request.path }}">Edit Post</a>
 </button>
 {% endif %}
+
+<!-- Comments Section -->
 {% if user.is_authenticated %}
 <hr>
 <h3>Leave a Comment</h3>
@@ -65,7 +70,7 @@
 <p>Log in to leave a comment</p>
 {% endif %}
 
-<!-- Delete confirmation modal - Code borrowed from the Codestar walkthrough project -->
+<!-- Delete Confirmation Modal - Code borrowed from the Codestar walkthrough project -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -86,5 +91,6 @@
     </div>
 </div>
 
+<!-- JS Script -->
 <script src="{% static 'js/comments.js' %}"></script>
 {% endblock %}
