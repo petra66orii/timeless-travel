@@ -54,6 +54,12 @@
                         <a class="nav-link {% if request.path == blog_url %}active{% endif %}" aria-current="page"
                             href="{% url 'blog' %}">Blog</a>
                     </li>
+                    {% if user.is_authenticated and user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page"
+                            href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    {% endif %}
                     <!-- This little section of code was borrowed from the Codestar blog project -->
 
                 </ul>
