@@ -70,14 +70,16 @@ class PostDetailView(DetailView):
             else:
                 messages.error(request, "Ooops! Error updating comment!")
         
+    def delete_comment(request, comment_id, slug):
+        comment = get_object_or_404(Comments, id=comment_id, user=request.user)
 
-        # If the form is invalid, re-render the page with the form errors
-        comments = blogpost.comments.all()
-        return self.render_to_response({
-            'blogpost': blogpost,
-            'comments': comments,
-            'form': form,
-        })
+        if comment.user == request.user:
+            comment.delete()
+            messages.success(request, "Comment deleted successfully!")
+            return HttpResponseRedirect(reverse('post',  args=[slug]))
+        else:
+            messages.error(request, "Failed to delete the comment.")
+            return redirect('post', slug=slug)
 
 # Create post view
 class PostCreateView(LoginRequiredMixin, CreateView):
