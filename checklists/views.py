@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from .models import Checklist, Task
 from .serializers import TaskSerializer, ChecklistSerializer
 from .forms import CreateChecklist
@@ -46,6 +47,7 @@ class ChecklistCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
     def get_success_url(self):
+        messages.success(self.request, "Checklist created!")
         return reverse('profile')
 
 class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
@@ -54,6 +56,7 @@ class ChecklistUpdateView(UpdateView, LoginRequiredMixin):
     template_name = 'checklists/edit_checklist_form.html'
     
     def get_success_url(self):
+        messages.success(self.request, "Checklist updated!")
         return reverse('checklist', kwargs={'pk': self.object.pk})
 
     def get_queryset(self):
@@ -66,6 +69,7 @@ class ChecklistDeleteView(DeleteView, LoginRequiredMixin):
     success_url = reverse_lazy('checklist')
 
     def get_success_url(self):
+        messages.success(self.request, "Checklist deleted!")
         return reverse('profile')
 
 # Tasks CRUD Views
@@ -85,6 +89,7 @@ class TaskCreateView(CreateView):
         return context
 
     def get_success_url(self):
+        messages.success(self.request, "Task created!")
         return reverse_lazy('checklist', kwargs={'pk': self.kwargs['checklist_id']})
 
 class TaskUpdateView(UpdateView):
@@ -98,6 +103,7 @@ class TaskUpdateView(UpdateView):
         return context
 
     def get_success_url(self):
+        messages.success(self.request, "Task updated!")
         return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
 
 class TaskDeleteView(DeleteView):
@@ -111,6 +117,7 @@ class TaskDeleteView(DeleteView):
         return context
 
     def get_success_url(self):
+        messages.success(self.request, "Task deleted!")
         return reverse_lazy('checklist', kwargs={'pk': self.object.checklist.id})
 
 # Toggle tasks as complete
