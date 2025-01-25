@@ -3,10 +3,14 @@ from .models import BlogPost, Comments
 from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
-# This model was borrowed and adapted from Codestar Blog project
+
+# This class was borrowed and adapted from Codestar Blog project
 @admin.register(BlogPost)
 class BlogPostAdmin(SummernoteModelAdmin):
-
+    """
+    Lists fields for display in admin, fields for search,
+    field filters, fields to prepopulate and rich-text editor.
+    """
     list_display = ('title', 'slug', 'status')
     search_fields = ['title']
     list_filter = ('status',)
@@ -15,4 +19,7 @@ class BlogPostAdmin(SummernoteModelAdmin):
 
 @admin.register(Comments)
 class CommentsAdmin(admin.ModelAdmin):
+  """
+  Lists fields for display in admin
+  """
   list_display = ("post", "user", "content", "created_at")
