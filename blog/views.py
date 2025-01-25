@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic
 from django.db.models import Q
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
@@ -56,12 +56,18 @@ class PostDetailView(DetailView):
             return HttpResponseRedirect(reverse('post', args=[self.object.slug]))
 
         # Handle editing a comment
-        if comment and comment.user == request.user:
+    def edit_comment(request, comment_id, slug):
+        comment = get_object_or_404(Comments, id=comment_id, user=request.user)
+
+        if request.method == 'POST':
             form = CommentForm(request.POST, instance=comment)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Comment updated successfully!")
-                return redirect('post', slug=slug)
+                return redirect('post', slug=comment.post.slug)
+            else:
+                messages.error(request, "Ooops! Error updating comment!")
+        
 
         # If the form is invalid, re-render the page with the form errors
         comments = blogpost.comments.all()
