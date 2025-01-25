@@ -57,6 +57,14 @@ class PostDetailView(DetailView):
         else:
             messages.error(request, "Ooops! Error adding comment!")
 
+        # If the form is invalid, re-render the page with the form errors
+        comments = blogpost.comments.all()
+        return self.render_to_response({
+            'blogpost': blogpost,
+            'comments': comments,
+            'form': form,
+        })
+
         # Handle editing a comment
     def edit_comment(request, comment_id, slug):
         comment = get_object_or_404(Comments, id=comment_id, user=request.user)
