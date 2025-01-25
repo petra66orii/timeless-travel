@@ -52,7 +52,7 @@ def user_drafts(request):
     draft_posts = BlogPost.objects.filter(author=request.user, status=0)
     return render(
     request, 'blog/draft_posts.html',
-    {'draft_posts': draft_posts, 'suppress_messages': True}
+    {'draft_posts': draft_posts}
 )
 
 @login_required
