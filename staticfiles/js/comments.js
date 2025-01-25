@@ -1,11 +1,14 @@
 // Handle inline editing
 document.addEventListener('DOMContentLoaded', () => {
-    let commentForm = document.getElementById('comment-form');
-    let commentText = document.getElementById('id_content');
-    let submitButton = document.getElementById('submit-btn');
+    const commentForm = document.getElementById('comment-form');
+    const commentText = document.getElementById('id_content');
+    const submitButton = document.getElementById('submit-btn');
 
-    let deleteButton = document.getElementById('delete-btn');
-    let editButtons = document.querySelectorAll('.edit-btn');
+    const editButtons = document.querySelectorAll('.edit-btn');
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+    const deleteConfirm = document.getElementById("deleteConfirm");
 
     editButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -16,4 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
             commentForm.setAttribute("action", `edit_comment/${commentId}`); // Update form action
         });
     });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            let commentId = e.target.getAttribute("data-comment-id");
+            deleteConfirm.href = `delete_comment/${commentId}`;
+            deleteModal.show();
+        });
+    })
 })
