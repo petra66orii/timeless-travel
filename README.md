@@ -68,7 +68,9 @@ At the bottom of the profile, there are two sections: on the left side, the *Che
 
 ### Blog Posts
 
-Every user that registers for an account can start writing blog posts to share their experiences and to give advice to those that are seeking to travel. The main blog page consists of a list of all blog posts, ordered from *Newest* to *Oldest*. In the main blog page, every post has a title, the author and an excerpt to offer a little preview into the story. The user can click on any post to read it and/or leave a comment. Users can create, edit or delete their own posts.
+Every user that registers for an account can start writing blog posts to share their experiences and to give advice to those that are seeking to travel. The main blog page consists of a list of all blog posts, ordered from *Newest* to *Oldest*. In the main blog page, every post has a title, the author and an excerpt to offer a little preview into the story. The user can click on any post to read it and/or leave a comment. 
+
+Users can create, edit or delete their own posts.
 
 When creating a post, users need to add:
 
@@ -86,6 +88,10 @@ Users can set their posts to a few visibility options:
 * *Private* - Only the authors can see this post
 * *Users Only* - Only registered users can see this post
 * *Public* - Everyone can see this post
+
+#### Comments
+
+Users can add comments to blog posts only if they're registered and logged in. They can also edit and/or delete them as well.
 
 ### Checklists and Tasks
 
