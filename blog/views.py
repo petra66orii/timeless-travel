@@ -54,6 +54,8 @@ class PostDetailView(DetailView):
             comment.save()
             messages.success(request, "Comment added successfully!")
             return HttpResponseRedirect(reverse('post', args=[self.object.slug]))
+        else:
+            messages.error(request, "Ooops! Error adding comment!")
 
         # Handle editing a comment
     def edit_comment(request, comment_id, slug):
