@@ -37,6 +37,7 @@
 <body class="d-flex flex-column h-100">
 
     <!-- Navigation -->
+    <!-- This section of code was borrowed and adapted from the Codestar blog project -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}"></a>
@@ -45,6 +46,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
+
+                <!-- Left-hand side links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
@@ -54,19 +57,18 @@
                         <a class="nav-link {% if request.path == blog_url %}active{% endif %}" aria-current="page"
                             href="{% url 'blog' %}">Blog</a>
                     </li>
+
+                    <!-- Admin panel link -->
                     {% if user.is_authenticated and user.is_staff %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page"
-                            href="{% url 'admin:index' %}">Admin</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
                     </li>
                     {% endif %}
-                    <!-- This little section of code was borrowed from the Codestar blog project -->
-
                 </ul>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 
+                    <!-- Right-hand side links -->
                     {% if user.is_authenticated %}
-
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == create_post_url %}active{% endif %}"
                             aria-current="page" href="{% url 'create_post' %}?next={{ request.path }}">Create Post</a>
@@ -79,9 +81,7 @@
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
                             href="{% url 'account_logout' %}">Logout</a>
                     </li>
-
                     {% else %}
-
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
                             href="{% url 'account_signup' %}">Register</a>
@@ -90,9 +90,7 @@
                         <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page"
                             href="{% url 'account_login' %}">Login</a>
                     </li>
-
                     {% endif %}
-
                 </ul>
             </div>
         </div>
@@ -101,13 +99,9 @@
 
         <!-- Display login status -->
         {% if user.is_authenticated %}
-
         <p class="text-end m-0 p-2 login-status">Welcome, {{ user }}</p>
-
         {% else %}
-
         <p class="text-end m-0 p-2 login-status">Welcome, traveller! Please log in</p>
-
         {% endif %}
 
         <!-- Display messages -->
@@ -118,6 +112,7 @@
                 aria-label="Close"></button>
         </div>
         {% endfor %}
+
         {% block content %}
         <!-- Content goes here -->
         {% endblock content %}
