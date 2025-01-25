@@ -19,4 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
             commentForm.setAttribute("action", `edit_comment/${commentId}`); // Update form action
         });
     });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            let commentId = e.target.getAttribute("data-comment-id");
+            deleteConfirm.href = `delete_comment/${commentId}`;
+            deleteModal.show();
+        });
+    })
 })
