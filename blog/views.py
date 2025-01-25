@@ -100,7 +100,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('post', kwargs={'slug': self.object.slug})
+        if self.object.status == 1:
+            messages.success(self.request, "Post published successfully!")
+            return reverse('post', kwargs={'slug': self.object.slug})
+        elif self.object.status == 0:
+            messages.success(self.request, "Post saved as draft!")
+            return reverse('post', kwargs={'slug': self.object.slug})                    
 
 # Update post view
 class PostUpdateView(UpdateView, LoginRequiredMixin):
@@ -109,6 +114,7 @@ class PostUpdateView(UpdateView, LoginRequiredMixin):
     template_name = 'blog/edit_post.html'
     
     def get_success_url(self):
+        messages.success(self.request, "Post updated successfully!")
         return reverse('post', kwargs={'slug': self.object.slug})
 
     def get_queryset(self):
@@ -128,6 +134,8 @@ class PostDeleteView(DeleteView):
 
     def get_success_url(self):
         if self.object.status == 1:
+            messages.success(self.request, "Post deleted successfully!")
             return reverse('blog')
         elif self.object.status == 0:
+            messages.success(self.request, "Post deleted successfully!")
             return reverse('user_drafts')
