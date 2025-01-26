@@ -340,20 +340,20 @@ def toggle_task_completion(request, task_id):
     Expects a POST request with the task_id in the URL path.
 
     Permissions:
-        - Requires authentication (not explicitly enforced in this code).
+      - Requires authentication (not explicitly enforced in this code).
 
     Args:
-        request: The incoming HTTP request.
-        task_id: The ID of the task object to be modified.
+      request: The incoming HTTP request.
+      task_id: The ID of the task object to be modified.
 
     Returns:
-        A JSON response with the following data:
-            - completed (bool): The updated completion status of the task.
+      A JSON response with the following data:
+          - completed (bool): The updated completion status of the task.
 
     Raises:
-        - HTTP 400 Bad Request: If the request method is not POST.
-        - HTTP 404 Not Found: If the task object is not found or the user
-          does not have permission to access it.
+      - HTTP 400 Bad Request: If the request method is not POST.
+      - HTTP 404 Not Found: If the task object is not found or the user
+        does not have permission to access it.
     """
     if request.method == 'POST':
         task = get_object_or_404(Task,
@@ -363,3 +363,4 @@ def toggle_task_completion(request, task_id):
         task.save()
         return JsonResponse({'completed': task.completed})
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
