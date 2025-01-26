@@ -1,4 +1,3 @@
-from bleach import clean
 from .models import BlogPost, Comments
 from django_summernote.widgets import SummernoteWidget
 from django import forms
