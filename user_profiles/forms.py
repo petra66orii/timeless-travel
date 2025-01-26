@@ -1,7 +1,15 @@
 from django import forms
 from .models import Profile
 
+
 class CustomSignupForm(forms.Form):
+    """
+    Custom signup form that collects additional
+    user information (first name, last name).
+
+    Extends the default signup form to include
+    fields for first name and last name.
+    """
     first_name = forms.CharField(
         max_length=30,
         label="First Name",
@@ -37,6 +45,12 @@ class CustomSignupForm(forms.Form):
     )
 
     def clean(self):
+        """
+        Validates the form data, ensuring that the entered passwords match.
+
+        Returns:
+            The cleaned data if valid, otherwise raises an error.
+        """
         cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
@@ -47,6 +61,19 @@ class CustomSignupForm(forms.Form):
         return cleaned_data
 
     def save(self, request):
+        """
+        Creates a new user with the provided information.
+
+        Uses the cleaned form data to create a new User object
+        with the specified username, email, password,
+        first name, and last name.
+
+        Args:
+            request: The HTTP request object.
+
+        Returns:
+            The newly created user object.
+        """
         from allauth.account.forms import SignupForm
         user = SignupForm().save(request)
         user.first_name = self.cleaned_data['first_name']
@@ -55,16 +82,52 @@ class CustomSignupForm(forms.Form):
         return user
 
     def signup(self, request, user):
+        """
+        Saves the user's first and last name to the existing user object.
+
+        This method is intended to be used after a
+        successful user signup process.
+        It updates the first and last names of the provided
+        user object with the values from the cleaned form data.
+
+        Args:
+            request: The HTTP request object
+            (might not be used in this method).
+            user: The user object to be updated.
+        """
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
         user.save()
 
+
 class EditProfileForm(forms.ModelForm):
+    """
+    Form for editing user profile information.
+
+    Allows users to update their profile picture and bio.
+
+    Attributes:
+        Meta:
+            - model: The Profile model.
+            - fields: A list of fields to be included
+            in the form ('profile_picture', 'bio').
+    """
     class Meta:
         model = Profile
         fields = ['profile_picture', 'bio']
 
     def validate_profile_picture(self):
+        """
+        Validates the uploaded profile picture.
+
+        Checks if the uploaded file is an image file.
+
+        Returns:
+            The cleaned profile picture data.
+
+        Raises:
+            forms.ValidationError: If the uploaded file is not an image.
+        """
         profile_picture = self.cleaned_data.get('profile_picture')
         if profile_picture:
             if not profile_picture.content_type.startswith('image/'):
