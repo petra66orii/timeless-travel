@@ -133,20 +133,18 @@ class LoginFormTests(TestCase):
 
 
 class EditProfileFormTests(TestCase):
-    """
-    Unit tests for the EditProfileForm class.
-    """
-    def setUp(self):
-        """
-        Sets up test data by creating a user and a profile instance.
-        """
-        self.user = User.objects.create_user(f"testuser_{self.id()}",
-                                             password='password')
-        self.profile,
-        created = Profile.objects.get_or_create(user=self.user,
-                                                defaults={
-                                                        "bio": "Initial bio"
-                                                        })
+    @classmethod
+    def setUpTestData(cls):
+        # Create a User instance
+        cls.user = User.objects.create_user(
+            username="testuser",
+            password="password123",
+            email="testuser@example.com",
+        )
+
+        # Check if a Profile exists and create it if not
+        cls.profile, created = Profile.objects.get_or_create(user=cls.user)
+
 
     def test_valid_form(self):
         """

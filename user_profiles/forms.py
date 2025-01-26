@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Profile
 
 
@@ -116,20 +117,24 @@ class EditProfileForm(forms.ModelForm):
         model = Profile
         fields = ['profile_picture', 'bio']
 
-    def validate_profile_picture(self):
+    def clean_profile_picture(self):
         """
         Validates the uploaded profile picture.
+        Checks if the uploaded file is a valid image file (JPEG or PNG).
 
-        Checks if the uploaded file is an image file.
+        Args:
+            self: The current form instance.
 
         Returns:
-            The cleaned profile picture data.
+            The cleaned profile picture data if valid.
 
         Raises:
-            forms.ValidationError: If the uploaded file is not an image.
+            ValidationError: If the uploaded file type is not JPEG or PNG.
         """
         profile_picture = self.cleaned_data.get('profile_picture')
         if profile_picture:
-            if not profile_picture.content_type.startswith('image/'):
-                raise forms.ValidationError('File type is not image')
-        return profile_picture
+            valid_mime_types = ['image/jpeg', 'image/png']
+            file_type = profile_picture.content_type
+            if file_type not in valid_mime_types:
+                raise ValidationError("Invalid file type. Only JPEG and PNG are allowed.")
+        return profile_picture 
