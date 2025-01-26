@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block content %}
+
+<!-- Profile Section -->
 <div class="container">
     <h1 class="text-center my-3 page-title">Welcome, {{ profile.user.first_name }}</h1>
     <div class="row m-4 justify-content-center flex-md-nowrap">
         <div class="col-12 col-md-6 m-3 p-2">
             <div class="profile">
-
                 {% if user.profile.profile_picture %}
                 <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}'s profile picture"
                     class="img-fluid image-post">
@@ -28,6 +29,8 @@
         </div>
     </div>
 </div>
+
+<!-- Checklists Section -->
 <div class="container">
     <div class="row m-4 justify-content-center flex-md-nowrap">
         <div class="col-12 col-md-6 m-3 p-2">
@@ -59,6 +62,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Posts Section -->
         <div class="col-12 col-md-6 m-3 p-2">
             <div class="posts">
                 <h2>My Posts</h2>
