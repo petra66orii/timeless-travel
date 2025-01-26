@@ -26,5 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteConfirm.href = `delete_comment/${commentId}`;
             deleteModal.show();
         });
-    })
-})
+    });
+});

@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Change colors dynamically depending on tasks completion
         if (progress <= 33) {
-            progressBar.style.backgroundColor = '#cf065a'
+            progressBar.style.backgroundColor = '#cf065a';
         } else if (progress <= 67) {
-            progressBar.style.backgroundColor = '#eb8808'
+            progressBar.style.backgroundColor = '#eb8808';
         } else {
-            progressBar.style.backgroundColor = '#64C431'
+            progressBar.style.backgroundColor = '#64C431';
         }
     }
 

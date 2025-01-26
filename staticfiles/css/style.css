@@ -9,6 +9,10 @@ body {
     background-color: whitesmoke;
 }
 
+.hidden-heading {
+    display: none;
+}
+
 /* Navbar */
 .navbar {
     background-color: #C2EBE6;
