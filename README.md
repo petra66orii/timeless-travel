@@ -8,7 +8,12 @@ Time[less] Travel is a travel blog/website designed to help travelers achieve th
 
 1. **[Project Goals](#project-goals)**
     * [Workflow](#workflow)
-    * [Data](#data)
+    * [Data Schema](#data-schema)
+        + [BlogPost Model](#blogpost-model)
+        + [Comment Model](#comment-model)
+        + [Checklist Model](#checklist-model)
+        + [Task Model](#task-model)
+        + [Profile Model](#profile-model)
 2. **[Target Audience](#target-audience)**
 3. **[Design](#design)**
     * [The Five Planes of UX](#the-five-planes-of-ux)
@@ -87,11 +92,66 @@ Users can do the following:
 * Create a profile: [EPIC: User Profiles](https://github.com/petra66orii/timeless-travel/milestone/6?closed=1)
 * Create blog posts: [EPIC: Blog Posts](https://github.com/petra66orii/timeless-travel/milestone/3?closed=1)
 
-## Data 
+## Data Schema 
 
 Planning for the database involved creating an ERD diagram to see the relationships between the data models:
 
 ![ERD Diagram](static/images/README/erd-diagram.png)
+
+The application uses a relational database to store and manage data. Below is the data schema:
+
+### BlogPost Model
+
+**Fields**:
+* `*author*`: `*ForeignKey*` to the `*User*` model (*Relation*: one user can author many blog posts).
+* `*title*`: CharField (max_length=255) - the title of the blog post.
+* `*slug*`: SlugField (max_length=255) - unique identifier for the post URL.
+* `*content*`: TextField - the content of the blog post.
+* `*created_at*`: DateTimeField - timestamp when the post is created.
+* `*updated_at*`: DateTimeField - timestamp when the post is last updated.
+* `*status*`: IntegerField - determines whether the post is draft or published.
+* `*excerpt*`: TextField - short preview of the blog post.
+* `*featured_image*`: CloudinaryField - stores an optional featured image for the post.
+* `*visibility*`: CharField - determines if the post is public or private.
+
+
+### Comments Model
+
+**Fields**:
+* `*post*`: `*ForeignKey*` to the `*BlogPost*` model (*Relation*: one post can have many comments).
+* `*user*`: `*ForeignKey*` to the `*User*` model (*Relation*: one user can comment on multiple posts).
+* `*content*`: TextField - the comment text.
+* `*created_at*`: DateTimeField - timestamp when the comment is created.
+
+### Checklist Model
+
+**Fields**:
+* `*user*`: `*ForeignKey*` to the `*User*` model (*Relation*: one user can have multiple checklists).
+* `*description*`: CharField (max_length=255) - a description of the checklist.
+* `*title*`: CharField (max_length=255) - title of the checklist.
+* `*created_at*`: DateTimeField - timestamp when the checklist is created.
+* `*updated_at*`: DateTimeField - timestamp when the checklist is last updated.
+
+### Task Model
+
+**Fields**:
+* `*checklist*`: `*ForeignKey*` to the `*Checklist*` model (*Relation*: one checklist can have multiple tasks).
+* `*task*`: CharField (max_length=255) - description of the task.
+* `*completed*`: BooleanField - indicates if the task is completed.
+* `*priority*`: CharField (choices: *low*, *medium*, *high*) - priority level of the task.
+
+### Profile Model
+
+**Fields**:
+* `*user*`: `*OneToOneField` to the `*User*` model (*Relation*: one user has one profile).
+* `*bio*`: TextField - user's biography or about information.
+* `*profile_picture*`: CloudinaryField - optional field for storing a profile picture.
+
+**Relationships**:
+
+* `*BlogPost*` -> `*Comments*`: *One-to-Many* relationship.
+* `*Checklist*` -> `*Task*`: *One-to-Many* relationship.
+* `*User*` -> `*BlogPost*`, `*Checklist*`, `*Comments*`, `*Profile*`: *One-to-Many* or *One-to-One* relationships.
 
 # Target Audience
 
@@ -425,6 +485,7 @@ There were so many things I would've wanted to implement in addition to what alr
 - **W3C Validator**: Tools for validating HTML, CSS, and web standards used in website development.
 - **dbdiagram.io**: ERD design.
 - **Pexels**: Royalty free images.
+- **Balsamiq**: Wireframe building app.
 
 # Deployment and Local Development
 
