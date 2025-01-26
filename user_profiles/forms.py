@@ -136,5 +136,5 @@ class EditProfileForm(forms.ModelForm):
             valid_mime_types = ['image/jpeg', 'image/png']
             file_type = profile_picture.content_type
             if file_type not in valid_mime_types:
-                raise ValidationError("Invalid file type. Only JPEG and PNG are allowed.")
-        return profile_picture 
+                raise ValidationError("Invalid file type.")
+        return profile_picture
