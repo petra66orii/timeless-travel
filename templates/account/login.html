@@ -16,7 +16,7 @@
         If you have not created an account yet, then please
         <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 
-
+      <!-- Login Form -->
       <form class="login d-flex flex-column" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form.as_p }}

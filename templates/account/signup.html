@@ -15,6 +15,8 @@
       </p>
     </div>
   </div>
+
+  <!-- Display Error Messages -->
   <div class="row">
     <div class="col-md-6 mt-3 offset-md-3">
       {% for field in form %}
@@ -28,6 +30,8 @@
         {% endif %}
       </div>
       {% endfor %}
+
+      <!-- Sign Up Form -->
       <form class="signup d-inline-flex col-4" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -73,5 +77,6 @@
   </div>
 </div>
 
+<!-- JS Script -->
 <script src="{% static 'js/sign-up-popover.js' %}"></script>
 {% endblock content %}
