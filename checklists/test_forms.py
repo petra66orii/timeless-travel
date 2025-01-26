@@ -2,6 +2,7 @@ from django.test import TestCase
 from .forms import CreateChecklist
 from .models import Checklist
 
+
 class CreateChecklistFormTests(TestCase):
 
     def test_create_checklist_form_valid_data(self):
@@ -17,7 +18,8 @@ class CreateChecklistFormTests(TestCase):
 
     def test_create_checklist_form_missing_required_fields(self):
         """
-        Tests if the CreateChecklist form is invalid with missing required fields.
+        Tests if the CreateChecklist form is invalid with
+        missing required fields.
         """
         form_data = {
             'title': '',
