@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h1 class="page-title my-3 p-2">Delete Checklist</h1>
 <p class="fw-bold">Are you sure you want to delete your checklist "{{ object.title }}"?</p>
 <p class="text-danger fw-bold">Warning! This action is irreversible!</p>
@@ -9,4 +10,5 @@
     <button class="btn btn-red my-2" type="submit">Yes</button>
 </form>
 <button class="btn mt-1"><a href="{% url 'checklist' checklist.id %}">Cancel</a></button>
+
 {% endblock %}

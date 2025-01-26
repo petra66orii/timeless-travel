@@ -5,10 +5,8 @@
 
 <h1 class="page-title my-3 p-2">Create Task</h1>
 <form class="m-5 p-3 fw-bold d-flex flex-column justify-content-center align-items-center" method="post">
-
     {% csrf_token %}
     {{ form | crispy }}
-
     <div>
         <button class="btn btn-green mb-5 mt-0" type="submit">Save</button>
         <button class="mb-5 mt-0 btn btn-orange"><a href="{% url 'checklist' checklist.id %}">Cancel</a></button>
