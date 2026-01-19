@@ -6,6 +6,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticated
+from .serializers import ChecklistSerializer, TaskSerializer
 from .models import Checklist, Task
 from .forms import CreateChecklist
 
@@ -364,3 +367,21 @@ def toggle_task_completion(request, task_id):
         return JsonResponse({'completed': task.completed})
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+class ChecklistViewSet(viewsets.ModelViewSet):
+    serializer_class = ChecklistSerializer
+    permission_classes = [IsAuthenticated] # Only logged-in users
+
+    def get_queryset(self):
+        # Only return checklists belonging to the current user
+        return Checklist.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class TaskUpdateView(generics.UpdateAPIView):
+    """
+    API endpoint to update a single task (e.g. mark complete)
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
