@@ -8,8 +8,8 @@ from django.contrib import messages
 from .forms import CreatePost, EditPost, CommentForm
 from .models import BlogPost, Comments
 from user_profiles.views import user_drafts
-
-# Create your views here.
+from rest_framework import viewsets
+from .serializers import BlogPostSerializer
 
 
 # Blog posts list view
@@ -115,6 +115,7 @@ class PostDetailView(DetailView):
             messages.error(request, "Ooops! Error adding comment!")
 
         # If the form is invalid, re-render the page with the form errors
+        blogpost = self.object
         comments = blogpost.comments.all()
         return self.render_to_response({
             'blogpost': blogpost,
@@ -312,3 +313,12 @@ class PostDeleteView(DeleteView):
         elif self.object.status == 0:
             messages.success(self.request, "Post deleted successfully!")
             return reverse('user_drafts')
+
+
+class BlogPostViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Blog Posts to be viewed or edited.
+    """
+    queryset = BlogPost.objects.filter(status=1) # Only return published posts
+    serializer_class = BlogPostSerializer
+    lookup_field = 'slug'
