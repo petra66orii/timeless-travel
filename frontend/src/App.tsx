@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import Checklists from "./pages/Checklists";
 
 function App() {
   return (
@@ -19,12 +20,19 @@ function App() {
         >
           Blog
         </Link>
+        <Link
+          to="/checklists"
+          className="text-gray-700 hover:text-purple-600 font-medium"
+        >
+          Checklists
+        </Link>
       </nav>
 
       {/* Page Content */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/checklists" element={<Checklists />} />
       </Routes>
     </Router>
   );
