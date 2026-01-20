@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import viewsets
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, permissions, status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from .serializers import ChecklistSerializer, TaskSerializer
 from .models import Checklist, Task
 from .forms import CreateChecklist
@@ -378,10 +378,21 @@ class ChecklistViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-class TaskUpdateAPIView(generics.UpdateAPIView):
+class TaskViewSet(viewsets.ModelViewSet):
     """
-    API endpoint to update a single task (e.g. mark complete)
+    API ViewSet for managing Tasks (Create, Update, Delete).
     """
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Ensure users can only access tasks belonging to their own checklists
+        return Task.objects.filter(checklist__user=self.request.user)
+
+    def perform_create(self, serializer):
+        # Security Check: Verify the checklist belongs to the logged-in user
+        checklist = serializer.validated_data['checklist']
+        if checklist.user != self.request.user:
+            raise PermissionDenied("You do not have permission to add tasks to this checklist.")
+        
+        serializer.save()
