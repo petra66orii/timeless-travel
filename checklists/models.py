@@ -15,7 +15,7 @@ class Checklist(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='checklists', null=False)
-    description = models.TextField(max_length=255)
+    description = models.TextField(max_length=255, blank=True)
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

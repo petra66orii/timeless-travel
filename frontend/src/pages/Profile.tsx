@@ -3,16 +3,22 @@ import api from "../api";
 import type { Profile as ProfileType, Checklist } from "../types";
 import ChecklistManager from "../components/ChecklistManager";
 import LogoutButton from "../components/LogoutButton";
+import CreateChecklistForm from "../components/CreateChecklistForm";
 
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<ProfileType | null>(null);
   const [checklists, setChecklists] = useState<Checklist[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Function to handle the update when a new list is created
+  const handleChecklistCreated = (newChecklist: Checklist) => {
+    // Add the new checklist to the TOP of the list
+    setChecklists((prev) => [newChecklist, ...prev]);
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
-        // Fetch both Profile and Checklists in parallel
         const [profileRes, checklistsRes] = await Promise.all([
           api.get("/api/user-profile/"),
           api.get("/api/checklists/"),
@@ -39,7 +45,6 @@ const Profile: React.FC = () => {
         {/* Profile Header Card */}
         <div className="flex flex-col items-center justify-between rounded-2xl bg-white p-8 shadow-sm md:flex-row">
           <div className="flex items-center gap-6">
-            {/* Profile Picture */}
             <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-blue-50 bg-gray-200">
               {profile?.profile_picture ? (
                 <img
@@ -56,7 +61,6 @@ const Profile: React.FC = () => {
               )}
             </div>
 
-            {/* User Info */}
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
                 {profile?.user.username}
@@ -77,6 +81,11 @@ const Profile: React.FC = () => {
           <h2 className="mb-6 text-2xl font-bold text-gray-800">
             My Travel Checklists
           </h2>
+
+          {/* Create Checklist Form Area */}
+          <div className="mb-8">
+            <CreateChecklistForm onChecklistCreated={handleChecklistCreated} />
+          </div>
 
           {checklists.length === 0 ? (
             <div className="rounded-xl bg-white p-10 text-center shadow-sm">
