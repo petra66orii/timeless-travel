@@ -10,10 +10,21 @@ const Profile: React.FC = () => {
   const [checklists, setChecklists] = useState<Checklist[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Function to handle the update when a new list is created
+  // 1. Handle Creation (Existing)
   const handleChecklistCreated = (newChecklist: Checklist) => {
-    // Add the new checklist to the TOP of the list
     setChecklists((prev) => [newChecklist, ...prev]);
+  };
+
+  // 2. Handle Deletion (New)
+  const handleChecklistDeleted = (id: number) => {
+    setChecklists((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  // 3. Handle Update (New - e.g. Rename)
+  const handleChecklistUpdated = (updatedList: Checklist) => {
+    setChecklists((prev) =>
+      prev.map((c) => (c.id === updatedList.id ? updatedList : c)),
+    );
   };
 
   useEffect(() => {
@@ -23,7 +34,6 @@ const Profile: React.FC = () => {
           api.get("/api/user-profile/"),
           api.get("/api/checklists/"),
         ]);
-
         setProfile(profileRes.data);
         setChecklists(checklistsRes.data);
       } catch (err) {
@@ -32,7 +42,6 @@ const Profile: React.FC = () => {
         setLoading(false);
       }
     };
-
     loadData();
   }, []);
 
@@ -42,7 +51,7 @@ const Profile: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="mx-auto max-w-5xl space-y-8">
-        {/* Profile Header Card */}
+        {/* Profile Header (Keep existing) */}
         <div className="flex flex-col items-center justify-between rounded-2xl bg-white p-8 shadow-sm md:flex-row">
           <div className="flex items-center gap-6">
             <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-blue-50 bg-gray-200">
@@ -60,7 +69,6 @@ const Profile: React.FC = () => {
                 </div>
               )}
             </div>
-
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
                 {profile?.user.username}
@@ -70,7 +78,6 @@ const Profile: React.FC = () => {
               </p>
             </div>
           </div>
-
           <div className="mt-6 md:mt-0">
             <LogoutButton />
           </div>
@@ -82,7 +89,6 @@ const Profile: React.FC = () => {
             My Travel Checklists
           </h2>
 
-          {/* Create Checklist Form Area */}
           <div className="mb-8">
             <CreateChecklistForm onChecklistCreated={handleChecklistCreated} />
           </div>
@@ -96,7 +102,13 @@ const Profile: React.FC = () => {
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
               {checklists.map((checklist) => (
-                <ChecklistManager key={checklist.id} checklist={checklist} />
+                <ChecklistManager
+                  key={checklist.id}
+                  checklist={checklist}
+                  // Pass the new handlers down
+                  onDelete={handleChecklistDeleted}
+                  onUpdate={handleChecklistUpdated}
+                />
               ))}
             </div>
           )}

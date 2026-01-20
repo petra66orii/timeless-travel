@@ -1,126 +1,227 @@
+// frontend/src/components/ChecklistManager.tsx
 import React, { useState } from "react";
 import type { Checklist, Task } from "../types";
-import { updateTask, createTask, deleteTask } from "../api"; // Use updateTask
+import {
+  updateTask,
+  createTask,
+  deleteTask,
+  deleteChecklist,
+  updateChecklist,
+} from "../api";
 
+// 1. Update Interface to accept the new props
 interface Props {
   checklist: Checklist;
+  onDelete: (id: number) => void; // <--- Added
+  onUpdate: (checklist: Checklist) => void; // <--- Added
 }
 
-export default function ChecklistManager({ checklist }: Props) {
+export default function ChecklistManager({
+  checklist,
+  onDelete,
+  onUpdate,
+}: Props) {
   const [tasks, setTasks] = useState<Task[]>(checklist.tasks);
+
+  // Task State
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-
-  // --- NEW: Editing State ---
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
-  const [editTitle, setEditTitle] = useState("");
+  const [editTaskTitle, setEditTaskTitle] = useState("");
 
-  // --- 1. Generic Update Handler (Toggle & Priority) ---
+  // Checklist Editing State
+  const [isEditingList, setIsEditingList] = useState(false);
+  const [listTitle, setListTitle] = useState(checklist.title);
+  const [listDesc, setListDesc] = useState(checklist.description);
+
+  // --- Checklist Actions ---
+
+  const handleDeleteChecklist = async () => {
+    if (
+      !window.confirm("Are you sure you want to delete this entire checklist?")
+    )
+      return;
+    try {
+      await deleteChecklist(checklist.id);
+      onDelete(checklist.id); // Notify parent
+    } catch {
+      alert("Failed to delete checklist");
+    }
+  };
+
+  const handleSaveList = async () => {
+    try {
+      const response = await updateChecklist(checklist.id, {
+        title: listTitle,
+        description: listDesc,
+      });
+      setIsEditingList(false);
+      onUpdate({ ...checklist, ...response.data }); // Notify parent
+    } catch {
+      alert("Failed to update checklist");
+    }
+  };
+
+  // --- Task Actions ---
+
   const handleUpdateTask = async (taskId: number, updates: Partial<Task>) => {
     const previousTasks = [...tasks];
-
-    // Optimistic Update
     setTasks(tasks.map((t) => (t.id === taskId ? { ...t, ...updates } : t)));
-
     try {
       await updateTask(taskId, updates);
-    } catch (error) {
-      console.error("Update failed, reverting:", error);
-      setTasks(previousTasks);
-    }
-  };
-
-  // --- 2. Cycle Priority ---
-  const cyclePriority = (task: Task) => {
-    const nextPriority: Record<string, "low" | "medium" | "high"> = {
-      low: "medium",
-      medium: "high",
-      high: "low",
-    };
-    handleUpdateTask(task.id, { priority: nextPriority[task.priority] });
-  };
-
-  // --- 3. Start Editing (Rename) ---
-  const startEditing = (task: Task) => {
-    setEditingTaskId(task.id);
-    setEditTitle(task.task);
-  };
-
-  // --- 4. Save Edit ---
-  const saveEdit = async () => {
-    if (!editingTaskId || !editTitle.trim()) return;
-
-    await handleUpdateTask(editingTaskId, { task: editTitle });
-    setEditingTaskId(null);
-    setEditTitle("");
-  };
-
-  // --- 5. Add Task ---
-  const handleAddTask = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newTaskTitle.trim()) return;
-
-    const tempId = Date.now();
-    const title = newTaskTitle;
-
-    const optimisticTask: Task = {
-      id: tempId,
-      task: title,
-      completed: false,
-      priority: "low",
-    };
-
-    setTasks([...tasks, optimisticTask]);
-    setNewTaskTitle("");
-    setIsAdding(true);
-
-    try {
-      const response = await createTask(checklist.id, title);
-      setTasks((current) =>
-        current.map((t) => (t.id === tempId ? response.data : t)),
-      );
-    } catch (error) {
-      console.error("Failed to add task:", error);
-      setTasks((current) => current.filter((t) => t.id !== tempId));
-      alert("Failed to add task.");
-    } finally {
-      setIsAdding(false);
-    }
-  };
-
-  // --- 6. Delete Task ---
-  const handleDeleteTask = async (taskId: number) => {
-    if (!window.confirm("Delete this task?")) return;
-    const previousTasks = [...tasks];
-    setTasks(tasks.filter((t) => t.id !== taskId));
-
-    try {
-      await deleteTask(taskId);
     } catch {
       setTasks(previousTasks);
     }
   };
 
-  // Calculate progress
+  const cyclePriority = (task: Task) => {
+    const next: Record<string, "low" | "medium" | "high"> = {
+      low: "medium",
+      medium: "high",
+      high: "low",
+    };
+    handleUpdateTask(task.id, { priority: next[task.priority] });
+  };
+
+  const saveTaskEdit = async () => {
+    if (!editingTaskId || !editTaskTitle.trim()) return;
+    await handleUpdateTask(editingTaskId, { task: editTaskTitle });
+    setEditingTaskId(null);
+    setEditTaskTitle("");
+  };
+
+  const handleAddTask = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newTaskTitle.trim()) return;
+    const tempId = Date.now();
+    const optimistic: Task = {
+      id: tempId,
+      task: newTaskTitle,
+      completed: false,
+      priority: "low",
+    };
+    setTasks([...tasks, optimistic]);
+    setNewTaskTitle("");
+    setIsAdding(true);
+    try {
+      const res = await createTask(checklist.id, newTaskTitle);
+      setTasks((curr) => curr.map((t) => (t.id === tempId ? res.data : t)));
+    } catch {
+      setTasks((curr) => curr.filter((t) => t.id !== tempId));
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
+  const handleDeleteTask = async (taskId: number) => {
+    if (!window.confirm("Delete task?")) return;
+    const prev = [...tasks];
+    setTasks(tasks.filter((t) => t.id !== taskId));
+    try {
+      await deleteTask(taskId);
+    } catch {
+      setTasks(prev);
+    }
+  };
+
+  // Progress Calculation
   const completedCount = tasks.filter((t) => t.completed).length;
   const progress =
     tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0;
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-6 transition-all hover:shadow-md">
-      {/* Header */}
+      {/* --- Header Section --- */}
       <div className="p-6 border-b border-gray-100 bg-gray-50/50">
-        <div className="flex justify-between items-start mb-2">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">
-              {checklist.title}
-            </h3>
-            <p className="text-gray-500 text-sm">{checklist.description}</p>
+        {isEditingList ? (
+          // Edit Mode
+          <div className="space-y-3">
+            <input
+              type="text"
+              value={listTitle}
+              onChange={(e) => setListTitle(e.target.value)}
+              className="w-full font-bold text-xl px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+            <textarea
+              value={listDesc}
+              onChange={(e) => setListDesc(e.target.value)}
+              className="w-full text-sm px-2 py-1 border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+              rows={2}
+            />
+            <div className="flex gap-2 justify-end">
+              <button
+                onClick={() => setIsEditingList(false)}
+                className="text-xs px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveList}
+                className="text-xs px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+              >
+                Save
+              </button>
+            </div>
           </div>
-          <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
-            {tasks.length} items
-          </span>
-        </div>
+        ) : (
+          // View Mode
+          <div className="flex justify-between items-start">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2 group">
+                {checklist.title}
+                <button
+                  onClick={() => setIsEditingList(true)}
+                  className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-blue-500 transition-opacity"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                    />
+                  </svg>
+                </button>
+              </h3>
+              <p className="text-gray-500 text-sm mt-1">
+                {checklist.description}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                {tasks.length} items
+              </span>
+              <button
+                onClick={handleDeleteChecklist}
+                className="text-gray-300 hover:text-red-500 transition-colors"
+                title="Delete Checklist"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
           <div
             className={`h-2 rounded-full transition-all duration-500 ${progress === 100 ? "bg-green-500" : "bg-blue-600"}`}
@@ -129,7 +230,7 @@ export default function ChecklistManager({ checklist }: Props) {
         </div>
       </div>
 
-      {/* Task List */}
+      {/* --- Task List --- */}
       <div className="divide-y divide-gray-100">
         {tasks.map((task) => (
           <div
@@ -137,7 +238,6 @@ export default function ChecklistManager({ checklist }: Props) {
             className="group flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
           >
             <div className="flex items-center gap-3 grow">
-              {/* Checkbox */}
               <input
                 type="checkbox"
                 checked={task.completed}
@@ -147,31 +247,23 @@ export default function ChecklistManager({ checklist }: Props) {
                 className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
               />
 
-              {/* Edit Mode vs View Mode */}
               {editingTaskId === task.id ? (
                 <div className="flex items-center gap-2 grow">
                   <input
                     type="text"
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)}
+                    value={editTaskTitle}
+                    onChange={(e) => setEditTaskTitle(e.target.value)}
                     className="w-full px-2 py-1 text-sm border rounded focus:outline-none focus:border-blue-500"
                     autoFocus
                     onKeyDown={(e) => {
-                      if (e.key === "Enter") saveEdit();
-                      if (e.key === "Escape") setEditingTaskId(null);
+                      if (e.key === "Enter") saveTaskEdit();
                     }}
                   />
                   <button
-                    onClick={saveEdit}
+                    onClick={saveTaskEdit}
                     className="text-green-600 hover:text-green-700"
                   >
                     ✓
-                  </button>
-                  <button
-                    onClick={() => setEditingTaskId(null)}
-                    className="text-gray-400 hover:text-gray-600"
-                  >
-                    ✕
                   </button>
                 </div>
               ) : (
@@ -179,11 +271,7 @@ export default function ChecklistManager({ checklist }: Props) {
                   onClick={() =>
                     handleUpdateTask(task.id, { completed: !task.completed })
                   }
-                  className={`cursor-pointer select-none transition-all ${
-                    task.completed
-                      ? "text-gray-400 line-through"
-                      : "text-gray-700"
-                  }`}
+                  className={`cursor-pointer select-none transition-all ${task.completed ? "text-gray-400 line-through" : "text-gray-700"}`}
                 >
                   {task.task}
                 </span>
@@ -191,26 +279,18 @@ export default function ChecklistManager({ checklist }: Props) {
             </div>
 
             <div className="flex items-center gap-3">
-              {/* Priority Badge (Clickable) */}
               <button
                 onClick={() => cyclePriority(task)}
-                className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider transition-colors cursor-pointer hover:opacity-80 ${
-                  task.priority === "high"
-                    ? "bg-red-100 text-red-600"
-                    : task.priority === "medium"
-                      ? "bg-yellow-100 text-yellow-600"
-                      : "bg-green-100 text-green-600"
-                }`}
-                title="Click to change priority"
+                className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider transition-colors cursor-pointer hover:opacity-80 ${task.priority === "high" ? "bg-red-100 text-red-600" : task.priority === "medium" ? "bg-yellow-100 text-yellow-600" : "bg-green-100 text-green-600"}`}
               >
                 {task.priority}
               </button>
-
-              {/* Edit Button */}
               <button
-                onClick={() => startEditing(task)}
-                className="text-gray-400 hover:text-blue-600 p-1 rounded transition-colors opacity-0 group-hover:opacity-100"
-                title="Rename Task"
+                onClick={() => {
+                  setEditingTaskId(task.id);
+                  setEditTaskTitle(task.task);
+                }}
+                className="text-gray-400 hover:text-blue-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -227,12 +307,9 @@ export default function ChecklistManager({ checklist }: Props) {
                   />
                 </svg>
               </button>
-
-              {/* Delete Button */}
               <button
                 onClick={() => handleDeleteTask(task.id)}
-                className="text-gray-400 hover:text-red-500 p-1 rounded hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100"
-                title="Delete Task"
+                className="text-gray-400 hover:text-red-500 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -254,7 +331,7 @@ export default function ChecklistManager({ checklist }: Props) {
         ))}
       </div>
 
-      {/* Add Task Input */}
+      {/* --- Add Task Input --- */}
       <form
         onSubmit={handleAddTask}
         className="p-4 bg-gray-50 border-t border-gray-100"
