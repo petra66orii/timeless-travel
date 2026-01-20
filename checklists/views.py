@@ -378,7 +378,7 @@ class ChecklistViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-class TaskUpdateView(generics.UpdateAPIView):
+class TaskUpdateAPIView(generics.UpdateAPIView):
     """
     API endpoint to update a single task (e.g. mark complete)
     """
