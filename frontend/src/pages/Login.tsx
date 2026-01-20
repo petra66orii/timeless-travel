@@ -1,48 +1,53 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { isAxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
-
-type LoginErrorResponse = {
-  non_field_errors?: string[];
-};
+import { useAuth } from "../context/AuthContext";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get login function from context
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
+    setIsSubmitting(true);
 
     try {
-      // dj-rest-auth standard login endpoint
       const response = await api.post("/dj-rest-auth/login/", {
         username,
         password,
       });
 
-      // Store the token (Token Authentication)
-      const token = response.data.key;
-      localStorage.setItem("token", token);
+      // Pass the token to the Context to handle state update
+      await login(response.data.key);
 
-      // Redirect to the protected area (Checklists)
-      navigate("/checklists");
-    } catch (error: unknown) {
-      console.error("Login failed:", error);
-      const fallbackMessage = "Login failed. Please check your credentials.";
-      if (isAxiosError<LoginErrorResponse>(error)) {
-        const nonFieldError = error.response?.data?.non_field_errors?.[0];
-        setError(nonFieldError ?? fallbackMessage);
+      // Redirect to Profile
+      navigate("/profile");
+    } catch (err: unknown) {
+      console.error("Login failed:", err);
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "response" in err &&
+        typeof (
+          err as { response?: { data?: { non_field_errors?: string[] } } }
+        ).response === "object" &&
+        (err as { response?: { data?: { non_field_errors?: string[] } } })
+          .response?.data?.non_field_errors
+      ) {
+        setError(
+          (err as { response: { data: { non_field_errors: string[] } } })
+            .response.data.non_field_errors[0],
+        );
       } else {
-        setError(fallbackMessage);
+        setError("Login failed. Please check your credentials.");
       }
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -73,7 +78,7 @@ const Login: React.FC = () => {
                 name="username"
                 type="text"
                 required
-                className="relative block w-full rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                className="relative block w-full rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -88,7 +93,7 @@ const Login: React.FC = () => {
                 name="password"
                 type="password"
                 required
-                className="relative block w-full rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                className="relative block w-full rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -96,24 +101,13 @@ const Login: React.FC = () => {
             </div>
           </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400"
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </button>
-          </div>
-
-          <div className="text-center text-sm">
-            <Link
-              to="/"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
-              Return to Home
-            </Link>
-          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400"
+          >
+            {isSubmitting ? "Signing in..." : "Sign in"}
+          </button>
         </form>
       </div>
     </div>

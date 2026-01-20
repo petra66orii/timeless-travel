@@ -1,3 +1,14 @@
+export interface User {
+    username: string;
+    email: string;
+}
+
+export interface Profile {
+    user: User;
+    bio: string;
+    profile_picture: string | null;
+}
+
 export interface BlogPost {
     id: number;
     title: string;
