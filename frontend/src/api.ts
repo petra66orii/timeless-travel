@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { BlogPost, Checklist } from './types';
+import type { BlogPost, Checklist, Task } from './types';
 
 // Create a base axios instance so we don't have to type the URL every time
 const api = axios.create({
@@ -36,9 +36,21 @@ export const getChecklists = async () => {
     return response.data;
 };
 
-export const toggleTask = async (taskId: number, completed: boolean) => {
-    const response = await api.patch(`api/tasks/${taskId}/`, { completed });
-    return response.data;
+
+export const createTask = async (checklistId: number, title: string) => {
+  return api.post('/api/tasks/', {
+    checklist_id: checklistId,
+    task: title,
+    priority: 'low' // Default priority
+  });
+};
+
+export const deleteTask = async (taskId: number) => {
+  return api.delete(`/api/tasks/${taskId}/`);
+};
+
+export const updateTask = async (taskId: number, updates: Partial<Task>) => {
+  return api.patch(`/api/tasks/${taskId}/`, updates);
 };
 
 export default api;
