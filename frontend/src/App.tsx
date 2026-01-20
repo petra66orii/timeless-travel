@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Checklists from "./pages/Checklists";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -26,12 +27,19 @@ function App() {
         >
           Checklists
         </Link>
+        <Link
+          to="/login"
+          className="text-gray-700 hover:text-purple-600 font-medium"
+        >
+          Login
+        </Link>
       </nav>
 
       {/* Page Content */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/checklists" element={<Checklists />} />
       </Routes>
     </Router>
