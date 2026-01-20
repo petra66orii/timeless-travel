@@ -31,11 +31,22 @@ export const getPosts = async () => {
     return response.data;
 };
 
+export const getPost = async (id: string | number) => {
+  return api.get(`/api/posts/${id}/`);
+};
+
 export const getChecklists = async () => {
     const response = await api.get<Checklist[]>('api/checklists/');
     return response.data;
 };
 
+export const deleteChecklist = async (id: number) => {
+  return api.delete(`/api/checklists/${id}/`);
+};
+
+export const updateChecklist = async (id: number, data: { title?: string; description?: string }) => {
+  return api.patch(`/api/checklists/${id}/`, data);
+};
 
 export const createTask = async (checklistId: number, title: string) => {
   return api.post('/api/tasks/', {

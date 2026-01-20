@@ -321,4 +321,4 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     """
     queryset = BlogPost.objects.filter(status=1) # Only return published posts
     serializer_class = BlogPostSerializer
-    lookup_field = 'slug'
+    # lookup_field = 'slug'
