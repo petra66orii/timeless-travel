@@ -3,6 +3,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from blog.views import BlogPostViewSet
 from checklists.views import ChecklistViewSet, TaskUpdateAPIView
+from user_profiles.views import UserProfileDetailView
 
 # Create the router and register viewsets
 router = DefaultRouter()
@@ -18,6 +19,7 @@ urlpatterns = [
     # The API URLs are now live at /api/
     path('api/', include(router.urls)),
     path('api/tasks/<int:pk>/', TaskUpdateAPIView.as_view(), name='task-update'),
+    path('api/user-profile/', UserProfileDetailView.as_view(), name='user-profile'),
     
     path('', include('home.urls'), name='home'),
     path('blog/', include("blog.urls")),

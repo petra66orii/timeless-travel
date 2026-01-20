@@ -3,13 +3,14 @@ from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
+from rest_framework import generics, permissions
+from .serializers import ProfileSerializer
 from .models import Profile
 from .forms import EditProfileForm
 from checklists.models import Checklist
 from blog.models import BlogPost
 
 
-# Create your views here.
 @login_required
 def user_profile(request):
     """
@@ -166,3 +167,15 @@ def publish_post(request, post_id):
         draft_post.save()
         messages.success(request, 'Post successfully published!')
         return redirect('user_drafts')
+
+# --- API VIEWS ---
+class UserProfileDetailView(generics.RetrieveUpdateAPIView):
+    """
+    API endpoint that returns the authenticated user's profile.
+    """
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        # Ensure we return the profile of the currently logged-in user
+        return get_object_or_404(Profile, user=self.request.user)

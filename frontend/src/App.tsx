@@ -2,12 +2,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Login from "./pages/Login";
-// import Profile from './pages/Profile';
+import Profile from "./pages/Profile";
 import "./App.css";
 
 function App() {
   return (
-    // <Router> was removed from here because it's already in main.tsx
     <div className="min-h-screen bg-gray-100">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
@@ -55,7 +54,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
