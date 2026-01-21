@@ -4,6 +4,7 @@ import sys
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
+from corsheaders.defaults import default_headers
 from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -131,13 +132,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'timeless_travel.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    ],
-}
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -233,10 +227,26 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "content-disposition", 
+    "authorization",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+REST_AUTH = {
+    'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+    'SESSION_LOGIN': False, # Recommended False if using only Tokens for API
+}
+
 # REST Framework Config (Use Session Auth for now)
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
 }
