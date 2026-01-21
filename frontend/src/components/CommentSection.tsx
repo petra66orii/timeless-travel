@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getComments, createComment } from "../api"; // Import createComment
+import { getComments, createComment } from "../api";
 import type { Comment } from "../types";
-import { useAuth } from "../context/AuthContext"; // Import Auth
+import { useAuth } from "../context/AuthContext";
+import CommentItem from "./CommentItem";
 
 interface CommentSectionProps {
   postId: number;
@@ -54,6 +56,18 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  // Helper to update list when a child is deleted
+  const handleCommentDeleted = (id: number) => {
+    setComments((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  // Helper to update list when a child is edited
+  const handleCommentUpdated = (updatedComment: Comment) => {
+    setComments((prev) =>
+      prev.map((c) => (c.id === updatedComment.id ? updatedComment : c)),
+    );
   };
 
   if (loading)
@@ -110,22 +124,16 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
         </p>
       ) : (
         <div className="space-y-6">
-          {comments.map((comment) => (
-            <div
-              key={comment.id}
-              className="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100"
-            >
-              <div className="flex justify-between items-start mb-2">
-                <span className="font-semibold text-purple-700">
-                  {comment.author}
-                </span>
-                <span className="text-xs text-gray-400">
-                  {new Date(comment.created_at).toLocaleDateString()}
-                </span>
-              </div>
-              <p className="text-gray-700 whitespace-pre-wrap">
-                {comment.content}
-              </p>
+          {comments.map((_comment) => (
+            <div className="space-y-4">
+              {comments.map((comment) => (
+                <CommentItem
+                  key={comment.id}
+                  comment={comment}
+                  onDelete={handleCommentDeleted}
+                  onUpdate={handleCommentUpdated}
+                />
+              ))}
             </div>
           ))}
         </div>

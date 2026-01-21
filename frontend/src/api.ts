@@ -56,6 +56,14 @@ export const createComment = async (data: { post: number; content: string }) => 
     return api.post('/api/comments/', data);
 };
 
+export const updateComment = async (id: number, content: string) => {
+    return api.patch(`/api/comments/${id}/`, { content });
+};
+
+export const deleteComment = async (id: number) => {
+    return api.delete(`/api/comments/${id}/`);
+};
+
 export const getChecklists = async () => {
     const response = await api.get<Checklist[]>('/api/checklists/');
     return response.data;

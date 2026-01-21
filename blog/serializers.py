@@ -1,5 +1,8 @@
 from rest_framework import serializers
+from rest_framework import permissions
 from .models import BlogPost, Comments
+from .permissions import IsOwnerOrReadOnly
+
 
 class BlogPostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
@@ -30,6 +33,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='user.username') # Show username, not ID
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     class Meta:
         model = Comments
