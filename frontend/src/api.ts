@@ -1,5 +1,12 @@
 import axios from 'axios';
-import type { BlogPost, Checklist, Task, Comment } from './types';
+import type { BlogPost, Checklist, Task, Comment, RegisterData } from './types';
+
+type PasswordResetConfirmData = {
+    uid: string;
+    token: string;
+    new_password1: string;
+    new_password2: string;
+};
 
 // Create a base axios instance so we don't have to type the URL every time
 const api = axios.create({
@@ -23,6 +30,17 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+
+
+export const requestPasswordReset = async (email: string) => {
+    return api.post('/dj-rest-auth/password/reset/', { email });
+};
+
+// 2. Confirm Password Reset (The actual change)
+export const confirmPasswordReset = async (data: PasswordResetConfirmData) => {
+    return api.post('/dj-rest-auth/password/reset/confirm/', data);
+};
 
 // Define our fetch functions
 export const getPosts = async () => {

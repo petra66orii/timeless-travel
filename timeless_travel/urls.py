@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 from blog.views import BlogPostViewSet, CommentViewSet
 from checklists.views import ChecklistViewSet, TaskViewSet
@@ -23,6 +24,11 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/tasks/<int:pk>/', TaskViewSet.as_view({'put': 'update', 'patch': 'partial_update'}), name='task-update'),
     path('api/user-profile/', UserProfileDetailView.as_view(), name='user-profile'),
+    path(
+        'password-reset/confirm/<uidb64>/<token>/', 
+        TemplateView.as_view(template_name="password_reset_confirm.html"), 
+        name='password_reset_confirm'
+    ),
     
     path('', include('home.urls'), name='home'),
     path('blog/', include("blog.urls")),

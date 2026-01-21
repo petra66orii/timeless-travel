@@ -7,6 +7,9 @@ import PostDetail from "./pages/PostDetail";
 import { useAuth } from "./context/AuthContext";
 import "./App.css";
 import PostEditor from "./pages/PostEditor";
+import Register from "./pages/Register";
+import PasswordResetRequest from "./pages/PasswordResetRequest";
+import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 
 function App() {
   // 2. Get auth state
@@ -52,12 +55,20 @@ function App() {
                   </Link>
                 ) : (
                   // If Logged Out: Show Login
-                  <Link
-                    to="/login"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Login
-                  </Link>
+                  <>
+                    <Link
+                      to="/login"
+                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                    >
+                      Register
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
@@ -72,6 +83,12 @@ function App() {
         <Route path="/blog/:id/edit" element={<PostEditor />} />
         <Route path="/blog/:id" element={<PostDetail />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/password-reset" element={<PasswordResetRequest />} />
+        <Route
+          path="/password-reset/confirm/:uid/:token"
+          element={<PasswordResetConfirm />}
+        />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
