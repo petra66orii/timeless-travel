@@ -52,6 +52,10 @@ export const getComments = async (postId: string | number) => {
     return api.get<Comment[]>(`/api/comments/?post_id=${postId}`);
 };
 
+export const createComment = async (data: { post: number; content: string }) => {
+    return api.post('/api/comments/', data);
+};
+
 export const getChecklists = async () => {
     const response = await api.get<Checklist[]>('/api/checklists/');
     return response.data;
