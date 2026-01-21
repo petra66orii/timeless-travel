@@ -5,7 +5,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     featured_image = serializers.SerializerMethodField()
     # Format the date to be nice and readable, or keep as ISO format
-    created_at = serializers.DateTimeField(format="%d %b %Y")
+    created_at = serializers.DateTimeField(format="%d %b %Y", read_only=True)
 
     class Meta:
         model = BlogPost

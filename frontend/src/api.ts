@@ -35,8 +35,20 @@ export const getPost = async (id: string | number) => {
   return api.get(`/api/posts/${id}/`);
 };
 
+export const createPost = async (data: Partial<BlogPost>) => {
+    return api.post('/api/posts/', data);
+};
+
+export const updatePost = async (id: string | number, data: Partial<BlogPost>) => {
+    return api.patch(`/api/posts/${id}/`, data);
+};
+
+export const deletePost = async (id: string | number) => {
+    return api.delete(`/api/posts/${id}/`);
+};
+
 export const getChecklists = async () => {
-    const response = await api.get<Checklist[]>('api/checklists/');
+    const response = await api.get<Checklist[]>('/api/checklists/');
     return response.data;
 };
 

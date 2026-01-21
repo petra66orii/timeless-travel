@@ -26,6 +26,8 @@ export default function Blog() {
     fetchPosts();
   }, []);
 
+  const publishedPosts = posts.filter((post) => post.status === 1);
+
   // 3. Render
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -53,11 +55,17 @@ export default function Blog() {
 
         {/* The Grid Layout */}
         {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {publishedPosts.map((post) => (
               <BlogCard key={post.id} post={post} />
             ))}
           </div>
+        )}
+        {/* Empty State check using the filtered list */}
+        {!loading && publishedPosts.length === 0 && (
+          <p className="text-center text-gray-500 mt-10">
+            No stories found. Be the first to write one!
+          </p>
         )}
       </div>
     </div>

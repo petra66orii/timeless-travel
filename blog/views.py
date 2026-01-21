@@ -322,3 +322,13 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.filter(status=1) # Only return published posts
     serializer_class = BlogPostSerializer
     # lookup_field = 'slug'
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return BlogPost.objects.filter(Q(status=1) | Q(author=user)).order_by('-created_at')
+        return BlogPost.objects.filter(status=1).order_by('-created_at')
+
+    def perform_create(self, serializer):
+        # This fills the 'author' field with the current user before saving
+        serializer.save(author=self.request.user)
