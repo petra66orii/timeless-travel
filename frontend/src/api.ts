@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { BlogPost, Checklist, Task } from './types';
+import type { BlogPost, Checklist, Task, Comment } from './types';
 
 // Create a base axios instance so we don't have to type the URL every time
 const api = axios.create({
@@ -45,6 +45,11 @@ export const updatePost = async (id: string | number, data: Partial<BlogPost>) =
 
 export const deletePost = async (id: string | number) => {
     return api.delete(`/api/posts/${id}/`);
+};
+
+export const getComments = async (postId: string | number) => {
+    // We use the filter we created in the ViewSet: ?post_id=X
+    return api.get<Comment[]>(`/api/comments/?post_id=${postId}`);
 };
 
 export const getChecklists = async () => {

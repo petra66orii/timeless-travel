@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from blog.views import BlogPostViewSet
+from blog.views import BlogPostViewSet, CommentViewSet
 from checklists.views import ChecklistViewSet, TaskViewSet
 from user_profiles.views import UserProfileDetailView
 
@@ -10,6 +10,7 @@ router = DefaultRouter()
 router.register(r'posts', BlogPostViewSet, basename='blogpost')
 router.register(r'checklists', ChecklistViewSet, basename='checklist')
 router.register(r'tasks', TaskViewSet, basename='task')
+router.register(r'comments', CommentViewSet, basename='comments')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

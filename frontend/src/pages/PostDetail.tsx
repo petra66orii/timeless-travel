@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getPost, deletePost } from "../api";
 import type { BlogPost } from "../types";
-import { useAuth } from "../context/AuthContext"; // Import Auth
+import { useAuth } from "../context/AuthContext";
+import CommentSection from "../components/CommentSection";
 
 const PostDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -123,6 +124,7 @@ const PostDetail: React.FC = () => {
               ← Back to all posts
             </Link>
           </div>
+          <CommentSection postId={post.id} />
         </div>
       </article>
     </div>

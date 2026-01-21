@@ -22,6 +22,14 @@ export interface BlogPost {
     visibility: 'Public' | 'Private' | 'Users Only';
 }
 
+export interface Comment {
+    id: number;
+    post: number;
+    author: string;
+    content: string;
+    created_at: string;
+}
+
 export interface Task {
     id: number;
     task: string;

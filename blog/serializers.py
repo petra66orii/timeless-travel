@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BlogPost
+from .models import BlogPost, Comments
 
 class BlogPostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
@@ -27,3 +27,10 @@ class BlogPostSerializer(serializers.ModelSerializer):
         if obj.featured_image and hasattr(obj.featured_image, 'url'):
             return obj.featured_image.url
         return None
+    
+class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.ReadOnlyField(source='user.username') # Show username, not ID
+
+    class Meta:
+        model = Comments
+        fields = ['id', 'post', 'author', 'content', 'created_at']

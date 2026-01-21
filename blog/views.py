@@ -8,8 +8,8 @@ from django.contrib import messages
 from .forms import CreatePost, EditPost, CommentForm
 from .models import BlogPost, Comments
 from user_profiles.views import user_drafts
-from rest_framework import viewsets
-from .serializers import BlogPostSerializer
+from rest_framework import viewsets, permissions
+from .serializers import BlogPostSerializer, CommentSerializer
 
 
 # Blog posts list view
@@ -332,3 +332,22 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         # This fills the 'author' field with the current user before saving
         serializer.save(author=self.request.user)
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned comments to a given post,
+        by filtering against a `post_id` query parameter in the URL.
+        """
+        queryset = Comments.objects.all()
+        post_id = self.request.query_params.get('post_id')
+        if post_id is not None:
+            queryset = queryset.filter(post_id=post_id)
+        return queryset.order_by('-created_at') # Newest first
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
