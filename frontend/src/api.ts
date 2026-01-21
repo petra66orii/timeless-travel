@@ -93,4 +93,17 @@ export const updateTask = async (taskId: number, updates: Partial<Task>) => {
   return api.patch(`/api/tasks/${taskId}/`, updates);
 };
 
+// --- AUTH ENDPOINTS ---
+
+export const registerUser = async (data: RegisterData) => {
+    return api.post('/dj-rest-auth/registration/', {
+        username: data.username,
+        email: data.email,
+        password1: data.password,
+        password2: data.password,
+        first_name: data.first_name,
+        last_name: data.last_name
+    });
+};
+
 export default api;

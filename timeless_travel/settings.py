@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',            
     'dj_rest_auth',
+    'dj_rest_auth.registration',
     'crispy_forms',
     'crispy_bootstrap5',
     'home',
@@ -184,7 +185,7 @@ MESSAGE_TAGS = {
 }
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_SIGNUP_FORM_CLASS = 'user_profiles.forms.CustomSignupForm'
+ACCOUNT_SIGNUP_FORM_CLASS = 'user_profiles.signup_forms.CustomSignupForm'
 
 # Email settings for development
 

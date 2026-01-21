@@ -3,6 +3,15 @@ export interface User {
     email: string;
 }
 
+export interface RegisterData {
+    username: string;
+    email: string;
+    password: string;
+    password_confirm: string; // dj-rest-auth usually expects this
+    first_name: string;
+    last_name: string;
+}
+
 export interface Profile {
     user: User;
     bio: string;

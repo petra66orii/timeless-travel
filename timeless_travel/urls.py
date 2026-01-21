@@ -17,6 +17,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     
     # The API URLs are now live at /api/
     path('api/', include(router.urls)),
