@@ -1,11 +1,14 @@
-// frontend/src/pages/PostDetail.tsx
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { getPost } from "../api";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { getPost, deletePost } from "../api";
 import type { BlogPost } from "../types";
+import { useAuth } from "../context/AuthContext"; // Import Auth
 
 const PostDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { user } = useAuth(); // Get current user
+
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -23,9 +26,20 @@ const PostDetail: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchPost();
   }, [id]);
+
+  const handleDelete = async () => {
+    if (!id || !window.confirm("Are you sure you want to delete this post?"))
+      return;
+    try {
+      await deletePost(id);
+      alert("Post deleted.");
+      navigate("/blog");
+    } catch {
+      alert("Failed to delete post.");
+    }
+  };
 
   if (loading)
     return (
@@ -37,6 +51,8 @@ const PostDetail: React.FC = () => {
         {error || "Post not found"}
       </div>
     );
+
+  const isOwner = user?.user.username === post.author;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -54,28 +70,55 @@ const PostDetail: React.FC = () => {
 
         <div className="p-8 md:p-12">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
-              {post.title}
-            </h1>
-            <div className="flex items-center text-sm text-gray-500">
-              <span className="font-medium text-blue-600">{post.author}</span>
-              <span className="mx-2">•</span>
-              <time>{new Date(post.created_at).toLocaleDateString()}</time>
+          <div className="mb-8 flex justify-between items-start">
+            <div>
+              <h1 className="mb-4 text-3xl font-extrabold text-gray-900 md:text-4xl">
+                {post.title}
+              </h1>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium text-purple-600">
+                  {post.author}
+                </span>
+                <span className="mx-2">•</span>
+                <time>{new Date(post.created_at).toLocaleDateString()}</time>
+                {post.status === 0 && (
+                  <span className="ml-2 px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 text-xs font-bold">
+                    DRAFT
+                  </span>
+                )}
+              </div>
             </div>
+
+            {/* Owner Actions */}
+            {isOwner && (
+              <div className="flex gap-2">
+                <Link
+                  to={`/blog/${post.id}/edit`}
+                  className="px-3 py-1 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 text-sm font-medium"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={handleDelete}
+                  className="px-3 py-1 bg-red-50 text-red-600 rounded hover:bg-red-100 text-sm font-medium"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Content (Render HTML safely) */}
+          {/* Content */}
           <div
             className="prose prose-lg max-w-none text-gray-700"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          {/* Footer / Back Button */}
+          {/* Footer */}
           <div className="mt-12 border-t pt-8">
             <Link
               to="/blog"
-              className="inline-flex items-center font-medium text-blue-600 hover:text-blue-500"
+              className="inline-flex items-center font-medium text-purple-600 hover:text-purple-500"
             >
               ← Back to all posts
             </Link>

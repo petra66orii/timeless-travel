@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import PostDetail from "./pages/PostDetail";
 import { useAuth } from "./context/AuthContext";
 import "./App.css";
+import PostEditor from "./pages/PostEditor";
 
 function App() {
   // 2. Get auth state
@@ -67,6 +68,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/new" element={<PostEditor />} />
+        <Route path="/blog/:id/edit" element={<PostEditor />} />
         <Route path="/blog/:id" element={<PostDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
