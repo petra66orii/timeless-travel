@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPost, createPost, updatePost } from "../api"; // Use new helpers
+import { getPost, createPost, updatePost } from "../api";
+import { toast } from "react-hot-toast";
 
 const PostEditor: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,7 +46,7 @@ const PostEditor: React.FC = () => {
             visibility: visibility || "Public",
           });
         })
-        .catch(() => alert("Failed to load post."));
+        .catch(() => toast.error("Failed to load post."));
     }
   }, [id, isEditing]);
 
@@ -59,16 +60,16 @@ const PostEditor: React.FC = () => {
     try {
       if (isEditing) {
         await updatePost(id, formData);
-        alert("Post updated!");
+        toast.success("Post updated!");
         navigate(`/blog/${id}`);
       } else {
         const res = await createPost(formData);
-        alert("Post created!");
+        toast.success("Post created!");
         navigate(`/blog/${res.data.id}`);
       }
     } catch (err) {
       console.error(err);
-      alert("Failed to save post.");
+      toast.error("Failed to save post.");
     } finally {
       setLoading(false);
     }

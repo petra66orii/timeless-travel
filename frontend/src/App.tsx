@@ -15,10 +15,33 @@ import Navbar from "./components/Navbar";
 import Contact from "./pages/Contact";
 import Checklists from "./pages/Checklists";
 import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <main className="min-h-screen bg-gray-100">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: "#333",
+            color: "#fff",
+            fontFamily: "var(--font-body)", // Matches your Work Sans
+          },
+          success: {
+            style: {
+              background: "#27AE60", // Your Action Create Green
+              color: "white",
+            },
+          },
+          error: {
+            style: {
+              background: "#C0392B", // Your Action Delete Red
+              color: "white",
+            },
+          },
+        }}
+      />
       <Navbar />
 
       <Routes>
@@ -41,7 +64,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
-    </div>
+    </main>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../api";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Register: React.FC = () => {
         navigate("/profile");
       } else {
         // If email verification is on, it might not return a token
-        alert("Registration successful! Please log in.");
+        toast.success("Registration successful! Please log in.");
         navigate("/login");
       }
     } catch (err: unknown) {

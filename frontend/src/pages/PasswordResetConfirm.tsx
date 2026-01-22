@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { confirmPasswordReset } from "../api";
+import { toast } from "react-hot-toast";
 
 const PasswordResetConfirm: React.FC = () => {
   const { uid, token } = useParams(); // Grab params from URL
@@ -34,7 +35,7 @@ const PasswordResetConfirm: React.FC = () => {
         new_password1: password,
         new_password2: confirmPass,
       });
-      alert("Password reset successful! You can now log in.");
+      toast.success("Password reset successful! You can now log in.");
       navigate("/login");
     } catch {
       setError("Invalid or expired link. Please request a new reset.");

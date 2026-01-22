@@ -5,6 +5,7 @@ import { getComments, createComment } from "../api";
 import type { Comment } from "../types";
 import { useAuth } from "../context/AuthContext";
 import CommentItem from "./CommentItem";
+import { toast } from "react-hot-toast";
 
 interface CommentSectionProps {
   postId: number;
@@ -52,7 +53,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
       setNewComment("");
     } catch (err) {
       console.error("Failed to post comment", err);
-      alert("Failed to post comment.");
+      toast.error("Failed to post comment.");
     } finally {
       setSubmitting(false);
     }

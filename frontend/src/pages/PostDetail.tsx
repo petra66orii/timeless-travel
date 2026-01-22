@@ -4,6 +4,7 @@ import { getPost, deletePost } from "../api";
 import type { BlogPost } from "../types";
 import { useAuth } from "../context/AuthContext";
 import CommentSection from "../components/CommentSection";
+import { toast } from "react-hot-toast";
 
 const PostDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,10 +36,10 @@ const PostDetail: React.FC = () => {
       return;
     try {
       await deletePost(id);
-      alert("Post deleted.");
+      toast.success("Post deleted.");
       navigate("/blog");
     } catch {
-      alert("Failed to delete post.");
+      toast.error("Failed to delete post.");
     }
   };
 

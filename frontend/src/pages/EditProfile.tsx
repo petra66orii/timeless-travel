@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api, { updateUserProfile, deleteAccount } from "../api";
 import type { Profile } from "../types";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
@@ -68,11 +69,11 @@ const EditProfile: React.FC = () => {
 
     try {
       await updateUserProfile(profileId, formData);
-      alert("Profile updated!");
+      toast.success("Profile updated!");
       navigate("/profile");
     } catch (err) {
       console.error("Update failed", err);
-      alert("Failed to update profile.");
+      toast.error("Failed to update profile.");
     } finally {
       setSaving(false);
     }
@@ -97,7 +98,7 @@ const EditProfile: React.FC = () => {
 
     try {
       await deleteAccount();
-      alert("Your account has been deleted.");
+      toast.success("Your account has been deleted.");
 
       // 1. Clear frontend state
       logout();
@@ -106,7 +107,7 @@ const EditProfile: React.FC = () => {
       navigate("/");
     } catch (err) {
       console.error("Delete failed", err);
-      alert("Failed to delete account.");
+      toast.error("Failed to delete account.");
     }
   };
 

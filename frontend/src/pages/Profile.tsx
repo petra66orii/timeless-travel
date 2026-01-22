@@ -5,6 +5,7 @@ import type { Profile as ProfileType, Checklist, BlogPost } from "../types";
 import ChecklistManager from "../components/ChecklistManager";
 import LogoutButton from "../components/LogoutButton";
 import CreateChecklistForm from "../components/CreateChecklistForm";
+import { toast } from "react-hot-toast";
 
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<ProfileType | null>(null);
@@ -43,7 +44,7 @@ const Profile: React.FC = () => {
       setMyPosts((prev) => prev.filter((p) => p.id !== postId));
     } catch (err) {
       console.error("Delete failed:", err);
-      alert("Failed to delete post.");
+      toast.error("Failed to delete post.");
     }
   };
 
@@ -67,6 +68,7 @@ const Profile: React.FC = () => {
         setMyPosts(userPosts);
       } catch (err) {
         console.error("Failed to load profile data", err);
+        toast.error("Failed to load profile data.");
       } finally {
         setLoading(false);
       }

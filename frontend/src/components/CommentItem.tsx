@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import type { Comment } from "../types";
 import { useAuth } from "../context/AuthContext";
 import { updateComment, deleteComment } from "../api";
+import { toast } from "react-hot-toast";
 
 interface CommentItemProps {
   comment: Comment;
@@ -31,7 +32,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
       onUpdate(res.data); // Update parent state
       setIsEditing(false); // Exit edit mode
     } catch {
-      alert("Failed to update comment.");
+      toast.error("Failed to update comment.");
     } finally {
       setSaving(false);
     }
@@ -43,7 +44,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
       await deleteComment(comment.id);
       onDelete(comment.id); // Remove from parent state
     } catch {
-      alert("Failed to delete comment.");
+      toast.error("Failed to delete comment.");
     }
   };
 

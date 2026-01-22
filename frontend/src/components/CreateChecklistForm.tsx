@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../api";
 import type { Checklist } from "../types";
+import { toast } from "react-hot-toast";
 
 interface Props {
   onChecklistCreated: (newChecklist: Checklist) => void;
@@ -31,7 +32,7 @@ const CreateChecklistForm: React.FC<Props> = ({ onChecklistCreated }) => {
       setIsExpanded(false);
     } catch (error) {
       console.error("Failed to create checklist", error);
-      alert("Failed to create checklist. Please try again.");
+      toast.error("Failed to create checklist. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getChecklists, deleteChecklist } from "../api"; // Ensure these exist in api.ts
+import { getChecklists, deleteChecklist } from "../api";
 import type { Checklist } from "../types";
+import { toast } from "react-hot-toast";
 
 const ChecklistList: React.FC = () => {
   const [checklists, setChecklists] = useState<Checklist[]>([]);
@@ -31,7 +32,7 @@ const ChecklistList: React.FC = () => {
       // Remove from state immediately
       setChecklists(checklists.filter((c) => c.id !== id));
     } catch {
-      alert("Failed to delete checklist.");
+      toast.error("Failed to delete checklist.");
     }
   };
 

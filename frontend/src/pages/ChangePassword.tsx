@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { changePassword } from "../api";
+import { toast } from "react-hot-toast";
 
 const ChangePassword: React.FC = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const ChangePassword: React.FC = () => {
     setLoading(true);
     try {
       await changePassword(formData);
-      alert("Password changed successfully!");
+      toast.success("Password changed successfully!");
       navigate("/profile");
     } catch (err: unknown) {
       console.error(err);
@@ -52,6 +53,7 @@ const ChangePassword: React.FC = () => {
         }
       }
       setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

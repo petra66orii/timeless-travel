@@ -7,6 +7,7 @@ import {
   deleteChecklist,
   updateChecklist,
 } from "../api";
+import { toast } from "react-hot-toast";
 
 // 1. Update Interface to accept the new props
 interface Props {
@@ -44,7 +45,7 @@ export default function ChecklistManager({
       await deleteChecklist(checklist.id);
       onDelete(checklist.id); // Notify parent
     } catch {
-      alert("Failed to delete checklist");
+      toast.error("Failed to delete checklist");
     }
   };
 
@@ -57,7 +58,7 @@ export default function ChecklistManager({
       setIsEditingList(false);
       onUpdate({ ...checklist, ...response.data }); // Notify parent
     } catch {
-      alert("Failed to update checklist");
+      toast.error("Failed to update checklist");
     }
   };
 
