@@ -19,6 +19,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 # 2. Update BlogPostSerializer to use it
 class BlogPostSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True) # Use the object, not just a string
+    featured_image = serializers.SerializerMethodField()
 
     class Meta:
         model = BlogPost
@@ -26,6 +27,16 @@ class BlogPostSerializer(serializers.ModelSerializer):
             'id', 'author', 'title', 'slug', 'content', 
             'excerpt', 'status', 'featured_image', 'created_at', 'visibility'
         ]
+
+    def get_featured_image(self, obj):
+        # Check if the image exists
+        if obj.featured_image:
+            # If it's a Cloudinary object or ImageField, it usually has a .url attribute
+            if hasattr(obj.featured_image, 'url'):
+                return obj.featured_image.url
+            # Fallback: return the string conversion (sometimes works for Cloudinary)
+            return str(obj.featured_image)
+        return None
 
 class CommentSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True, source='user')
