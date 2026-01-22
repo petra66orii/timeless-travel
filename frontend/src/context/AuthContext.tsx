@@ -28,7 +28,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const fetchUser = useCallback(async () => {
     try {
       const response = await api.get("/api/user-profile/");
-      setUser(response.data);
+
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        setUser(response.data[0]);
+      } else {
+        // Fallback if the API structure changes to a single object later
+        setUser(response.data);
+      }
     } catch (error) {
       console.error("Failed to fetch user profile", error);
       // If fetching fails (e.g. token expired), clear storage
@@ -37,7 +43,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     } finally {
       setLoading(false);
     }
-  }, []); // Empty dependency array means this function is created once on mount
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -50,7 +56,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = async (token: string) => {
     localStorage.setItem("token", token);
-    await fetchUser(); // Re-fetch user immediately after login
+    await fetchUser();
   };
 
   const logout = () => {
