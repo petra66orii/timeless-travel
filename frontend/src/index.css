@@ -1,1 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&family=Work+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-heading: "Playwrite AU SA", cursive;
+  --font-body: "Work Sans", sans-serif;
+
+  /* Legacy Color Palette */
+  --color-pastel-blue: #D6EAF8; /* The signature Navbar color */
+  --color-pastel-dark: #2C3E50; /* The dark text for contrast */
+  --color-pastel-purple: #A08DB9;
+
+  /* Strong Action Colors (for CRUD Buttons) */
+  --color-action-create: #27AE60; /* Green */
+  --color-action-edit: #F39C12;   /* Orange */
+  --color-action-delete: #C0392B; /* Red */
+  --color-action-info: #2980B9;   /* Blue */
+}
