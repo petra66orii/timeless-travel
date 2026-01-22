@@ -57,12 +57,6 @@ const EditProfile: React.FC = () => {
     setSaving(true);
     const formData = new FormData();
 
-    // We must nest user fields exactly as the serializer expects: "user.first_name"
-    // Note: FormData keys typically can't be nested objects like JSON.
-    // However, DRF serializers often flatten keys differently or need a workaround.
-    // Let's try the standard JSON approach first for text, but multipart for file.
-    // ACTUALLY: For nested serializers in DRF with Multipart, dot notation works best.
-
     formData.append("user.first_name", firstName);
     formData.append("user.last_name", lastName);
     formData.append("bio", bio);
@@ -150,6 +144,18 @@ const EditProfile: React.FC = () => {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             />
+          </div>
+          <div className="border-t pt-6 mt-6">
+            <h3 className="text-lg font-medium text-gray-900">Security</h3>
+            <div className="mt-2">
+              <button
+                type="button"
+                onClick={() => navigate("/change-password")}
+                className="text-purple-600 hover:text-purple-500 text-sm font-medium hover:underline"
+              >
+                Change your password
+              </button>
+            </div>
           </div>
 
           <div className="flex justify-end gap-3 pt-4">

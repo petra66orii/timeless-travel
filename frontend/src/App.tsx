@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import PasswordResetRequest from "./pages/PasswordResetRequest";
 import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 import EditProfile from "./pages/EditProfile";
+import ChangePassword from "./pages/ChangePassword";
 
 function App() {
   // 2. Get auth state
@@ -90,6 +91,7 @@ function App() {
           path="/password-reset/confirm/:uid/:token"
           element={<PasswordResetConfirm />}
         />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/edit" element={<EditProfile />} />
       </Routes>

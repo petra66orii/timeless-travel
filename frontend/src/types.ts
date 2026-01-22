@@ -22,6 +22,12 @@ export interface Profile {
     profile_picture: string | null;
 }
 
+export interface PasswordChangeData {
+    old_password: string;
+    new_password1: string;
+    new_password2: string;
+};
+
 export interface BlogPost {
     id: number;
     title: string;

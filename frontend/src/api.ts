@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { BlogPost, Checklist, Task, Comment, RegisterData } from './types';
+import type { BlogPost, Checklist, Task, Comment, RegisterData, PasswordChangeData } from './types';
 
 type PasswordResetConfirmData = {
     uid: string;
@@ -38,6 +38,11 @@ export const requestPasswordReset = async (email: string) => {
 // 2. Confirm Password Reset (The actual change)
 export const confirmPasswordReset = async (data: PasswordResetConfirmData) => {
     return api.post('/dj-rest-auth/password/reset/confirm/', data);
+};
+
+// Change Password
+export const changePassword = async (data: PasswordChangeData) => {
+    return api.post('/dj-rest-auth/password/change/', data);
 };
 
 export const updateUserProfile = async (id: number, formData: FormData) => {
