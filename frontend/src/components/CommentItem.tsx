@@ -21,7 +21,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
 
   // Check if the current user owns this comment
   // Note: user?.username comes from AuthContext, comment.author comes from API
-  const isOwner = user?.user.username === comment.author;
+  const isOwner = user?.user.id === comment.author.id;
 
   const handleSave = async () => {
     if (!editContent.trim()) return;
@@ -50,7 +50,9 @@ const CommentItem: React.FC<CommentItemProps> = ({
   return (
     <div className="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100 transition-colors hover:bg-white">
       <div className="flex justify-between items-start mb-2">
-        <span className="font-semibold text-purple-700">{comment.author}</span>
+        <span className="font-semibold text-purple-700">
+          {comment.author.name}
+        </span>
         <div className="flex items-center gap-3">
           <span className="text-xs text-gray-400">
             {new Date(comment.created_at).toLocaleDateString()}

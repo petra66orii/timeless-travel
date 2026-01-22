@@ -28,6 +28,13 @@ export interface PasswordChangeData {
     new_password2: string;
 };
 
+export interface Author {
+    id: number;
+    username: string;
+    name: string;
+    email: string;
+}
+
 export interface BlogPost {
     id: number;
     title: string;
@@ -35,7 +42,7 @@ export interface BlogPost {
     content: string;
     excerpt: string;
     featured_image: string | null;
-    author: string;
+    author: Author;
     created_at: string; // ISO date string from Django
     status: number;
     visibility: 'Public' | 'Private' | 'Users Only';
@@ -44,7 +51,7 @@ export interface BlogPost {
 export interface Comment {
     id: number;
     post: number;
-    author: string;
+    author: Author;
     content: string;
     created_at: string;
 }

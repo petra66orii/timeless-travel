@@ -53,7 +53,7 @@ const PostDetail: React.FC = () => {
       </div>
     );
 
-  const isOwner = user?.user.username === post.author;
+  const isOwner = user?.id === post.author.id;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -78,7 +78,7 @@ const PostDetail: React.FC = () => {
               </h1>
               <div className="flex items-center text-sm text-gray-500">
                 <span className="font-medium text-purple-600">
-                  {post.author}
+                  {post.author.name}
                 </span>
                 <span className="mx-2">•</span>
                 <time>{new Date(post.created_at).toLocaleDateString()}</time>

@@ -31,7 +31,7 @@ const BlogCard: React.FC<Props> = ({ post }) => {
         <div className="mb-2 flex items-center text-xs text-gray-500">
           <span>{new Date(post.created_at).toLocaleDateString()}</span>
           <span className="mx-2">•</span>
-          <span className="font-medium text-blue-600">{post.author}</span>
+          <span className="font-medium text-blue-600">{post.author.name}</span>
         </div>
 
         {/* Title Link */}
