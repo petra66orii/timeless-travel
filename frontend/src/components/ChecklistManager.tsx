@@ -1,4 +1,3 @@
-// frontend/src/components/ChecklistManager.tsx
 import React, { useState } from "react";
 import type { Checklist, Task } from "../types";
 import {
@@ -12,8 +11,8 @@ import {
 // 1. Update Interface to accept the new props
 interface Props {
   checklist: Checklist;
-  onDelete: (id: number) => void; // <--- Added
-  onUpdate: (checklist: Checklist) => void; // <--- Added
+  onDelete: (id: number) => void;
+  onUpdate: (checklist: Checklist) => void;
 }
 
 export default function ChecklistManager({
