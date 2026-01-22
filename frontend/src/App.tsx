@@ -14,6 +14,7 @@ import ChangePassword from "./pages/ChangePassword";
 import Navbar from "./components/Navbar";
 import Contact from "./pages/Contact";
 import Checklists from "./pages/Checklists";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
