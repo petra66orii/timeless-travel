@@ -103,6 +103,10 @@ export const getChecklists = async () => {
     return response.data;
 };
 
+export const createChecklist = async (data: { title: string; description: string }) => {
+    return api.post('/api/checklists/', data);
+};
+
 export const deleteChecklist = async (id: number) => {
   return api.delete(`/api/checklists/${id}/`);
 };
