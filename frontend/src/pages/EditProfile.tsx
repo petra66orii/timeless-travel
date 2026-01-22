@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api, { updateUserProfile } from "../api";
+import api, { updateUserProfile, deleteAccount } from "../api";
 import type { Profile } from "../types";
+import { useAuth } from "../context/AuthContext";
 
 const EditProfile: React.FC = () => {
   const navigate = useNavigate();
@@ -74,6 +75,38 @@ const EditProfile: React.FC = () => {
       alert("Failed to update profile.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const { logout } = useAuth(); // Get logout function
+
+  const handleDeleteAccount = async () => {
+    // 1. Confirm First
+    if (
+      !window.confirm(
+        "Are you SURE? This action cannot be undone. All your posts and data will be lost forever.",
+      )
+    ) {
+      return;
+    }
+
+    // 2. Double Confirm (Optional but good practice)
+    if (!window.confirm("Really really sure? Last chance!")) {
+      return;
+    }
+
+    try {
+      await deleteAccount();
+      alert("Your account has been deleted.");
+
+      // 1. Clear frontend state
+      logout();
+
+      // 2. FORCE REDIRECT TO HOME (The Fix)
+      navigate("/");
+    } catch (err) {
+      console.error("Delete failed", err);
+      alert("Failed to delete account.");
     }
   };
 
@@ -154,6 +187,22 @@ const EditProfile: React.FC = () => {
                 className="text-purple-600 hover:text-purple-500 text-sm font-medium hover:underline"
               >
                 Change your password
+              </button>
+            </div>
+          </div>
+          <div className="border-t pt-6 mt-6">
+            <h3 className="text-lg font-medium text-red-600">Danger Zone</h3>
+            <div className="mt-4 bg-red-50 p-4 rounded-md border border-red-200">
+              <p className="text-sm text-red-700 mb-4">
+                Once you delete your account, there is no going back. Please be
+                certain.
+              </p>
+              <button
+                type="button"
+                onClick={handleDeleteAccount}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                Delete Account
               </button>
             </div>
           </div>

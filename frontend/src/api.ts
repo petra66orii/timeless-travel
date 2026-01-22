@@ -54,6 +54,10 @@ export const updateUserProfile = async (id: number, formData: FormData) => {
     });
 };
 
+export const deleteAccount = async () => {
+    return api.delete('/api/user/delete/');
+};
+
 // Define our fetch functions
 export const getPosts = async () => {
     // TypeScript knows that response.data is an array of BlogPosts

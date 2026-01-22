@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 from blog.views import BlogPostViewSet, CommentViewSet
 from checklists.views import ChecklistViewSet, TaskViewSet
-from user_profiles.views import UserProfileViewSet
+from user_profiles.views import UserProfileViewSet, DeleteUserView
 
 # Create the router and register viewsets
 router = DefaultRouter()
@@ -29,7 +29,7 @@ urlpatterns = [
         TemplateView.as_view(template_name="password_reset_confirm.html"), 
         name='password_reset_confirm'
     ),
-    
+    path('api/user/delete/', DeleteUserView.as_view(), name='delete_user'),
     path('', include('home.urls'), name='home'),
     path('blog/', include("blog.urls")),
     path('user_profiles/', include('user_profiles.urls')),
