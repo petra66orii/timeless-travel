@@ -3,8 +3,8 @@ from django.db.models import Count, Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
-from rest_framework import generics, permissions
-from .serializers import ProfileSerializer
+from rest_framework import viewsets, permissions
+from .serializers import UserProfileSerializer
 from .models import Profile
 from .forms import EditProfileForm
 from checklists.models import Checklist
@@ -169,13 +169,20 @@ def publish_post(request, post_id):
         return redirect('user_drafts')
 
 # --- API VIEWS ---
-class UserProfileDetailView(generics.RetrieveUpdateAPIView):
+class UserProfileViewSet(viewsets.ModelViewSet):
     """
     API endpoint that returns the authenticated user's profile.
     """
-    serializer_class = ProfileSerializer
+    serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
+    http_method_names = ['get', 'put', 'patch', 'head', 'options'] # Ensure PUT/PATCH are allowed
 
-    def get_object(self):
-        # Ensure we return the profile of the currently logged-in user
-        return get_object_or_404(Profile, user=self.request.user)
+    def get_queryset(self):
+        # If the user is Anonymous (not logged in), this returns empty -> 404
+        if self.request.user.is_anonymous:
+            return Profile.objects.none()
+
+        return Profile.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

@@ -56,7 +56,7 @@ const Profile: React.FC = () => {
           getPosts(), // Fetch all visible posts
         ]);
 
-        setProfile(profileRes.data);
+        setProfile(profileRes.data[0]);
         setChecklists(checklistsRes.data);
 
         // Filter posts client-side to find ones authored by this user
@@ -101,7 +101,7 @@ const Profile: React.FC = () => {
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
-                {profile?.user.username}
+                {profile?.user.first_name} {profile?.user.last_name}
               </h1>
               <p className="text-gray-500">
                 {profile?.bio || "Ready for a new adventure!"}
@@ -110,6 +110,14 @@ const Profile: React.FC = () => {
           </div>
           <div className="mt-6 md:mt-0">
             <LogoutButton />
+            <div className="mt-6">
+              <Link
+                to="/profile/edit"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              >
+                ✏️ Edit Profile
+              </Link>
+            </div>
           </div>
         </div>
 

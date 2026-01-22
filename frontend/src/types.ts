@@ -1,6 +1,9 @@
 export interface User {
+    id: number;
     username: string;
     email: string;
+    first_name: string;
+    last_name: string;
 }
 
 export interface RegisterData {
@@ -13,6 +16,7 @@ export interface RegisterData {
 }
 
 export interface Profile {
+    id: number;
     user: User;
     bio: string;
     profile_picture: string | null;

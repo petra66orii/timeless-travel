@@ -10,6 +10,7 @@ import PostEditor from "./pages/PostEditor";
 import Register from "./pages/Register";
 import PasswordResetRequest from "./pages/PasswordResetRequest";
 import PasswordResetConfirm from "./pages/PasswordResetConfirm";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   // 2. Get auth state
@@ -90,6 +91,7 @@ function App() {
           element={<PasswordResetConfirm />}
         />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
       </Routes>
     </div>
   );

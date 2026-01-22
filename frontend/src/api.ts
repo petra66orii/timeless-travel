@@ -31,8 +31,6 @@ api.interceptors.request.use(
   }
 );
 
-
-
 export const requestPasswordReset = async (email: string) => {
     return api.post('/dj-rest-auth/password/reset/', { email });
 };
@@ -40,6 +38,15 @@ export const requestPasswordReset = async (email: string) => {
 // 2. Confirm Password Reset (The actual change)
 export const confirmPasswordReset = async (data: PasswordResetConfirmData) => {
     return api.post('/dj-rest-auth/password/reset/confirm/', data);
+};
+
+export const updateUserProfile = async (id: number, formData: FormData) => {
+    return api.patch(`/api/user-profile/${id}/`, formData, {
+        headers: {
+            // "undefined" lets the browser set the correct multipart header + boundary automatically
+            'Content-Type': undefined 
+        },
+    });
 };
 
 // Define our fetch functions

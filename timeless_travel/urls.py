@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 from blog.views import BlogPostViewSet, CommentViewSet
 from checklists.views import ChecklistViewSet, TaskViewSet
-from user_profiles.views import UserProfileDetailView
+from user_profiles.views import UserProfileViewSet
 
 # Create the router and register viewsets
 router = DefaultRouter()
@@ -12,6 +12,7 @@ router.register(r'posts', BlogPostViewSet, basename='blogpost')
 router.register(r'checklists', ChecklistViewSet, basename='checklist')
 router.register(r'tasks', TaskViewSet, basename='task')
 router.register(r'comments', CommentViewSet, basename='comments')
+router.register(r'user-profile', UserProfileViewSet, basename='user-profile')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,7 +24,6 @@ urlpatterns = [
     # The API URLs are now live at /api/
     path('api/', include(router.urls)),
     path('api/tasks/<int:pk>/', TaskViewSet.as_view({'put': 'update', 'patch': 'partial_update'}), name='task-update'),
-    path('api/user-profile/', UserProfileDetailView.as_view(), name='user-profile'),
     path(
         'password-reset/confirm/<uidb64>/<token>/', 
         TemplateView.as_view(template_name="password_reset_confirm.html"), 
