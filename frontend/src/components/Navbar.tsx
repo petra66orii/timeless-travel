@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-8 font-body text-lg">
             <Link
               to="/"
-              className={`hover:text-action-info transition ${isActive("/")}`}
+              className={`hover:text-purple-600 transition ${isActive("/")}`}
             >
               Home
             </Link>
@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/checklists"
-                className={`hover:text-action-info transition ${isActive("/checklists")}`}
+                className={`hover:text-purple-600 transition ${isActive("/checklists")}`}
               >
                 Travel Planner
               </Link>
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
 
             <Link
               to="/blog"
-              className={`hover:text-action-info transition ${isActive("/blog")}`}
+              className={`hover:text-purple-600 transition ${isActive("/blog")}`}
             >
               Blog
             </Link>
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
               <>
                 <Link
                   to="/profile"
-                  className={`hover:text-action-info transition ${isActive("/profile")}`}
+                  className={`hover:text-purple-600 transition ${isActive("/profile")}`}
                 >
                   My Profile
                 </Link>
@@ -70,13 +70,13 @@ const Navbar: React.FC = () => {
               <>
                 <Link
                   to="/login"
-                  className={`hover:text-action-info transition ${isActive("/login")}`}
+                  className={`hover:text-purple-600 transition ${isActive("/login")}`}
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className={`hover:text-action-info transition ${isActive("/register")}`}
+                  className={`hover:text-purple-600 transition ${isActive("/register")}`}
                 >
                   Register
                 </Link>
@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
         )}
       </nav>
 
-      <div className="bg-slate-50 border-b border-gray-200 py-2 px-4 text-center font-body text-sm text-gray-600 shadow-inner">
+      <div className="bg-pastel-purple border-b border-pastel-purple py-2 px-4 text-center font-body text-sm text-gray-800 shadow-inner">
         {isAuthenticated && user ? (
           <span>
             Welcome, <strong>{user.user.first_name}</strong>! Happy travelling!

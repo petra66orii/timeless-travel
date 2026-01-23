@@ -1,0 +1,6 @@
+{
+  "name": "timeless-travel-deployment",
+  "scripts": {
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  }
+}

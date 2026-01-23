@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 from blog.views import BlogPostViewSet, CommentViewSet
@@ -34,4 +34,5 @@ urlpatterns = [
     path('blog/', include("blog.urls")),
     path('user_profiles/', include('user_profiles.urls')),
     path('checklists/', include('checklists.urls')),
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]

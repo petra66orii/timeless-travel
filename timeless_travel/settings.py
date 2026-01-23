@@ -118,7 +118,9 @@ ROOT_URLCONF = 'timeless_travel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [TEMPLATES_DIR,
+                 os.path.join(BASE_DIR, 'static', 'dist'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
