@@ -8,9 +8,11 @@ type PasswordResetConfirmData = {
     new_password2: string;
 };
 
-// Create a base axios instance so we don't have to type the URL every time
+const isDevelopment = import.meta.env.MODE === 'development';
+const API_URL = isDevelopment ? 'http://127.0.0.1:8000/api/' : '/api/';
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+    baseURL: API_URL, // <--- Now it uses the dynamic URL
     timeout: 5000,
     headers: {
         'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -100,11 +101,36 @@ const Login: React.FC = () => {
               />
             </div>
           </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+              />
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
+                Remember me
+              </label>
+            </div>
+
+            <div className="text-sm">
+              <Link
+                to="/reset-password"
+                className="font-medium text-purple-600 hover:text-purple-500"
+              >
+                Forgot your password?
+              </Link>
+            </div>
+          </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group relative flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-400"
+            className="group relative flex w-full justify-center rounded-md border border-transparent bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:bg-purple-400"
           >
             {isSubmitting ? "Signing in..." : "Sign in"}
           </button>
