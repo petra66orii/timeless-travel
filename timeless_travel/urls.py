@@ -16,7 +16,7 @@ router.register(r'user-profile', UserProfileViewSet, basename='user-profile')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('allauth.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
@@ -30,9 +30,5 @@ urlpatterns = [
         name='password_reset_confirm'
     ),
     path('api/user/delete/', DeleteUserView.as_view(), name='delete_user'),
-    path('', include('home.urls'), name='home'),
-    path('blog/', include("blog.urls")),
-    path('user_profiles/', include('user_profiles.urls')),
-    path('checklists/', include('checklists.urls')),
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]
